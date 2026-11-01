@@ -1,0 +1,1 @@
+<!DOCTYPE html><html><body><p id="x">no</p><script>document.getElementById('x').textContent='joined-ok';</script></body></html>
