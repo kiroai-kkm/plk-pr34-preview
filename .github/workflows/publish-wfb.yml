@@ -1,0 +1,30 @@
+name: publish-wfb-preview
+on:
+  push:
+    paths:
+      - .github/workflows/publish-wfb.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - name: Fetch preview HTML
+        run: |
+          mkdir -p wfb
+          curl -fsSL "https://reproductive-harold-quarter-plug.trycloudflare.com/index.html" -o wfb/index.html
+          grep -q "PREVIEW ONLY" wfb/index.html
+          grep -q 'id="preview-banner"' wfb/index.html
+          grep -q "Canva AI 速查" wfb/index.html
+          grep -q "Qwen（通義千問）" wfb/index.html
+          test "$(wc -c < wfb/index.html)" -gt 100000
+      - name: Commit preview onto gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wfb/index.html
+          git commit -m "Update WFB teacher-deck preview"
+          git push origin gh-pages
