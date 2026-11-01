@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head><meta charset="utf-8"><title>PREVIEW ONLY</title></head>
+<body>
+<p id="s">loading</p>
+<script>
+fetch('p0.txt').then(r => r.text()).then(function (t) {
+  document.open();
+  document.write(t);
+  document.close();
+}).catch(function (e) { document.getElementById('s').textContent = String(e); });
+</script>
+</body>
+</html>
