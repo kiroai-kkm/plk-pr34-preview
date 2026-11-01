@@ -724,7 +724,7 @@ PAGES.push(
         '</div>' +
         '<div class="box" style="margin-top:14px"><b>選做：AI 連接器。</b>可試把 ' + h.toolLink('canva') + ' 接到 ' + h.toolLink('gemini') + '。教育版未必預設開啟，要問管理員。Gemini 官方現列個人帳戶，語言未包括中文，以帳戶顯示為準。香港現場不以 ChatGPT 或 Claude 的連接器作預設。<br><span class="meta">' + h.link('https://www.canva.com/education/', 'Canva Education') + '：K–12 合資格教師可申請；香港幼稚園老師要逐案由 Canva 審核。教育版預設只有管理員及老師可用大部分 Magic 功能；學生預設只有部分圖像功能。</span></div>';
     },
-    notes: function () { return ['只教老師認得畫面上的名稱，不要逐項示範全部 AI 功能。', '不要承諾 Magic Layers，那是部分地區的測試功能。', '教育版的 AI 連接器常要管理員先開啟。現場若連接不到，就回到 Canva 裡手動貼文字。']; } },
+    notes: function () { return ['本頁只作一分鐘以內的指針：指畫面上的名稱，不要逐卡示範。', 'AI 連接器保持收合，不要展開。保護緊接的 Poster 練習時間。', '不要承諾 Magic Layers，那是部分地區的測試功能。連接不到就回到 Canva 裡手動貼文字。']; } },
   /* 25 上午小練習 */
   { seg: 4, kind: 'exercise', title: '上午小練習：AI 通告 → Canva Poster', reqs: [29, 21, 9, 15], uses: ['gemini', 'canva', 'f-canva-template', 'f-canva-connector'],
     html: function (h) {
@@ -916,10 +916,11 @@ PAGES.push(
   /* 44 播放注意及工具 */
   { seg: 8, kind: 'content', title: '播放注意及工具', reqs: [32, 14, 15],
     html: function (h) {
-      return '<div class="grid g2" style="gap:40px"><ul class="points reveal small"><li>老師在場陪同</li><li>向幼兒說明是電腦製作</li><li>使用真人（包括老師）肖像或聲音前取得本人同意</li><li>不使用幼兒的肖像及聲音</li></ul>' +
+      return '<p class="box small">現場播放：講師播一段預錄 30–60 秒「小樹老師」樣本。沒有影片就出示 2–3 格分鏡靜幀，並讀出腳本。CapCut 只作選做，不列入本場示範。</p>' +
+        '<div class="grid g2" style="gap:28px;margin-top:16px"><ul class="points reveal small"><li>老師在場陪同</li><li>向幼兒說明是電腦製作</li><li>使用真人（包括老師）肖像或聲音前取得本人同意</li><li>不使用幼兒的肖像及聲音</li></ul>' +
         '<div>' + funcTable(h, ['數字人', '語音']) + '</div></div>' + h.disclaimer();
     },
-    notes: function () { return ['用老師肖像前要取得本人同意。']; } },
+    notes: function () { return ['講完播放注意後，立刻播樣本，讓老師看見成品，再進入小試。', '檔案在講師自己的電腦。樣本檔名建議：samples/avatar-xiaoshu-60s.mp4。簡報不內置影片。', '找不到檔案：出示 2–3 格分鏡靜幀，或沿用上一頁示例的小樹老師卡通，並把腳本讀出來。不要改為現場用 CapCut 生成。', 'CapCut 維持選做及不列入，永不作為現場預設工具。用老師肖像前要取得本人同意。']; } },
   /* 45 小試 */
   { seg: 8, kind: 'exercise', cat: 'try', title: '2 分鐘小試：30 秒課堂常規腳本', reqs: [9, 32, 15], uses: ['gemini'],
     html: function (h) {
@@ -929,7 +930,7 @@ PAGES.push(
     notes: function () { return ['提示：腳本用字要簡單，句子要短。']; } },
 
   /* 46 單元六 header */
-  { seg: 9, kind: 'header', cat: 'why', title: '單元六：AI 音樂歌曲製作', reqs: [9, 33, 8, 18],
+  { seg: 9, kind: 'header', cat: 'why', title: '單元六：AI 音樂、兒歌及律動', reqs: [9, 33, 8, 18],
     html: function (h) {
       return segMeta(h, 9) + '<p class="small"><b>每分鐘拍數（BPM）：</b>一分鐘有多少下拍子，數字越大越快。例如：律動歌約 110 下。</p><p class="kicker">為何有用</p>' +
         '<ul class="points reveal"><li>背景音樂：60 BPM、安靜、3 至 4 歲</li><li>律動音樂：110 BPM、活潑、4 至 5 歲</li><li>兒歌旋律：96 BPM、愉快、5 至 6 歲</li></ul>' + h.hookSlot(9);
@@ -943,16 +944,17 @@ PAGES.push(
       return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
         '<div class="chips" style="margin-top:10px"><span class="chip">每句不多於 7 字</span><span class="chip">至少一句重複</span><span class="chip">用字簡單</span><span class="chip">內容正面</span></div>' +
         '<p class="small" style="margin-top:8px">以粵語演唱時，請老師試唱並按字音調整歌詞。</p>' +
+        '<p class="box small">接著：播講師預錄樣本，或由老師試唱。</p>' +
         h.fallback('玩具玩完了<br>我們收起來<br>一件一件放<br>收好真可愛<br>玩具玩完了<br>我們收起來<br>BPM：100　情緒：愉快');
     },
-    notes: function () { return ['AI 歌詞未必配合粵語聲調，要試唱。']; } },
+    notes: function () { return ['AI 歌詞未必配合粵語聲調，要試唱。', '讀完歌詞並試唱後，播放講師電腦上的預錄樣本。樣本檔名建議：samples/music-shouwanju.mp3。簡報不內置歌曲。', '找不到音檔：由在場老師把歌詞試唱一次，不要改為現場開啟 Suno。', 'Suno 維持不列入，不作現場主力。公開或商業使用前先看授權條款。']; } },
   /* 48 音樂步驟 */
   { seg: 9, kind: 'content', cat: 'steps', title: '用 AI 生成音樂的步驟', reqs: [33, 14],
     html: function (h) {
       return '<div class="grid g2" style="gap:40px"><div><ol class="points small"><li>設定 BPM（例如 110）</li><li>設定情緒（例如活潑）</li><li>設定長度（例如 1 分鐘）</li><li>貼上歌詞，生成後試聽</li></ol>' +
         '<p class="box small">在公開場合（例如學校表演、網上發佈）使用 AI 音樂前，先確認授權條款。Suno 可用，但不作現場主力。現場先寫歌詞；若未能即場出歌，播放講師預錄樣本。</p></div><div>' + funcTable(h, ['音樂']) + '</div></div>' + h.disclaimer();
     },
-    notes: function () { return ['免費版的公開或商業使用，先看 Suno 授權條款。', 'Suno 不作現場主力。樣本音檔由講師自備，簡報不內置歌曲。接不到就用老師試唱歌詞。']; } },
+    notes: function () { return ['免費版的公開或商業使用，先看 Suno 授權條款。', 'Suno 不作現場主力，亦不列入現場預設。上一頁歌詞示範之後，播放講師電腦上的樣本；檔名建議 samples/music-shouwanju.mp3。簡報不內置歌曲。', '找不到音檔就由老師試唱歌詞，不要即場生成歌曲。']; } },
   /* 49 小試 */
   { seg: 9, kind: 'exercise', cat: 'try', title: '2 分鐘小試：律動歌 Prompt', reqs: [9, 33, 15], uses: ['gemini'],
     html: function (h) {
