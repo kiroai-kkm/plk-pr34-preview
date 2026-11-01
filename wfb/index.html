@@ -1,14 +1,1473 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-HK">
-<head><meta charset="utf-8"><title>PREVIEW ONLY</title></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>PREVIEW ONLY — AI 工具於幼兒教育的應用 — 聯校教師培訓</title>
+<script id="session-config">
+/* ============================================================
+ * Session_Config（場次設定）— 兩場的差異只在此區塊修改
+ * ============================================================ */
+var SESSION_CONFIG = {
+  shared: {
+    // 培訓機構名稱；封面、結尾頁及頁尾顯示（全形括號）
+    providerConstant: 'Silicon Workshop Limited（思進電腦香港）',
+    // 頁尾是否顯示培訓機構：只可填「開啟」或「關閉」
+    footerProvider: '關閉',
+    // 現場示範的第二個工具：只可填 DeepSeek 或 Qwen
+    secondTool: 'DeepSeek',
+    // 本檔最後建立或修改內容的日期（YYYY-MM-DD）；資料表日期不得遲於此日
+    buildDate: '2026-11-01',
+    // 兩校共通事實（C1–C5）；School_Hook 只可引用已核准事實
+    facts: {
+      C1: '兩校均為世界佛教友誼會（世佛會）屬校。',
+      C2: '佛教背景、非牟利、本地課程、兒童為本。',
+      C3: '共同精神接近：樂於學習、善於溝通、勇於嘗試、敢於創新（只可轉述）。',
+      C4: '課程包含藝術與創意、音樂、語文／繪本及家長溝通。',
+      C5: '有家長通訊及家長會需求。'
+    }
+  },
+  sessions: {
+    manjusri: {
+      // 場次標籤：顯示於每頁右上角
+      label: '場次一',
+      // 日期（YYYY-MM-DD）
+      date: '2026-11-28',
+      // 開始及結束時間（24 小時制 HH:MM）
+      start: '10:00',
+      end: '17:00',
+      // 午膳開始及結束時間（24 小時制 HH:MM）
+      lunchStart: '13:00',
+      lunchEnd: '14:00',
+      // 學校全名：顯示於封面
+      school: '世佛會文殊幼兒學校',
+      // 地點：顯示於封面
+      venue: '青衣長康邨',
+      // 人數（正整數）
+      headcount: 30,
+      // 此場次可引用的事實編號
+      factIds: ['C1', 'C2', 'C3', 'C4', 'C5', 'M1', 'M2', 'M3', 'M4', 'M5'],
+      // 此場次專屬事實文字
+      facts: {
+        M1: '世佛會文殊幼兒學校位於青衣長康邨，創校於 1987 年。',
+        M2: '文殊幼兒學校重視品德、故事教學、繪本及親子閱讀。',
+        M3: '教育局視學曾肯定文殊幼兒學校的繪本延伸及故事結局創作。',
+        M4: '文殊幼兒學校的音樂及美藝時間充足。',
+        M5: '文殊幼兒學校有「好寶寶」等正向行為文化。'
+      },
+      // School_Hook：seg 為時段序號（只可為 2、3、6、7、8、9），facts 為引用的事實編號
+      hooks: [
+        { seg: 2, facts: ['M2'], text: '文殊重視故事教學：今日學會請 AI 幫你備課' },
+        { seg: 3, facts: ['M5'], text: '延續文殊「好寶寶」正向文化：用 AI 起草正面語氣的家長信' },
+        { seg: 6, facts: ['M3'], text: '文殊的繪本延伸及故事結局創作曾獲視學肯定：AI 幫你多想幾個結局' },
+        { seg: 7, facts: ['M2'], text: '文殊重視繪本及親子閱讀：把繪本插圖變成動態頁' },
+        { seg: 8, facts: ['M2'], text: '文殊重視故事教學：設計一位講故事的虛擬老師' },
+        { seg: 9, facts: ['M4'], text: '文殊的音樂及美藝時間充足：用 AI 準備律動及兒歌' }
+      ]
+    },
+    mantra: {
+      label: '場次二',
+      date: '2027-01-23',
+      start: '10:00',
+      end: '17:00',
+      lunchStart: '13:00',
+      lunchEnd: '14:00',
+      school: '世佛會真言宗幼兒學校',
+      venue: '屯門兆禧苑',
+      headcount: 30,
+      factIds: ['C1', 'C2', 'C3', 'C4', 'C5', 'T1', 'T2', 'T3', 'T4', 'T5'],
+      facts: {
+        T1: '世佛會真言宗幼兒學校位於屯門兆禧苑，創校於 1994 年。',
+        T2: '真言宗幼兒學校參與屬校聯校交流，鼓勵教師進修及建立學習型團隊。',
+        T3: '真言宗幼兒學校以繪本引入主題教學，推行親子伴讀。',
+        T4: '真言宗幼兒學校設有音樂室。',
+        T5: '真言宗幼兒學校近年關注品德及中華文化。'
+      },
+      hooks: [
+        { seg: 2, facts: ['T2'], text: '真言宗鼓勵教師進修及建立學習型團隊：今日一起學 AI' },
+        { seg: 3, facts: ['C5'], text: '家長通訊及家長會需求多：AI 先起草，老師把關' },
+        { seg: 6, facts: ['T3'], text: '真言宗以繪本引入主題教學：AI 幫你按主題做繪本' },
+        { seg: 7, facts: ['T5'], text: '真言宗關注中華文化：把中秋節插圖變成動態頁' },
+        { seg: 8, facts: ['T5'], text: '真言宗關注品德：請虛擬老師講一個分享的故事' },
+        { seg: 9, facts: ['T4'], text: '真言宗設有音樂室：用 AI 準備律動音樂及兒歌' }
+      ]
+    }
+  }
+};
+</script>
+<script id="availability-registry">
+/* ============================================================
+ * Availability_Registry（可用性資料表）
+ * 會過時的聲明集中在此。verified 只填已對照官方來源核實的日期
+ * （YYYY-MM-DD，不遲於 buildDate）。不寫任何價錢數字。
+ * ============================================================ */
+var REGISTRY = [
+  /* ---------- 工具 ---------- */
+  { id: 'gemini', name: 'Google Gemini', category: '工具', claim: 'Gemini 香港個人帳戶自 2026 年 3 月起可直用。', source: 'https://support.google.com/gemini/answer/13575153?hl=zh-HK', verified: '2026-11-01',
+    url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、多用途對話', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '勿輸入幼兒個人資料' },
+  { id: 'deepseek', name: 'DeepSeek', category: '工具', claim: 'DeepSeek 網頁及 App 在香港可直接使用。', source: 'https://chat.deepseek.com', verified: '2026-11-01',
+    url: 'https://chat.deepseek.com', hk: '香港可直用', group: '主力', use: '中文寫作、教案草稿', zh: '佳', free: '免費起步', fit: '高', note: '繁中輸出要再檢查用字' },
+  { id: 'qwen', name: 'Qwen', category: '工具', claim: 'Qwen（通義）網頁版在香港可直接使用。', source: 'https://chat.qwen.ai', verified: '2026-11-01',
+    url: 'https://chat.qwen.ai', hk: '香港可直用', group: '主力', use: '中文寫作、圖像生成', zh: '良', free: '免費起步', fit: '中', note: '繁中輸出要再檢查用字' },
+  { id: 'grok', name: 'Grok', category: '工具', claim: 'Grok 網頁及香港 App Store 的 Grok App 可直接使用。', source: 'https://grok.com', verified: '2026-11-01',
+    url: 'https://grok.com', hk: '香港可直用', group: '主力', use: '對話、即時資訊', zh: '良', free: '免費起步', fit: '中', note: '圖像內容要嚴格把關' },
+  { id: 'copilot', name: 'Microsoft Copilot', category: '工具', claim: 'Microsoft Copilot 在香港可直接使用。', source: 'https://copilot.microsoft.com', verified: '2026-11-01',
+    url: 'https://copilot.microsoft.com', hk: '香港可直用', group: '主力', use: '對話、Office 文書', zh: '良', free: '免費起步', fit: '高', note: 'Office 內功能另需授權' },
+  { id: 'canva', name: 'Canva', category: '工具', claim: 'Canva 在香港可直接使用，設 AI 功能。', source: 'https://www.canva.com', verified: '2026-11-01',
+    url: 'https://www.canva.com', hk: '香港可直用', group: '主力', use: 'Poster、繪本、動態頁', zh: '良', free: '免費起步', fit: '高', note: '部分 AI 功能有次數限制' },
+  { id: 'perplexity', name: 'Perplexity', category: '工具', claim: 'Perplexity 在香港可直接使用。', source: 'https://www.perplexity.ai', verified: '2026-11-01',
+    url: 'https://www.perplexity.ai', hk: '香港可直用', group: '也很實用', use: '附來源的資料搜尋', zh: '良', free: '免費起步', fit: '中', note: '來源仍要老師核對' },
+  { id: 'kimi', name: 'Kimi', category: '工具', claim: 'Kimi 在香港可直接使用。', source: 'https://www.kimi.com', verified: '2026-11-01',
+    url: 'https://www.kimi.com', hk: '香港可直用', group: '也很實用', use: '長文件摘要', zh: '良', free: '免費起步', fit: '中', note: '上載文件前先刪個人資料' },
+  { id: 'poe', name: 'Poe', category: '工具', claim: 'Poe 在香港可直接使用，可試多個模型。', source: 'https://poe.com', verified: '2026-11-01',
+    url: 'https://poe.com', hk: '香港可直用', group: '也很實用', use: '一處試用多個模型', zh: '良', free: '每日免費額度', fit: '中', note: '額度用完要等翌日' },
+  { id: 'hkchat', name: 'HKChat', category: '工具', claim: '港話通 HKChat 已在香港 App Store 上架，官方網站亦提供下載。', source: 'https://hkchat.org', verified: '2026-11-01',
+    url: 'https://hkchat.org', hk: '香港可直用', group: '也很實用', use: '粵語草稿、本地資訊', zh: '佳', free: '免費下載', fit: '中', note: '粵語家長溝通草稿補充，不作唯一主力' },
+  { id: 'ernie', name: '文心一言（ERNIE）', category: '工具', claim: '文心網頁未有官方香港可直用說明，不列入老師必備工具。', source: 'https://wenxin.baidu.com/', verified: '2026-11-01',
+    url: 'https://wenxin.baidu.com/', hk: '香港不可直用', group: '不列入', use: '中文對話', zh: '一般', free: '—', fit: '低', note: '不列入老師必備工具', alt: 'Google Gemini、DeepSeek' },
+  { id: 'chatgpt', name: 'ChatGPT', category: '工具', claim: 'OpenAI 支援地區名單不包括香港。', source: 'https://help.openai.com/en/articles/7947663-chatgpt-supported-countries', verified: '2026-11-01',
+    url: 'https://chatgpt.com', hk: '香港不可直用', group: '不列入', use: '對話', zh: '佳', free: '—', fit: '低', note: '帳戶風險，不要用 VPN', alt: 'Poe、Microsoft Copilot' },
+  { id: 'claude', name: 'Claude', category: '工具', claim: 'Anthropic 支援地區名單不包括香港。', source: 'https://www.anthropic.com/legal/supported-regions', verified: '2026-11-01',
+    url: 'https://claude.ai', hk: '香港不可直用', group: '不列入', use: '長文寫作', zh: '佳', free: '—', fit: '低', note: '官方介面不可直用', alt: 'Poe' },
+  { id: 'doubao', name: '豆包', category: '工具', claim: '豆包主要面向內地消費者，本培訓不把它列作香港可直用工具。', source: 'https://www.doubao.com/', verified: '2026-11-01',
+    url: 'https://www.doubao.com/', hk: '香港不可直用', group: '不列入', use: '對話', zh: '良', free: '—', fit: '低', note: '不列入老師必備工具', alt: '—' },
+  { id: 'capcut', name: 'CapCut', category: '工具', claim: 'CapCut 在香港可直接使用，設數字人及文字轉語音功能。', source: 'https://www.capcut.com', verified: '2026-11-01',
+    url: 'https://www.capcut.com', hk: '香港可直用', group: '不列入', use: '短片、數字人、配音', zh: '良', free: '免費起步', fit: '中', note: '數字人功能或需付費' },
+  { id: 'suno', name: 'Suno', category: '工具', claim: 'Suno 網頁可生成歌曲；公開使用前先看授權條款。', source: 'https://suno.com/terms', verified: '2026-11-01',
+    url: 'https://suno.com', hk: '香港可直用', group: '不列入', use: '生成歌曲及旋律', zh: '一般', free: '免費起步', fit: '中', note: '公開使用前先看授權條款' },
+
+  /* ---------- 功能 ---------- */
+  { id: 'f-gemini-image', name: 'Gemini 圖像生成', category: '功能', claim: 'Gemini 個人帳戶可在香港生成圖像，用量以帳戶方案為準。', source: 'https://gemini.google.com', verified: '2026-11-01',
+    tool: 'gemini', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-canva-image', name: 'Canva 圖像生成', category: '功能', claim: 'Canva 可生成圖像；免費及教育版的 AI 圖像有次數或功能限制。', source: 'https://www.canva.com', verified: '2026-11-01',
+    tool: 'canva', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-canva-animate', name: 'Canva 動畫', category: '功能', claim: 'Canva 免費帳戶可使用基本動畫；部分進階效果另有限制。', source: 'https://www.canva.com', verified: '2026-11-01',
+    tool: 'canva', kind: '動畫', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-canva-template', name: 'Canva 模板及文字排版', category: '功能', claim: 'Canva 模板及文字排版免費可用。', source: 'https://www.canva.com', verified: '2026-11-01',
+    tool: 'canva', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-canva-connector', name: 'Canva AI 連接器', category: '功能', claim: 'Canva AI 連接器可連接 Gemini 及 Microsoft Copilot；免費帳戶可以連接，教育版功能或有限制。', source: 'https://www.canva.com/ai-connector/', verified: '2026-11-01',
+    tool: 'canva', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-gemini-video', name: 'Gemini 影片生成', category: '功能', claim: 'Gemini 的影片生成在香港可用，需付費方案。', source: 'https://one.google.com/intl/zh-HK_hk/about/google-ai-plans/', verified: '2026-11-01',
+    tool: 'gemini', kind: '動畫', hk: '香港可直用', fee: '付費', region: '沒有' },
+  { id: 'f-capcut-avatar', name: 'CapCut 數字人', category: '功能', claim: 'CapCut 設有數字人功能，進階功能或需付費。', source: 'https://www.capcut.com', verified: '2026-11-01',
+    tool: 'capcut', kind: '數字人', hk: '香港可直用', fee: '付費', region: '沒有' },
+  { id: 'f-capcut-tts', name: 'CapCut 文字轉語音', category: '功能', claim: 'CapCut 提供文字轉語音，公開使用前先看授權條款。', source: 'https://www.capcut.com', verified: '2026-11-01',
+    tool: 'capcut', kind: '語音', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-suno-music', name: 'Suno 歌曲生成', category: '功能', claim: 'Suno 可生成歌曲；公開使用前先看授權條款。', source: 'https://suno.com', verified: '2026-11-01',
+    tool: 'suno', kind: '音樂', hk: '香港可直用', fee: '免費', region: '沒有' },
+
+  /* ---------- 教育方案 ---------- */
+  { id: 'e-canva-teacher', name: 'Canva Education（老師個人）', category: '教育方案', claim: 'K–12 在職教師可申請；幼稚園老師一般包括在內，以 Canva 審核為準。', source: 'https://www.canva.com/education/eligibility-guidelines/', verified: '2026-11-01',
+    org: 'Canva', audience: 'K–12 在職教師（幼稚園一般包括在內）', route: '老師個人', fee: '教師驗證後免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '適用' },
+  { id: 'e-canva-school', name: 'Canva Education（整校申請）', category: '教育方案', claim: '合資格學校可為全校老師及學生申請 Canva Education，是否批核以 Canva 審核為準。', source: 'https://www.canva.com/education/', verified: '2026-11-01',
+    org: 'Canva', audience: '合資格學校', route: '整校申請', fee: '合資格學校免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '適用' },
+  { id: 'e-gws-fundamentals', name: 'Google Workspace for Education Fundamentals', category: '教育方案', claim: '須由合資格的校方申請；老師個人按一下申請不等於取得學校教育版。', source: 'https://edu.google.com/workspace-for-education/editions/overview/', verified: '2026-11-01',
+    org: 'Google', audience: '合資格教育機構', route: '整校申請', fee: '合資格機構免費', privacy: '依 Google Education 條款保護資料。', kgDefault: '適用' },
+  { id: 'e-gemini-edu', name: 'Gemini for Education', category: '教育方案', claim: 'Gemini for Education 隨學校 Google Workspace for Education 帳戶提供，須由校方申請並開啟。', source: 'https://edu.google.com/ai/gemini-for-education/', verified: '2026-11-01',
+    org: 'Google', audience: '已申請 Google Workspace for Education 的學校', route: '整校申請', fee: '隨學校帳戶提供', privacy: '依 Google Education 條款，對話不用於訓練模型。', kgDefault: '適用' },
+  { id: 'e-copilot-chat', name: 'Microsoft Copilot Chat（教育用戶）', category: '教育方案', claim: '學校教職員以合資格的 Microsoft 365 教育帳戶登入，即可使用 Copilot Chat，無須另購 Copilot 授權。', source: 'https://www.microsoft.com/en-us/education/products/copilot-in-education', verified: '2026-11-01',
+    org: 'Microsoft', audience: '有合資格學校 Microsoft 帳戶的教職員', route: '整校申請', fee: '學校帳戶已包括', privacy: '依 Microsoft 教育條款提供資料保護。', kgDefault: '適用' },
+  { id: 'e-m365-copilot', name: 'Microsoft 365 Copilot（Word／PowerPoint 內的 Copilot）', category: '教育方案', claim: 'Word 及 PowerPoint 內的 Copilot 需另購授權，不是教育帳戶已包括的 Copilot Chat。', source: 'https://www.microsoft.com/en-us/education/products/copilot-in-education', verified: '2026-11-01',
+    org: 'Microsoft', audience: '學校', route: '機構購買', fee: '進階功能需付費授權', privacy: '依 Microsoft 教育條款提供資料保護。', kgDefault: '不適用' },
+  { id: 'e-chatgpt-teachers', name: 'ChatGPT for Teachers', category: '教育方案', claim: '主要面向美國經核實的 K–12 教師，香港幼稚園老師不能以此作為預設方案。', source: 'https://help.openai.com/en/articles/12844995-chatgpt-for-teachers', verified: '2026-11-01',
+    org: 'OpenAI', audience: '美國經核實的 K–12 教師', route: '老師個人', fee: '美國教師方案', privacy: '依 OpenAI 條款。', kgDefault: '不適用' },
+  { id: 'e-chatgpt-edu', name: 'ChatGPT Edu', category: '教育方案', claim: 'ChatGPT Edu 屬機構向 OpenAI 洽購的校園方案，不是幼稚園老師個人方案。', source: 'https://openai.com/index/introducing-chatgpt-edu/', verified: '2026-11-01',
+    org: 'OpenAI', audience: '大專及機構', route: '機構購買', fee: '機構級銷售', privacy: '依 OpenAI 條款。', kgDefault: '不適用' },
+
+  /* ---------- 政策 ---------- */
+  { id: 'p-ai-sandbox', name: '保障個人資料人工智能沙盒（2026）', category: '政策', claim: '首階段對象為公帑資助的中小學，不是幼稚園。申請已於 2026 年 10 月 30 日截止。', source: 'https://www.pcpd.org.hk/tc_chi/artificial_intelligence/index.html', verified: '2026-11-01',
+    issuer: '個人資料私隱專員公署及數字政策辦公室', scope: '首階段對象為公帑資助的中小學，不是幼稚園。申請已於 2026 年 10 月 30 日截止' },
+  { id: 'p-edb-genai', name: '《中小學應用人工智能教學指南》', category: '政策', claim: '教育局此指引對象為中小學，不是幼稚園。', source: 'https://www.edb.gov.hk/tc/edu-system/primary-secondary/applicable-to-primary-secondary/it-in-edu/debp.html', verified: '2026-11-01',
+    issuer: '教育局', scope: '教育局《中小學應用人工智能教學指南》主要針對中小學，不是幼稚園' },
+  { id: 'p-dpo-guideline', name: '《香港生成式人工智能技術及應用指引》', category: '政策', claim: '數字政策辦公室發布的生成式 AI 指引。', source: 'https://www.digitalpolicy.gov.hk/tc/our_work/data_governance/policies_standards/ethical_ai_framework/', verified: '2026-11-01',
+    issuer: '數字政策辦公室', scope: '香港生成式 AI 的技術及應用' },
+  { id: 'p-pdpo', name: '《個人資料（私隱）條例》', category: '政策', claim: '個人資料的收集及使用受條例規管。', source: 'https://www.pcpd.org.hk/tc_chi/data_privacy_law/ordinance_at_a_Glance/ordinance.html', verified: '2026-11-01',
+    issuer: '個人資料私隱專員公署', scope: '在香港收集及使用個人資料' }
+];
+</script>
+<script id="timeline-data">
+/* ============================================================
+ * 時間軸資料（兩場共用）：剛好 10 段，時間為 24 小時制 HH:MM
+ * modes 只可用「示範」、「動手」、「討論」；第 5 段（午膳）留空
+ * ============================================================ */
+var TIMELINE = [
+  { n: 1, start: '10:00', end: '10:20', title: '開場與期望、香港可用工具地圖', short: '開場', modes: ['討論'] },
+  { n: 2, start: '10:20', end: '11:10', title: '單元一：AI 基礎、術語、平台比較', short: '單元一', modes: ['示範', '動手'] },
+  { n: 3, start: '11:10', end: '12:20', title: '單元二：日常教學及行政 AI', short: '單元二', modes: ['示範', '動手'] },
+  { n: 4, start: '12:20', end: '13:00', title: '教育方案、合規底線及上午小練習', short: '方案合規', modes: ['示範', '動手'] },
+  { n: 5, start: '13:00', end: '14:00', title: '午膳', short: '午膳', modes: [] },
+  { n: 6, start: '14:00', end: '14:50', title: '單元三：AI 繪本製作', short: '單元三', modes: ['示範', '動手'] },
+  { n: 7, start: '14:50', end: '15:40', title: '單元四：AI 微動畫及 AI 素養', short: '單元四', modes: ['示範', '討論'] },
+  { n: 8, start: '15:40', end: '16:20', title: '單元五：AI 卡通數字人微動畫', short: '單元五', modes: ['示範', '動手'] },
+  { n: 9, start: '16:20', end: '16:50', title: '單元六：AI 音樂、兒歌及律動', short: '單元六', modes: ['示範', '動手'] },
+  { n: 10, start: '16:50', end: '17:00', title: '行動計劃、資源清單及 Q&A', short: '行動計劃', modes: ['討論'] }
+];
+</script>
+<style>
+:root {
+  --bg: hsl(42 62% 95%);
+  --ink: #1d2a2e;
+  --muted: #45555a;
+  --accent: hsl(182 70% 24%);
+  --accent-soft: hsl(182 45% 90%);
+  --accent-2: hsl(28 80% 34%);
+  --card: #ffffff;
+  --line: hsl(40 25% 78%);
+  --green: #1e7a3c;
+  --red: #b3261e;
+  --dot-off: hsl(200 10% 46%);
+  --font: "Noto Sans TC", "Microsoft JhengHei", "PingFang HK", "PingFang TC", "Noto Sans CJK TC", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #2b2f31; }
+body { font-family: var(--font); color: var(--ink); }
+#viewport { position: fixed; inset: 0; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; background: var(--bg); overflow: hidden; }
+#print-area { display: none; }
+
+/* ---------- slides ---------- */
+.slide { position: absolute; inset: 0; display: none; padding: 0; }
+.slide.current { display: block; animation: slideIn 450ms ease-out both; }
+.slide h1 { position: absolute; left: 96px; top: 56px; width: 1360px; margin: 0; font-size: 52px; line-height: 1.25; font-weight: 700; }
+.slide .content { position: absolute; left: 96px; right: 96px; top: 176px; bottom: 184px; font-size: 30px; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; }
+.slide.full .content { top: 120px; }
+.kicker { font-size: 22px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+p { margin: 0 0 16px; }
+ul.points, ol.points { margin: 0; padding-left: 1.2em; }
+ul.points li, ol.points li { margin: 0 0 14px; }
+.small { font-size: 24px; line-height: 1.45; }
+.meta { font-size: 20px; color: var(--muted); }
+.grid { display: grid; gap: 24px; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.row { display: flex; gap: 24px; align-items: flex-start; }
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 20px 24px; }
+.card h3 { margin: 0 0 8px; font-size: 28px; }
+.card.accent { border-color: var(--accent); }
+.tag { display: inline-block; max-width: 100%; font-size: 20px; font-weight: 700; padding: 2px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); border: 2px solid var(--accent); vertical-align: middle; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.tag.warm { background: hsl(28 80% 93%); color: var(--accent-2); border-color: var(--accent-2); }
+.tag.plain { background: #fff; color: var(--ink); border-color: var(--line); }
+.ready { position: absolute; right: 0; top: -58px; }
+.disclaimer { position: absolute; right: 0; top: -58px; font-size: 20px; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 2px 12px; }
+.box { border-left: 8px solid var(--accent); background: #fff; border-radius: 12px; padding: 16px 24px; }
+.prompt { font-size: 24px; line-height: 1.5; background: #fff; border: 2px dashed var(--accent); border-radius: 12px; padding: 16px 20px; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; }
+a.ext { color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a.ext:hover { color: var(--accent-2); }
+.hook { margin-top: 24px; background: hsl(28 80% 95%); border: 2px solid var(--accent-2); border-radius: 16px; padding: 14px 22px; font-size: 26px; }
+.hook .tag { margin-right: 12px; }
+.hook-item + .hook-item { margin-top: 8px; }
+table.t { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 24px; line-height: 1.35; background: #fff; border: 2px solid var(--line); border-radius: 14px; overflow: hidden; }
+table.t th, table.t td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+table.t th { background: var(--accent-soft); color: var(--ink); font-weight: 700; white-space: nowrap; }
+table.t td.nw { white-space: nowrap; }
+table.t tr:last-child td { border-bottom: 0; }
+table.t tr.lunch td { background: hsl(42 50% 88%); font-style: italic; }
+
+/* ---------- status dot ---------- */
+.st { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 22px; }
+.st .d { width: 18px; height: 18px; border-radius: 50%; flex: none; }
+.st.ok .d { background: var(--green); }
+.st.no .d { background: var(--red); }
+.slide.current .st .d { animation: pulse 500ms ease-out 1 both; }
+.verified { font-size: 20px; color: var(--muted); white-space: nowrap; }
+
+/* ---------- matrix cards ---------- */
+.mx { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.mx .card { padding: 14px 18px; font-size: 22px; line-height: 1.32; }
+.mx .card h3 { font-size: 26px; margin: 0 0 4px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.mx dl { margin: 6px 0; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 2px; }
+.mx dt { color: var(--muted); }
+.mx dd { margin: 0; }
+.oneliner { margin-top: 20px; font-size: 22px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
+/* ---------- interactive controls ---------- */
+button.ctl { font: inherit; font-size: 22px; font-weight: 700; color: #fff; background: var(--accent); border: 0; border-radius: 12px; padding: 8px 20px; cursor: pointer; }
+button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var(--accent-2); outline-offset: 2px; }
+.answer, .fallback { display: none; }
+.answer.shown, .fallback.shown { display: block; }
+.answer, .fallback { margin-top: 14px; background: #fff; border: 2px solid var(--accent); border-radius: 14px; padding: 12px 18px; font-size: 22px; line-height: 1.42; }
+.fallback .label, .answer .label { font-weight: 700; color: var(--accent); }
+.opt { margin-top: 12px; border: 2px dashed var(--line); border-radius: 14px; padding: 8px 16px; background: #fffdf8; }
+.opt .opt-head { display: flex; gap: 12px; align-items: center; font-size: 22px; }
+.opt .opt-body { display: none; font-size: 22px; margin-top: 8px; line-height: 1.42; }
+.opt.open .opt-body { display: block; }
+.opt-toggle { font: inherit; font-size: 20px; background: #fff; border: 2px solid var(--accent); color: var(--accent); border-radius: 10px; padding: 2px 12px; cursor: pointer; }
+
+/* ---------- term cards ---------- */
+.terms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; height: 520px; }
+.term { display: block; height: 100%; perspective: 1400px; cursor: pointer; border: 0; padding: 0; background: none; font: inherit; color: inherit; text-align: left; }
+.term .inner { display: block; position: relative; width: 100%; height: 100%; transition: transform 450ms ease; transform-style: preserve-3d; }
+.term.flipped .inner { transform: rotateY(180deg); }
+.term .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center; gap: 16px; background: #fff; border: 3px solid var(--accent); }
+.term .front { align-items: center; text-align: center; font-size: 40px; font-weight: 700; }
+.term .back { transform: rotateY(180deg); font-size: 28px; }
+.term .hint { font-size: 20px; color: var(--muted); font-weight: 400; }
+
+/* ---------- step flow ---------- */
+.flow { display: flex; align-items: stretch; gap: 0; }
+.flow .step { flex: 1; background: #fff; border: 3px solid var(--accent); border-radius: 16px; padding: 18px; font-size: 26px; text-align: center; }
+.flow .step b { display: block; font-size: 30px; margin-bottom: 6px; }
+.flow svg.link { flex: 0 0 56px; height: 40px; align-self: center; }
+.flow svg.link line { stroke: var(--accent); stroke-width: 6; stroke-dasharray: 60; stroke-dashoffset: 0; }
+.slide.current .flow svg.link line { animation: draw 350ms ease-out both; }
+.chips { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.chip { max-width: 100%; font-size: 24px; padding: 6px 16px; border-radius: 999px; background: #fff; border: 2px solid var(--accent-2); color: var(--accent-2); font-weight: 700; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.redcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.redcard { background: #fff; border: 4px solid var(--red); border-radius: 18px; padding: 36px 24px; font-size: 32px; font-weight: 700; text-align: center; }
+
+/* ---------- bad vs good prompt ---------- */
+.vs { display: grid; grid-template-columns: 1fr 1.6fr; gap: 32px; }
+.slide.current .vs .bad { animation: fromLeft 450ms ease-out both; }
+.slide.current .vs .good { animation: fromRight 450ms ease-out both; }
+.part { display: inline-block; max-width: 100%; border-radius: 8px; padding: 2px 8px; font-weight: 700; border: 2px solid; vertical-align: middle; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.part small { display: inline; font-size: 18px; font-weight: 700; margin-right: 4px; white-space: nowrap; }
+.parts { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: flex-start; }
+.parts .part { margin: 0; min-width: 0; }
+.tpl { gap: 8px 16px; }
+.tpl .card { padding: 8px 12px; }
+.tpl b { font-size: 22px; }
+.tpl .parts { gap: 4px 8px; }
+.tpl .part { font-size: 18px; line-height: 1.35; padding: 1px 6px; }
+.p1 { background: hsl(182 60% 92%); border-color: hsl(182 70% 26%); }
+.p2 { background: hsl(28 85% 92%); border-color: hsl(28 80% 34%); }
+.p3 { background: hsl(260 60% 94%); border-color: hsl(260 45% 40%); }
+.p4 { background: hsl(140 50% 92%); border-color: hsl(140 55% 26%); }
+.p5 { background: hsl(340 70% 94%); border-color: hsl(340 60% 38%); }
+
+/* ---------- reveal list ---------- */
+.slide.current .reveal > * { animation: rise 300ms ease-out both; }
+.slide.current .reveal > *:nth-child(2) { animation-delay: 90ms; }
+.slide.current .reveal > *:nth-child(3) { animation-delay: 180ms; }
+.slide.current .reveal > *:nth-child(4) { animation-delay: 270ms; }
+.slide.current .reveal > *:nth-child(5) { animation-delay: 360ms; }
+
+/* ---------- neural network ---------- */
+.nn circle { fill: #fff; stroke: var(--accent); stroke-width: 4; }
+.nn line { stroke: hsl(182 30% 60%); stroke-width: 3; }
+.nn text { font-size: 28px; fill: var(--ink); font-family: var(--font); }
+.slide.current .nn .pulse { animation: signal 1800ms ease-in-out 1 both; }
+
+/* ---------- chrome ---------- */
+#session-bar { position: absolute; right: 40px; top: 24px; display: flex; gap: 12px; align-items: center; z-index: 5; }
+.session-tag { font-size: 20px; font-weight: 700; background: var(--accent); color: #fff; padding: 6px 14px; border-radius: 10px; }
+#session-switch { font: inherit; font-size: 18px; background: #fff; color: var(--accent); border: 2px solid var(--accent); border-radius: 10px; padding: 4px 12px; cursor: pointer; }
+#timeline-bar { position: absolute; left: 160px; top: 916px; width: 1600px; height: 52px; display: flex; z-index: 4; }
+#timeline-bar[hidden] { display: none; }
+#timeline-bar button { flex: 1 1 0; min-width: 0; height: 52px; font: inherit; font-size: 18px; color: var(--ink); background: #fff; border: 1px solid var(--line); cursor: pointer; white-space: nowrap; overflow: hidden; padding: 0 4px; }
+#timeline-bar button:first-child { border-radius: 12px 0 0 12px; }
+#timeline-bar button:last-child { border-radius: 0 12px 12px 0; }
+#timeline-bar button.now { background: var(--accent); color: #fff; font-weight: 700; outline: 3px solid var(--ink); outline-offset: -3px; }
+#dots { position: absolute; left: 0; right: 0; top: 984px; height: 32px; display: flex; justify-content: center; z-index: 4; }
+#dots button { width: 22px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+#dots button i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--dot-off); }
+#dots button.now i { width: 18px; height: 18px; background: var(--accent); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--ink); }
+#page-indicator { position: absolute; left: 48px; top: 1032px; font-size: 20px; color: var(--muted); z-index: 4; }
+#footer-provider { position: absolute; right: 48px; top: 1032px; font-size: 18px; color: var(--muted); z-index: 4; }
+#toast { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); background: var(--ink); color: #fff; font-size: 24px; padding: 12px 24px; border-radius: 12px; z-index: 9; }
+#notes { position: absolute; right: 24px; top: 90px; width: 720px; max-height: 800px; overflow: auto; background: #fff; color: var(--ink); border: 3px solid var(--ink); border-radius: 16px; padding: 20px 26px; font-size: 22px; line-height: 1.5; z-index: 8; box-shadow: 0 12px 40px rgb(0 0 0 / 25%); }
+#notes h2 { font-size: 24px; margin: 0 0 10px; }
+#notes ol, #notes ul { padding-left: 1.3em; margin: 0 0 10px; }
+#notes .warn { color: var(--red); font-weight: 700; }
+.appx-mark { display: inline-block; margin-left: 16px; vertical-align: middle; font-size: 22px; padding: 2px 12px; border: 2px solid var(--ink); border-radius: 8px; font-weight: 700; }
+
+/* ---------- keyframes ---------- */
+@keyframes slideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+@keyframes fromLeft { from { opacity: 0; transform: translateX(-80px); } to { opacity: 1; transform: none; } }
+@keyframes fromRight { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 0% { transform: scale(0.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes signal { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 1; } }
+
+.no-anim, .no-anim * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- action plan (screen + print) ---------- */
+.slide.plan { background: #ffffff; }
+.plan-table td { height: 64px; }
+.commit { margin-top: 24px; border: 3px solid var(--ink); border-radius: 16px; padding: 16px 24px; font-size: 28px; display: flex; gap: 32px; align-items: center; }
+.blank { display: inline-block; min-width: 260px; border-bottom: 3px solid var(--ink); height: 1.2em; }
+
+@media print {
+  @page { size: A4 landscape; margin: 12mm; }
+  html, body { height: auto; overflow: visible; background: #fff; }
+  #viewport { display: none; }
+  #print-area { display: block; color: #111; font-family: var(--font); }
+  #print-area h1 { font-size: 26pt; margin: 0 0 10pt; }
+  #print-area table.t { font-size: 14pt; border-color: #333; }
+  #print-area table.t th { background: #fff; border-bottom: 2px solid #333; }
+  #print-area .plan-table td { height: 34pt; }
+  #print-area .commit { font-size: 16pt; border-color: #333; }
+  #print-area .blank { min-width: 160pt; border-color: #333; }
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="webfont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all';this.dataset.loaded='1'">
+<style id="preview-only">
+#preview-banner{position:fixed;top:0;left:0;right:0;z-index:10000;box-sizing:border-box;background:#9b1c1c;color:#fff;font:700 15px/1.35 "Noto Sans TC","Microsoft JhengHei",sans-serif;text-align:center;padding:7px 12px}
+#preview-banner small{display:block;font-weight:400;font-size:12px;opacity:.95}
+</style>
+</head>
 <body>
-<p id="s">loading</p>
-<script>
-fetch('p0.txt').then(r => r.text()).then(function (t) {
-  document.open();
-  document.write(t);
-  document.close();
-}).catch(function (e) { document.getElementById('s').textContent = String(e); });
+<div id="preview-banner" role="status">PREVIEW ONLY　預覽，非正式教材<small>PR #1 尚未合併 main，不是最終交付版本</small></div>
+<div id="viewport">
+  <div id="stage" aria-live="polite">
+    <div id="slides"></div>
+    <div id="session-bar" data-interactive>
+      <span id="session-tag" class="session-tag"></span>
+      <button id="session-switch" type="button" data-interactive></button>
+    </div>
+    <nav id="timeline-bar" aria-label="全日時間軸" data-interactive></nav>
+    <div id="dots" aria-label="頁面進度" data-interactive></div>
+    <div id="page-indicator"></div>
+    <div id="footer-provider" hidden></div>
+    <div id="toast" role="status" hidden></div>
+    <aside id="notes" hidden aria-label="講者備註"></aside>
+  </div>
+</div>
+<div id="print-area" data-print></div>
+<script id="pages">
+var PAGES = [];
+/* Pages: shared builders + 時段一、時段二（第 1 至 14 頁） */
+function segMeta(h, seg) {
+  var t = h.tl[seg - 1];
+  return '<p class="meta"><b>' + t.start + '–' + t.end + '</b>　建議 ' + h.duration(t) + ' 分鐘　' +
+    t.modes.map(function (m) { return '<span class="tag">' + m + '</span>'; }).join(' ') + '</p>';
+}
+function moduleHeader(h, seg, points) {
+  return segMeta(h, seg) + '<p class="kicker">為何有用</p><ul class="points reveal">' +
+    points.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' + h.hookSlot(seg);
+}
+function exercise(h, task, steps, toolText, answer) {
+  return '<p><span class="tag">2 分鐘小試</span></p><p><b>任務：</b>' + task + '</p><ol class="points">' +
+    steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol><p class="small"><b>工具：</b>' + toolText + '</p>' + h.answer(answer);
+}
+function partsHtml(parts, labelled) {
+  var names = ['角色', '對象', '任務', '限制', '輸出格式'];
+  var body = parts.map(function (t, i) { return labelled ? '<span class="part p' + (i + 1) + '"><small>' + names[i] + '</small>' + t + '</span>' : t; }).join(labelled ? '' : '');
+  return labelled ? '<span class="parts">' + body + '</span>' : body;
+}
+function liveHead(h, toolKey) {
+  var id = DECK.resolveTool(toolKey);
+  return '<p class="small"><span class="tag">現場示範</span>　<b>' + h.toolLink(id) + '</b>　' + h.dot(id) + '</p>';
+}
+function toolChip(h, e) {
+  return '<span class="card" style="display:inline-flex;gap:10px;align-items:center;padding:8px 14px;margin:0 10px 10px 0;font-size:22px"><b>' +
+    h.toolLink(e.id) + '</b>' + h.dot(e.id) + (e.id === 'poe' ? '<span class="meta">' + h.poeNote + '</span>' : '') + '</span>';
+}
+
+var U1_PARTS = ['你是一位幼稚園老師。', '對象是 K2（4 至 5 歲）幼兒。', '請為「秋天」主題設計 3 條引發討論的提問。', '每條不多於 20 字，用正面語氣及繁體中文。', '以編號列出，每條附一句老師跟進說法。'];
+
+PAGES.push(
+  /* 1 Cover */
+  { seg: 1, kind: 'cover', raw: true, title: '封面', reqs: [13, 1, 11],
+    html: function (h) {
+      return '<div style="position:absolute;left:120px;top:210px;right:120px">' +
+        '<p class="kicker" style="font-size:28px">世佛會屬校聯校教師培訓</p>' +
+        '<h1 style="position:static;width:auto;font-size:72px;line-height:1.2;margin:16px 0 48px">AI 工具於幼兒教育的應用 — 聯校教師培訓</h1>' +
+        '<p style="font-size:40px;font-weight:700;margin:0 0 18px">' + h.bind('school') + '</p>' +
+        '<p style="font-size:32px;margin:0 0 8px">' + h.bind('date') + '　' + h.bind('time') + '</p>' +
+        '<p style="font-size:32px;margin:0 0 56px">地點：' + h.bind('venue') + '</p>' +
+        '<p style="font-size:30px;margin:0">培訓機構：' + h.bind('provider') + '</p></div>';
+    },
+    notes: function () { return ['歡迎各位老師，介紹今日目標：聽得懂、跟得上、即日能用。', '按 H 可隨時開關講者備註；按 F 進入全屏。'];
+    } },
+  /* 2 全日流程 (header seg 1) */
+  { seg: 1, kind: 'header', title: '今日流程', reqs: [23, 22, 10],
+    html: function (h) {
+      return segMeta(h, 1) + '<table class="t"><thead><tr><th style="width:260px">時間</th><th>內容</th><th style="width:260px">形式</th></tr></thead><tbody>' +
+        h.tl.map(function (t) {
+          return '<tr' + (t.n === 5 ? ' class="lunch"' : '') + '><td>' + t.start + '–' + t.end + '</td><td>' + t.title + '</td><td>' +
+            (t.modes.length ? t.modes.join('、') : '<span class="tag plain">休息</span>') + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    },
+    notes: function () { return ['逐段簡介全日安排，強調每個單元都有動手時間。', '午膳後由繪本開始，最後帶走行動計劃。']; } },
+  /* 3 期望設定 */
+  { seg: 1, kind: 'content', title: '今日三個目標', reqs: [23],
+    html: function () {
+      return '<div class="grid g3 reveal">' +
+        '<div class="card accent"><h3>聽得懂</h3><p class="small">用生活例子講人工智能（AI），不用背術語。</p></div>' +
+        '<div class="card accent"><h3>跟得上</h3><p class="small">每一步都有示範，再跟着做一次。</p></div>' +
+        '<div class="card accent"><h3>即日能用</h3><p class="small">今日完成的成品，回校即可使用。</p></div></div>' +
+        '<div class="box" style="margin-top:40px"><span class="tag">討論</span>　你最想 AI 幫你減少哪一項工作？</div>';
+    },
+    notes: function () { return ['請老師在小組內分享最花時間的文書工作。', '記下兩三個例子，下午回應。']; } },
+  /* 4 香港可用工具地圖 */
+  { seg: 1, kind: 'content', title: '香港可用工具地圖', reqs: [23, 15, 16, 14], matrix: true,
+    html: function (h) {
+      var ok = h.tools(function (e) { return h.hkOK(e.id) && e.group !== '不列入'; });
+      var no = h.tools(function (e) { return !h.hkOK(e.id); });
+      return '<p class="small"><b>今日只用香港可直用、免虛擬私人網絡（VPN）的工具。</b>VPN：令上網連線「繞道」到別處的工具，例如用來開啟香港未支援的網站——今日不會這樣做。</p>' +
+        '<div class="grid" style="grid-template-columns:1.7fr 1fr;margin-top:12px"><div><h3 style="margin:0 0 10px;font-size:28px">香港可直用</h3>' + ok.map(function (e) { return toolChip(h, e); }).join('') + '</div>' +
+        '<div><h3 style="margin:0 0 10px;font-size:28px">香港不可直用</h3>' + no.map(function (e) { return toolChip(h, e); }).join('') + '</div></div>' + h.disclaimer();
+    },
+    notes: function () { return ['綠點代表香港可直接使用；紅點代表官方不支援香港。', '想試 ChatGPT 類工具，可改用 Poe 或 Microsoft Copilot。']; } },
+  /* 5 香港可用性與 VPN 政策 */
+  { seg: 1, kind: 'content', title: '香港可用性與 VPN 政策', reqs: [15, 16, 14],
+    html: function (h) {
+      var row = function (id, label, say, alt, note) {
+        return '<tr><td><b>' + h.link(h.field(id, 'url'), label) + '</b></td><td>' + h.dot(id) + '</td><td>' + say + '</td><td>' + alt + (note ? '<br><span class="meta">' + note + '</span>' : '') + '</td></tr>';
+      };
+      var fixed = function (id, text) { return h.hkOK(id) ? h.esc(h.field(id, 'note')) : text; };
+      return '<p style="font-size:44px;font-weight:700;margin:0 0 8px;color:var(--red)">不建議、不示範、不教 VPN</p>' +
+        '<p class="small">適用於培訓現場及回校使用。原因：可能違反平台服務條款；帳戶有被停用的風險；學校資料保安風險。</p>' +
+        '<table class="t" style="font-size:22px"><thead><tr><th style="width:280px">平台</th><th style="width:200px">香港狀態</th><th>講解說法</th><th style="width:320px">香港替代方案</th></tr></thead><tbody>' +
+        row('chatgpt', 'ChatGPT（OpenAI 官方）', fixed('chatgpt', '很出名，但香港官方不可直用；帳戶風險。不要用 VPN。想試 GPT 類 → Poe 或 Copilot。'), 'Poe、Microsoft Copilot', h.poeNote) +
+        row('claude', 'Claude（Anthropic 官方）', fixed('claude', '長文很強，但香港官方介面不可直用。想試類似能力 → Poe。'), 'Poe', '') +
+        row('doubao', '豆包', fixed('doubao', '主要面向內地消費者，不列入老師必備工具。'), '—', '') +
+        '</tbody></table><p class="meta" style="margin-top:10px">應用程式介面（API）：讓程式之間互相傳送資料的接駁口，例如學校系統自動取天氣資料。</p>' + h.disclaimer();
+    },
+    notes: function () { return ['重點：不用 VPN、不代註冊、不共用帳戶。', 'Poe 可試多個模型，但不是 ChatGPT／Claude 官方帳戶。']; } },
+
+  /* 6 單元一 header */
+  { seg: 2, kind: 'header', cat: 'why', title: '單元一：AI 基礎認識與工具介紹', reqs: [9, 24, 18],
+    html: function (h) {
+      return moduleHeader(h, 2, ['用生活例子明白 AI 是甚麼', '學會提示詞（Prompt）公式，一次寫清楚要求', '分清哪些工具在香港可直接用', '知道哪些資料不可以輸入']);
+    },
+    notes: function () { return ['本單元先打好基礎，下午所有單元都會用到同一條公式。']; } },
+  /* 7 AI 是甚麼 */
+  { seg: 2, kind: 'content', title: 'AI 是甚麼？', reqs: [24, 8, 6],
+    html: function () {
+      var L = [[200, [130, 260, 390]], [560, [90, 200, 310, 420]], [920, [200, 320]]];
+      var svg = '<svg class="nn" viewBox="0 0 1100 560" width="860" height="438" role="img" aria-label="神經網絡簡化圖解">';
+      for (var a = 0; a < 2; a++) L[a][1].forEach(function (y1) { L[a + 1][1].forEach(function (y2) { svg += '<line x1="' + L[a][0] + '" y1="' + y1 + '" x2="' + L[a + 1][0] + '" y2="' + y2 + '"/>'; }); });
+      L.forEach(function (layer) { layer[1].forEach(function (y) { svg += '<circle class="pulse" cx="' + layer[0] + '" cy="' + y + '" r="28"/>'; }); });
+      svg += '<text x="200" y="40" text-anchor="middle">輸入層</text><text x="560" y="40" text-anchor="middle">隱藏層</text><text x="920" y="40" text-anchor="middle">輸出層</text>' +
+        '<text x="200" y="490" text-anchor="middle">長耳朵、白色毛</text><text x="920" y="420" text-anchor="middle">兔子</text></svg>';
+      return '<div class="grid" style="grid-template-columns:780px 1fr;gap:40px"><div>' +
+        '<div class="box" style="font-size:34px;font-weight:700">很會模仿與重組的助手，不是有靈魂的老師</div>' +
+        '<p style="margin-top:24px"><b>AI：</b>電腦從大量例子學會規律，再按你的要求產生內容。</p><p class="small">例如：輸入「秋天」，它寫出三條給 K2 的提問。</p>' +
+        '<p style="margin-top:24px"><b>神經網絡（Neural Network）：</b>一層層小計算點，合力由例子找出特徵。</p><p class="small">例如：看到「長耳朵、白色毛」，認出是兔子。</p></div>' +
+        '<div>' + svg + '</div></div>';
+    },
+    notes: function () { return ['強調 AI 會出錯，老師永遠是把關的人。', '圖解只示意：輸入特徵，經隱藏層計算，得出答案。']; } },
+  /* 8 術語卡 */
+  { seg: 2, kind: 'content', title: '三個常見術語（按卡片翻面）', reqs: [24, 8, 6],
+    html: function () {
+      var card = function (front, back, ex) {
+        return '<button type="button" class="term" data-interactive aria-label="' + front + '（按一下翻面）"><span class="inner"><span class="face front">' + front + '<span class="hint">按一下看解釋</span></span>' +
+          '<span class="face back"><span>' + back + '</span><span class="small">' + ex + '</span></span></span></button>';
+      };
+      return '<div class="terms">' +
+        card('大型語言模型（LLM）', '讀過大量文字、很會接話和寫作的電腦程式。', '例如：幫你起草一封家長信。') +
+        card('自然語言處理（NLP）', '讓電腦明白及處理人類語言的技術。', '例如：把粵語口語稿轉成書面語。') +
+        card('提示詞（Prompt）', '你交給 AI 的指示，寫得越清楚，結果越好。', '例如：為 K2 寫 3 條秋天提問。') + '</div>';
+    },
+    notes: function () { return ['逐張翻卡，請老師用自己的話再講一次。']; } },
+  /* 9 Live: Gemini */
+  { seg: 2, kind: 'live', cat: 'demo', tool: 'gemini', title: '示範：一條好 Prompt 的效果', reqs: [17, 24, 9], uses: ['gemini'],
+    prompt: U1_PARTS.join(''),
+    steps: ['開啟 gemini.google.com，以個人帳戶登入。', '貼上頁面上的 Prompt。', '按送出，讀出結果。', '指出五個部分如何影響結果。', '請老師提出一項修改（例如改為 K1）再試一次。'],
+    html: function (h, p) {
+      return h.ready() + liveHead(h, 'gemini') + '<p class="kicker">所用 Prompt</p><div class="prompt">' + h.esc(p.prompt) + '</div>' +
+        h.fallback('<ol class="small" style="margin:6px 0 0"><li>樹葉為甚麼會變色？——「我們一起去公園找找看。」</li><li>秋天你會穿甚麼衣服？——「摸摸外套，它厚不厚？」</li><li>你最喜歡秋天哪種水果？——「我們來畫出它的顏色。」</li></ol>');
+    },
+    notes: function () { return ['示範重點是公式，不是工具。']; } },
+  /* 10 Prompt 公式 */
+  { seg: 2, kind: 'content', cat: 'steps', title: 'Prompt 公式：五個部分', reqs: [24, 9, 7],
+    html: function () {
+      var names = ['角色', '對象（幼兒年齡）', '任務', '限制（字數／正面語氣／繁中）', '輸出格式'];
+      return '<ol class="points reveal">' + names.map(function (n, i) { return '<li><span class="part p' + (i + 1) + '">' + n + '</span>　<span class="small">' + U1_PARTS[i] + '</span></li>'; }).join('') + '</ol>' +
+        '<p class="kicker" style="margin-top:12px">完整 Prompt</p><div class="prompt">' + U1_PARTS.join('') + '</div>';
+    },
+    notes: function () { return ['五個部分缺一不可；限制最常被忘記。', '完整 Prompt 與剛才示範的完全相同。']; } },
+  /* 11 Matrix A */
+  { seg: 2, kind: 'content', title: '香港可直用工具：主力（現場優先示範）', reqs: [25, 17, 14, 7], matrix: true,
+    html: function (h) { return matrixCards(h, '主力', 3) + h.disclaimer(); },
+    notes: function () { return ['現場只深入示範 Gemini、' + DECK.secondName() + ' 及 Canva。', '其餘卡片是速查卡，回校可自行試。']; } },
+  /* 12 Matrix B */
+  { seg: 2, kind: 'content', title: '香港可直用工具：也很實用', reqs: [25, 16, 14, 7], matrix: true,
+    html: function (h) {
+      var one = h.tools(function (e) { return e.group === '一句帶過' && h.hkOK(e.id); });
+      var oneHtml = one.length ? '<p class="kicker" style="margin-top:16px">一句帶過</p>' + one.map(function (e) {
+        return '<div class="oneliner card"><b>' + h.toolLink(e.id) + '</b>' + h.dot(e.id) + '<span>幼教現場優先使用主力工具</span><span class="meta">' + h.link(e.url) + '</span></div>';
+      }).join('') : '';
+      return '<p class="kicker">也很實用</p>' + matrixCards(h, '也很實用', 4) + oneHtml + h.disclaimer();
+    },
+    notes: function () { return ['HKChat 適合起草粵語家長溝通草稿，但不作唯一主力。']; } },
+  /* 13 安全提示 */
+  { seg: 2, kind: 'content', title: '安全提示：輸入前先想一想', reqs: [20, 24],
+    html: function () {
+      return '<ul class="points reveal" style="font-size:34px"><li>勿輸入幼兒全名及照片</li><li>勿輸入家長電話及地址</li><li>勿輸入評估及個案資料</li><li>勿輸入校內敏感資料</li><li>先用「［幼兒名］」等佔位符代替</li></ul>';
+    },
+    notes: function () { return ['任何工具都適用；有疑問就不要輸入。']; } },
+  /* 14 小試 */
+  { seg: 2, kind: 'exercise', cat: 'try', title: '2 分鐘小試：寫你班的 Prompt', reqs: [9, 24, 15], uses: ['gemini'],
+    html: function (h) {
+      return exercise(h, '按五個部分，為自己班別寫一條 Prompt。', ['選一個本週主題。', '逐一寫出五個部分。', '貼到工具試一次。'], h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()),
+        '你是一位幼稚園老師。對象是 K1（3 至 4 歲）幼兒。請為「洗手」主題寫一首 4 句短兒歌。每句不多於 7 字，正面語氣，繁體中文。以編號列出。');
+    },
+    notes: function () { return ['巡視時提醒加入「限制」部分。']; } }
+);
+
+function matrixCards(h, group, cols) {
+  var demo = ['gemini', DECK.secondId(), 'canva'];
+  var list = h.tools(function (e) { return e.group === group && h.hkOK(e.id); });
+  return '<div class="mx" style="grid-template-columns:repeat(' + cols + ',1fr)">' + list.map(function (e) {
+    var f = function (k) { return h.esc(h.field(e.id, k)); };
+    return '<div class="card' + (demo.indexOf(e.id) >= 0 ? ' accent' : '') + '"><h3><span>' + h.toolLink(e.id) + '</span>' + (demo.indexOf(e.id) >= 0 ? '<span class="tag">現場示範</span>' : '') + '</h3>' +
+      h.dot(e.id) + '<dl><dt>用途</dt><dd>' + f('use') + '</dd><dt>繁中表現</dt><dd>' + f('zh') + '</dd><dt>免費起步</dt><dd>' + f('free') + '</dd><dt>幼教適合度</dt><dd>' + f('fit') + '</dd><dt>注意事項</dt><dd>' + f('note') + '</dd></dl>' +
+      '<div class="meta">' + h.link(e.url) + '</div>' + (e.id === 'poe' ? '<div class="meta"><b>' + h.poeNote + '</b></div>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+
+/* Pages: 時段三至五（第 15 至 26 頁） */
+var U2_PLAN = ['你是一位幼稚園老師。', '對象是 K2（4 至 5 歲）幼兒。', '請以「秋天的樹葉」為主題，設計一節 30 分鐘、以遊戲為本的教案。', '註明學習範疇，不用抄寫、默書或工作紙，用繁體中文。', '按「主題、對象、學習範疇、學習目標、材料、活動流程（提問 → 遊戲 → 區角活動）」列出。'];
+var U2_LETTER = ['你是一位幼稚園老師。', '讀者是 K2（4 至 5 歲）幼兒的家長。', '請把以下粵語口語稿改寫成書面語家長信。', '語氣禮貌清楚，不多於 150 字，用繁體中文。', '以「各位家長：」開頭，最後署名「［老師名］」。'];
+var U2_GOOD = ['你是一位幼稚園老師。', '對象是 K1（3 至 4 歲）幼兒。', '請設計一節「水果」主題、20 分鐘的遊戲活動。', '不多於 200 字，正面語氣，繁體中文。', '以「目標／材料／步驟」列出。'];
+
+PAGES.push(
+  /* 15 單元二 header */
+  { seg: 3, kind: 'header', cat: 'why', title: '單元二：AI 協助日常教學活動', reqs: [9, 26, 18],
+    html: function (h) {
+      return moduleHeader(h, 3, ['教案初稿 10 分鐘完成，老師再修改', '口語稿一鍵變書面語家長信', '會議紀錄、物資清單快速整理', '把壞 Prompt 改成好 Prompt']);
+    },
+    notes: function () { return ['本單元示範以 ' + DECK.secondName() + ' 為主，對照上午的 Gemini。']; } },
+  /* 16 Live: 教案 */
+  { seg: 3, kind: 'live', cat: 'demo', tool: 'second', title: '示範：10 分鐘寫好教案初稿', reqs: [17, 26, 9], uses: [],
+    prompt: U2_PLAN.join(''),
+    steps: function (h) { return ['開啟 ' + h.toolLink(DECK.secondId()) + '。', '貼上頁面上的 Prompt。', '讀出教案，指出三個活動部分。', '請老師檢查是否有小學化活動。', '示範追問：「請把遊戲改為室內版本」。']; },
+    html: function (h, p) {
+      return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' + h.fallback(
+        '<b>主題：</b>秋天的樹葉　<b>對象：</b>K2（4 至 5 歲）<br><b>學習範疇：</b>大自然與生活、語言、藝術與創意<br>' +
+        '<b>學習目標：</b>觀察樹葉的顏色及形狀，用完整句子描述。<br><b>材料：</b>不同顏色的樹葉、放大鏡、畫紙、蠟筆<br>' +
+        '<b>活動流程：</b><span class="tag plain">提問</span>「樹葉為甚麼會變色？」→ <span class="tag plain">遊戲</span>「樹葉配對」按顏色分組 → <span class="tag plain">區角活動</span>美藝角樹葉拓印');
+    },
+    notes: function () { return ['強調 AI 只寫初稿，教案由老師按班情修改。']; } },
+  /* 17 家長溝通 */
+  { seg: 3, kind: 'content', title: '家長溝通：粵語口語稿 → 書面語家長信', reqs: [26, 20, 9],
+    html: function (h) {
+      return h.ready() + '<div class="grid g2" style="gap:28px"><div class="card"><p class="kicker">粵語口語稿</p><p class="small colloquial">各位家長，下星期五我哋去公園睇樹葉，記得俾小朋友着波鞋，帶埋水樽。如果落雨就改喺學校玩，唔使擔心。</p></div>' +
+        '<div class="card accent"><p class="kicker">書面語家長信</p><p class="small">各位家長：<br>下星期五（［日期］）本班將到公園觀察樹葉。請為小朋友穿上運動鞋，並帶備水壺。如當日下雨，活動將改在校內進行，敬請放心。<br>［老師名］ 敬啟</p></div></div>' +
+        '<p class="kicker" style="margin-top:12px">所用 Prompt</p><div class="prompt">' + U2_LETTER.join('') + '</div>' +
+        '<div class="grid g2" style="gap:20px">' + h.opt('通告範例', '本校將於［日期］舉行親子運動會，請家長於［日期］前交回回條。如有查詢，請致電［學校電話］。') +
+        h.opt('活動通知範例', 'K2 班將於［日期］上午參觀消防局，請小朋友穿著校服，並帶備水壺。') + '</div>';
+    },
+    notes: function () { return ['AI 改寫後，老師要核對日期、地點及語氣。', '家長信是老師的工作例子，家長不會操作 AI。']; } },
+  /* 18 行政文書 */
+  { seg: 3, kind: 'content', title: '行政文書：三分鐘整理好', reqs: [26],
+    html: function () {
+      var card = function (t, p, lines) { return '<div class="card"><h3>' + t + '</h3><p class="meta">Prompt 摘要：' + p + '</p><ol class="small" style="margin:6px 0 0;padding-left:1.2em">' + lines.map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ol></div>'; };
+      return '<div class="grid g3">' +
+        card('會議紀錄要點', '把會議筆記整理成要點及跟進人。', ['中秋節活動於［日期］舉行', '各班預備一首兒歌', '物資由［老師名］統籌', '下次會議：［日期］']) +
+        card('物資清單', '為 20 人樹葉拓印活動列出物資。', ['畫紙 20 張', '水彩 5 盒', '樹葉 40 片', '圍裙 20 件', '濕紙巾 2 包']) +
+        card('活動流程', '為 30 分鐘親子閱讀活動寫流程。', ['10:00 歡迎及熱身', '10:05 老師示範講故事', '10:15 親子共讀', '10:25 分享及小結']) + '</div>';
+    },
+    notes: function () { return ['先刪去姓名及電話，再把筆記交給 AI。']; } },
+  /* 19 壞 Prompt → 好 Prompt */
+  { seg: 3, kind: 'content', cat: 'steps', title: '壞 Prompt → 好 Prompt', reqs: [26, 6, 7, 9],
+    html: function () {
+      return '<div class="vs"><div class="card bad"><p class="kicker">壞 Prompt</p><p style="font-size:40px;font-weight:700">寫一份教案</p><p class="small">太短：AI 不知道對象、長度及格式。</p></div>' +
+        '<div class="card good accent"><p class="kicker">好 Prompt</p><div class="small">' + partsHtml(U2_GOOD, true) + '</div></div></div>';
+    },
+    notes: function () { return ['逐色讀出五個部分，請老師說出缺了哪部分會怎樣。']; } },
+  /* 20 小試 */
+  { seg: 3, kind: 'exercise', cat: 'try', title: '2 分鐘小試：改好一條家長信 Prompt', reqs: [9, 26, 15], uses: ['gemini'],
+    html: function (h) {
+      return '<div class="prompt" style="margin-bottom:12px">原本：寫一封家長信</div>' + exercise(h, '把上面的 Prompt 補齊五個部分。', ['補上角色及對象。', '加上字數、語氣及繁中限制。', '寫明輸出格式。'], h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()),
+        '你是一位幼稚園老師。讀者是 K3（5 至 6 歲）幼兒的家長。請寫一封秋季旅行通知。不多於 120 字，語氣禮貌，用繁體中文書面語。以「各位家長：」開頭，列出日期、集合地點及攜帶物品，署名「［老師名］」。');
+    },
+    notes: function () { return ['請兩位老師分享改寫前後的分別。']; } },
+
+  /* 21 時段四 header */
+  { seg: 4, kind: 'header', title: '教育方案、合規底線及上午小練習', reqs: [27, 28, 29, 22],
+    html: function (h) {
+      return segMeta(h, 4) + '<ul class="points reveal"><li>分清老師個人試用與整校申請</li><li>記住適用於全部 AI 工具的合規底線</li><li>上午小練習：AI 通告 → Canva Poster</li></ul>';
+    },
+    notes: function () { return ['不作過度承諾：方案是否批核以官方審核為準。']; } },
+  /* 22 教育方案 1 */
+  { seg: 4, kind: 'content', title: '教育方案：老師個人與整校申請', reqs: [27, 14],
+    html: function (h) {
+      var c = function (id) { return h.esc(h.field(id, 'claim')); }, pv = function (id) { return '<br><span class="meta">' + h.esc(h.field(id, 'privacy')) + '</span>'; };
+      var appr = '<br><span class="tag plain">是否批核以官方審核為準</span>';
+      var name = function (id, label) { return h.link(h.field(id, 'source'), label); };
+      return '<table class="t" style="font-size:22px"><thead><tr><th style="width:330px">方案</th><th>老師個人免費試用</th><th>整校申請</th></tr></thead><tbody>' +
+        '<tr><td><b>' + name('e-canva-teacher', 'Canva Education') + '</b><br><span class="tag warm">本場建議</span></td><td>' + c('e-canva-teacher') + pv('e-canva-teacher') + '</td><td>' + c('e-canva-school') + appr + '</td></tr>' +
+        '<tr><td><b>' + name('e-gws-fundamentals', 'Google Workspace for Education') + '</b><br><span class="meta">含 ' + name('e-gemini-edu', 'Gemini for Education') + '</span></td><td>老師個人按一下申請，不等於取得學校教育版。<br>今日示範使用個人 Gemini 帳戶；回校可向 IT 負責人或校長查詢是否申請。</td><td>Google Workspace for Education Fundamentals：' + c('e-gws-fundamentals').replace(/；.*$/, '。') + pv('e-gemini-edu') + appr + '</td></tr>' +
+        '<tr><td><b>' + name('e-copilot-chat', 'Microsoft 365／Copilot（教育）') + '</b></td><td>Copilot Chat（教育用戶）：' + c('e-copilot-chat') + '</td><td>Microsoft 365 Copilot：' + c('e-m365-copilot') + '<br>適合已使用 Outlook、Word 或 Teams 的學校。' + appr + '</td></tr>' +
+        '</tbody></table>' + h.disclaimer();
+    },
+    notes: function () { return ['Canva Education 是本場建議：老師可即日完成教師驗證。', '整校方案要由校方申請，老師只需向 IT 負責人或校長提出。']; } },
+  /* 23 教育方案 2 */
+  { seg: 4, kind: 'content', title: '不適用作香港幼稚園預設的方案', reqs: [27, 16, 14],
+    html: function (h) {
+      var r = function (id, extra) { return '<tr><td><b>' + h.link(h.field(id, 'source'), h.field(id, 'name')) + '</b></td><td>' + h.esc(h.field(id, 'claim')) + (extra || '') + '</td></tr>'; };
+      return '<table class="t"><thead><tr><th style="width:520px">方案／政策</th><th>說明</th></tr></thead><tbody>' +
+        r('e-chatgpt-teachers') + r('e-chatgpt-edu') +
+        '<tr><td><b>' + h.link(h.field('p-ai-sandbox', 'source'), '保障個人資料人工智能沙盒（2026）') + '</b><br><span class="meta">發出機構：' + h.esc(h.field('p-ai-sandbox', 'issuer')) + '</span></td><td>' + h.esc(h.field('p-ai-sandbox', 'scope')) + '　<span class="tag warm">政策趨勢，只作介紹</span></td></tr>' +
+        '</tbody></table><div class="box" style="margin-top:24px">想用 GPT 類工具 → ' + h.toolLink('copilot') + ' 或 ' + h.toolLink('poe') + '（' + h.poeNote + '）</div>' + h.disclaimer();
+    },
+    notes: function () { return ['這些方案主要不是為香港幼稚園而設，只作了解。']; } },
+  /* 24 合規底線 */
+  { seg: 4, kind: 'content', title: '合規底線（適用於全部 AI 工具）', reqs: [28, 14, 20],
+    html: function (h) {
+      return '<ul class="points reveal"><li>遵守' + h.link(h.field('p-pdpo', 'source'), '《個人資料（私隱）條例》') + '</li><li>勿輸入幼兒姓名、照片、家長電話、評估及個案資料</li><li>人為把關、透明、安全（' + h.link(h.field('p-dpo-guideline', 'source'), '數字政策辦公室指引') + '）</li><li>' + h.link(h.field('p-edb-genai', 'source'), h.field('p-edb-genai', 'scope')) + '</li><li>本培訓建議：兒童為本、教師操作及監督、年齡適切</li></ul>' +
+        '<p class="meta" style="margin-top:12px">資料來源：' + h.link(h.field('p-dpo-guideline', 'source'), '數字政策辦公室《香港生成式人工智能技術及應用指引》') + '</p>' + h.disclaimer();
+    },
+    notes: function () { return ['幼兒不直接操作 AI 工具；由老師操作並把關。']; } },
+  /* 25 上午小練習 */
+  { seg: 4, kind: 'exercise', title: '上午小練習：AI 通告 → Canva Poster', reqs: [29, 21, 9, 15], uses: ['gemini', 'canva', 'f-canva-template', 'f-canva-connector'],
+    html: function (h) {
+      return '<p><span class="tag">建議 10 分鐘</span>　<b>任務：</b>用 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + ' 寫一則活動通告，再用 ' + h.toolLink('canva') + ' 做成 Poster。</p><div class="grid" style="grid-template-columns:1fr 1fr;gap:32px;align-items:start"><div><ol class="points small">' +
+        '<li>用 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + ' 按公式寫一則活動通告。</li><li>複製 AI 輸出的通告文字。</li><li>在 ' + h.toolLink('canva') + ' 選一個 Poster 模板（Canva 模板及文字排版 ' + h.fee('f-canva-template') + '）。</li><li>把文字貼入模板，換上主題插圖。</li><li>老師檢查用字及日期後下載。</li></ol>' +
+        '<p class="small"><b>工具：</b>' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + '、' + h.toolLink('canva') + '</p></div><div>' +
+        h.opt('進階：在 AI 對話內直接做 Poster', '把 ' + h.link(h.field('f-canva-connector', 'source'), 'Canva AI 連接器') + ' 接上 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink('copilot') + '，就可在對話內生成 Poster 並匯出。免費帳戶可以連接；教育版功能或有限制。' + h.fee('f-canva-connector') + ' ' + h.dot('f-canva-connector') +
+          '<br><b>連接前留意：</b>AI 助手可讀取你的 Canva 設計；如設計內有幼兒照片，先移走或不要連接。') +
+        h.answer('<div class="row"><p style="flex:1;margin:0">活動通告：K2 班將於［日期］上午舉行「秋天樹葉展」，歡迎家長蒞臨欣賞小朋友的拓印作品。地點：［地點］。</p>' +
+        '<svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Poster 版面示意"><rect x="2" y="2" width="196" height="146" rx="12" fill="#fff4e0" stroke="#8a4b12" stroke-width="3"/><text x="100" y="40" text-anchor="middle" font-size="22" fill="#5a2e08">秋天樹葉展</text><ellipse cx="60" cy="90" rx="22" ry="12" fill="#d9822b" transform="rotate(-30 60 90)"/><ellipse cx="140" cy="92" rx="22" ry="12" fill="#b5532a" transform="rotate(25 140 92)"/><text x="100" y="135" text-anchor="middle" font-size="18" fill="#5a2e08">［日期］［地點］</text></svg></div>') + '</div></div>';
+    },
+    notes: function () { return ['巡視時提醒：先 AI 起草，再由老師把關。']; } },
+  /* 26 午膳 */
+  { seg: 5, kind: 'header', title: '午膳', reqs: [29, 11, 22],
+    html: function (h) {
+      return '<p style="font-size:44px;font-weight:700;margin:40px 0 16px">' + h.bind('lunch') + '</p><p style="font-size:36px">' + h.bind('afternoon') + '</p>';
+    },
+    notes: function () { return ['提醒老師午膳後由繪本單元開始。']; } }
+);
+
+/* Pages: 時段六、時段七（第 27 至 40 頁） */
+var U3_BOOK = ['你是一位幼稚園老師及繪本作家。', '讀者是 K1（3 至 4 歲）幼兒。', '請以「學會分享」為主題，寫一本 6 頁繪本的大綱及每頁文案，並為第 1 頁寫一段插圖提示。', '每頁不多於 2 句，每句不多於 15 字，內容溫暖正面，用繁體中文。', '按「頁數、文案、插圖提示」列出。'];
+function bearSvg(w, waving) {
+  return '<svg width="' + w + '" height="' + Math.round(w * 0.75) + '" viewBox="0 0 200 150" role="img" aria-label="小熊插圖"><rect x="1" y="1" width="198" height="148" rx="14" fill="#fff8ec" stroke="#c9a46a" stroke-width="2"/>' +
+    '<circle cx="100" cy="62" r="30" fill="#b9793d"/><circle cx="76" cy="38" r="10" fill="#b9793d"/><circle cx="124" cy="38" r="10" fill="#b9793d"/>' +
+    '<circle cx="90" cy="58" r="4" fill="#2b1a0c"/><circle cx="110" cy="58" r="4" fill="#2b1a0c"/><ellipse cx="100" cy="72" rx="9" ry="6" fill="#f1d3a8"/>' +
+    '<rect x="78" y="90" width="44" height="40" rx="12" fill="#c43c32"/>' +
+    (waving ? '<rect x="120" y="70" width="12" height="34" rx="6" fill="#b9793d" transform="rotate(-35 126 100)"/>' : '<rect x="122" y="94" width="12" height="30" rx="6" fill="#b9793d"/>') +
+    '<rect x="66" y="94" width="12" height="30" rx="6" fill="#b9793d"/><circle cx="150" cy="118" r="10" fill="#e8a33c"/></svg>';
+}
+function flowHtml(steps) {
+  return '<div class="flow">' + steps.map(function (s, i) {
+    return (i ? '<svg class="link" viewBox="0 0 56 40" aria-hidden="true"><line x1="4" y1="20" x2="52" y2="20" style="animation-delay:' + (i * 350) + 'ms"/></svg>' : '') + '<div class="step"><b>' + s[0] + '</b><span class="small">' + s[1] + '</span></div>';
+  }).join('') + '</div>';
+}
+
+PAGES.push(
+  /* 27 單元三 header */
+  { seg: 6, kind: 'header', cat: 'why', title: '單元三：AI 繪本製作', reqs: [9, 30, 18],
+    html: function (h) { return moduleHeader(h, 6, ['一條 Prompt 生成整本繪本大綱', '插圖提示令角色前後一致', 'AI 文案加 Canva 組頁，即日成書', '配合主題教學及故事時間']); },
+    notes: function () { return ['繪本主題選美德或日常生活，例如分享、洗手。']; } },
+  /* 28 午休後回溫 */
+  { seg: 6, kind: 'content', title: '午休後回溫', reqs: [29],
+    html: function () { return '<ol class="points reveal" style="font-size:36px"><li>Prompt 公式有哪五個部分？</li><li>哪些資料不可以輸入 AI 工具？</li><li>老師個人試用與整校申請有何分別？</li></ol>'; },
+    notes: function () { return ['答案一：角色、對象、任務、限制、輸出格式。', '答案二：幼兒姓名、照片、家長電話、評估及個案資料。', '答案三：個人試用可即日開始；整校方案由校方申請並經官方審核。']; } },
+  /* 29 Live 繪本 */
+  { seg: 6, kind: 'live', cat: 'demo', tool: 'gemini', title: '示範：一條 Prompt 生成繪本', reqs: [17, 30, 9], uses: ['gemini', 'f-gemini-image'],
+    prompt: U3_BOOK.join(''),
+    steps: ['開啟 gemini.google.com。', '貼上頁面上的 Prompt，讀出大綱。', '複製第 1 頁的插圖提示，請 Gemini 生成插圖。', '檢查角色外觀是否符合提示。', '請老師建議另一個結局。'],
+    html: function (h, p) {
+      var img = ['f-gemini-image', 'f-canva-image'].filter(function (id) { return h.hkOK(id); });
+      var imgLine = img.length ? '插圖生成：' + img.map(function (id) { return h.esc(h.field(id, 'name')) + ' ' + h.dot(id); }).join('　') : '插圖生成：暫無已核實的香港可直用工具';
+      return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div><p class="small" style="margin-top:8px">' + imgLine + '</p>' +
+        h.fallback('<div class="row"><div style="flex:1"><b>大綱：</b>小熊有一盒蠟筆 → 小兔沒有蠟筆 → 小熊猶豫 → 小熊分一半 → 一起畫彩虹 → 分享真快樂<br>' +
+          '<b>第 1 頁：</b>小熊有一盒新蠟筆。他很喜歡紅色。<br><b>第 4 頁：</b>小熊把蠟筆分一半。小兔笑了。<br><b>插圖提示：</b>穿紅色背心的啡色小熊，坐在草地上，水彩風格。</div>' + bearSvg(220, false) + '</div>');
+    },
+    notes: function () { return ['提醒：插圖要保持同一角色外觀。']; } },
+  /* 30 五步流程 */
+  { seg: 6, kind: 'content', cat: 'steps', title: '繪本五步流程', reqs: [30, 6, 9],
+    html: function () {
+      return flowHtml([['主題', '選美德或生活主題'], ['大綱', '6 至 8 頁故事線'], ['分頁文案', '每頁不多於 2 句'], ['插圖提示', '寫清角色外觀'], ['組頁', 'Canva 排版成書']]) +
+        '<div style="margin-top:48px"><p class="kicker">注意</p><div class="chips"><span class="chip">角色一致性</span><span class="chip">年齡適切</span><span class="chip">避免恐怖內容</span><span class="chip">避免刻板印象</span></div></div>';
+    },
+    notes: function () { return ['每一步都由老師檢查後才進入下一步。']; } },
+  /* 31 Canva 組頁 */
+  { seg: 6, kind: 'content', cat: 'steps', title: 'Canva 組頁：可打印的 A4 繪本', reqs: [21, 30, 14], uses: ['canva', 'f-canva-template', 'f-canva-image'],
+    html: function (h) {
+      return '<ol class="points small reveal"><li>複製 AI 寫好的分頁文案。</li><li>在 Canva 選 A4 繪本模板（Canva 模板及文字排版 ' + h.fee('f-canva-template') + '）。</li>' +
+        '<li>每頁貼上一頁文案，放入 AI 插圖（Canva 圖像生成 ' + h.fee('f-canva-image') + '）。</li><li>檢查角色一致及錯字。</li><li>下載為 PDF，打印成 A4 繪本。</li></ol>' +
+        '<p class="small" style="margin-top:12px">成品格式：可打印的 A4 頁</p>' + h.disclaimer();
+    },
+    notes: function () { return ['老師已會用 Canva，只示範如何接駁 AI 產出。']; } },
+  /* 32 小試 */
+  { seg: 6, kind: 'exercise', cat: 'try', title: '2 分鐘小試：寫一段插圖提示', reqs: [9, 30, 15], uses: ['gemini'],
+    html: function (h) {
+      return exercise(h, '為繪本第 2 頁寫插圖提示，角色要與第 1 頁一致。', ['寫出角色外觀（顏色、衣服）。', '寫出場景及動作。', '加上畫風。'], h.toolLink('gemini'),
+        '同一隻穿紅色背心的啡色小熊，在課室門口遇見拿着空盒的白色小兔，兩人表情好奇，水彩風格，畫面明亮溫暖。');
+    },
+    notes: function () { return ['請老師互相檢查：角色描述有沒有前後不同？']; } },
+
+  /* 33 單元四 header */
+  { seg: 7, kind: 'header', cat: 'why', title: '單元四：AI 微動畫製作及 AI 素養', reqs: [9, 31, 18],
+    html: function (h) { return moduleHeader(h, 7, ['靜態圖動態化：例如令繪本小熊揮手', '教材擬真互動：例如會開口提問的故事角色', '用 Canva 把插圖變成動態頁', '分清倫理、私隱及版權界線']); },
+    notes: function () { return ['上半部做動畫，下半部談 AI 素養。']; } },
+  /* 34 Live Canva 動畫 */
+  { seg: 7, kind: 'live', cat: 'demo', tool: 'canva', title: '示範：把插圖變成動態頁', reqs: [17, 31, 21, 9], uses: ['canva', 'f-canva-animate'],
+    goal: '把單元三的小熊插圖變成 10 秒動態頁',
+    steps: ['在 Canva 開啟上一節的繪本設計。', '選取小熊插圖，按「動畫」。', '選一個輕柔的動畫效果。', '設定頁面時長為 10 秒。', '播放預覽，再下載為短片。'],
+    html: function (h, p) {
+      return h.ready() + liveHead(h, 'canva') + '<div class="prompt"><b>操作目標：</b>' + h.esc(p.goal) + '</div>' +
+        h.fallback('<div class="row"><div style="text-align:center">' + bearSvg(220, false) + '<div class="meta">首格</div></div><div style="font-size:48px;align-self:center">→</div><div style="text-align:center">' + bearSvg(220, true) + '<div class="meta">末格：小熊揮手</div></div></div>');
+    },
+    notes: function () { return ['動畫只作輔助，避免閃爍效果。']; } },
+  /* 35 動畫步驟及工具路徑 */
+  { seg: 7, kind: 'content', cat: 'steps', title: '動畫步驟及工具路徑', reqs: [31, 21, 14], uses: ['canva', 'f-canva-animate'],
+    html: function (h) {
+      var adv = h.functions(['動畫']).filter(function (e) { return e.id !== 'f-canva-animate'; });
+      var advHtml = adv.length ? adv.map(function (e) {
+        return '<div class="small">' + h.toolLink(e.tool) + '：' + h.link(h.field(e.id, 'source'), e.name) + '　' + h.fee(e.id) + (h.field(e.id, 'region') === '有' ? ' <span class="tag plain">地區限制</span>' : '') + '</div>';
+      }).join('') : '<div class="small">暫無已核實的香港可直用工具（只介紹概念：由文字或圖片生成短片）</div>';
+      var easy = h.hkOK('f-canva-animate') ? '<div class="small">' + h.link(h.field('f-canva-animate', 'source'), 'Canva 動畫') + '　' + h.fee('f-canva-animate') + '</div>' : '<div class="small">暫無已核實的香港可直用工具</div>';
+      return '<div class="grid g2" style="gap:40px"><div><p class="kicker">Canva 動畫步驟（Canva 動畫 ' + h.fee('f-canva-animate') + '）</p><ol class="points small"><li>匯入 AI 生成的插圖。</li><li>選取插圖，按「動畫」。</li><li>選效果並設定時長。</li><li>預覽後下載為短片。</li></ol></div>' +
+        '<div><p class="kicker">工具路徑：易 → 進階</p><div class="card"><b>易</b>' + easy + '</div><div class="card" style="margin-top:16px"><b>進階</b>' + advHtml + '</div></div></div>' + h.disclaimer();
+    },
+    notes: function () { return ['進階工具多需付費，回校先用 Canva 已足夠。']; } },
+  /* 36 倫理 */
+  { seg: 7, kind: 'content', title: 'AI 倫理', reqs: [31],
+    html: function () {
+      return '<ul class="points reveal"><li>人為把關：老師檢查後才使用</li><li>標明 AI 生成</li><li>避免偏見及刻板印象</li></ul>' +
+        '<div class="box" style="margin-top:24px"><p class="kicker">如何向幼兒說明電腦幫手</p><p style="font-size:34px;margin:0">「這幅圖是老師請電腦幫手一起畫的。電腦幫手不是真人，老師已經檢查過。」</p></div>';
+    },
+    notes: function () { return ['用幼兒聽得懂的字，誠實說明。']; } },
+  /* 37 私隱 */
+  { seg: 7, kind: 'content', title: 'AI 與私隱', reqs: [31, 20],
+    html: function () {
+      return '<ul class="points reveal"><li>《個人資料（私隱）條例》適用於幼兒資料</li><li>勿輸入可識別幼兒或家庭的資料</li><li>以「［幼兒名］」等佔位符代替</li><li>使用前查看工具的私隱及資料設定</li></ul>';
+    },
+    notes: function () { return ['上載文件前，先刪去姓名、電話及照片。']; } },
+  /* 38 版權 */
+  { seg: 7, kind: 'content', title: 'AI 與版權', reqs: [31],
+    html: function () {
+      return '<ul class="points reveal"><li>版權及使用權以各工具條款為準</li><li>不以受版權保護的繪本、角色或歌曲作素材</li><li>公開使用前（例如表演、網上發佈）確認授權</li><li>標明 AI 生成</li></ul>';
+    },
+    notes: function () { return ['學校表演或上載網站前，先看清楚授權條款。']; } },
+  /* 39 紅線清單 */
+  { seg: 7, kind: 'content', title: '紅線清單', reqs: [31],
+    html: function () {
+      return '<div class="redcards reveal">' + ['勿輸入幼兒個人資料', '發出前老師人手檢查', '內容年齡適切', '標明 AI 生成', '使用前確認版權及授權', '只用免 VPN 工具'].map(function (t) { return '<div class="redcard">' + t + '</div>'; }).join('') + '</div>';
+    },
+    notes: function () { return ['六條紅線適用於全部工具及全部單元。']; } },
+  /* 40 小試 紅線判斷 */
+  { seg: 7, kind: 'exercise', cat: 'try', title: '2 分鐘小試：有沒有越過紅線？', reqs: [9, 31],
+    html: function (h) {
+      return exercise(h, '判斷以下三個情境是否越過紅線。', ['把全班幼兒照片上載到 AI 工具做相簿。', '用 Gemini 寫中秋節兒歌，老師修改後在課堂唱。', '把 AI 繪本直接發給家長，未經老師檢查。'], '毋須使用 AI 工具',
+        '一、越線：幼兒照片屬個人資料。二、不越線：老師已把關，內容年齡適切。三、越線：發出前要由老師人手檢查。');
+    },
+    notes: function () { return ['小組討論一分鐘，再請兩組分享。']; } }
+);
+
+/* Pages: 時段八至十及附錄（第 41 至 57 頁） */
+var U5_AVATAR = ['你是一位幼兒教育動畫編劇。', '觀眾是 K2（4 至 5 歲）幼兒。', '請設計虛擬幼教老師「小樹老師」的人設（外型、聲線），並寫一段約 60 秒、講「分享」的故事腳本。', '卡通風格、溫暖正面，腳本不多於 250 字，用繁體中文。', '按「人設／腳本」兩部分列出。'];
+var U6_SONG = ['你是一位幼稚園音樂老師。', '對象是 K1（3 至 4 歲）幼兒。', '請以「收玩具」為主題寫一首兒歌歌詞，並註明 BPM 及情緒。', '共 4 至 8 句，每句不多於 7 字，至少一句重複，用字簡單正面，用繁體中文。', '每句一行，最後一行寫 BPM 及情緒。'];
+function treeTeacherSvg(w) {
+  return '<svg width="' + w + '" height="' + w + '" viewBox="0 0 160 160" role="img" aria-label="小樹老師卡通人設"><rect x="1" y="1" width="158" height="158" rx="16" fill="#eef8ef" stroke="#7fb48a" stroke-width="2"/>' +
+    '<circle cx="80" cy="46" r="30" fill="#4f9d5d"/><circle cx="58" cy="54" r="18" fill="#5fb06d"/><circle cx="102" cy="54" r="18" fill="#5fb06d"/>' +
+    '<circle cx="80" cy="76" r="22" fill="#f4d2b0"/><circle cx="72" cy="74" r="3" fill="#2b1a0c"/><circle cx="88" cy="74" r="3" fill="#2b1a0c"/><path d="M71 84 Q80 91 89 84" stroke="#a5523b" stroke-width="3" fill="none"/>' +
+    '<rect x="56" y="98" width="48" height="44" rx="14" fill="#2f7d8c"/></svg>';
+}
+function funcTable(h, kinds) {
+  var list = h.functions(kinds);
+  if (!list.length) return '<p class="small">暫無已核實的香港可直用工具</p>';
+  return '<table class="t"><thead><tr><th>功能</th><th>所屬工具</th><th>標籤</th></tr></thead><tbody>' + list.map(function (e) {
+    return '<tr><td>' + h.link(h.field(e.id, 'source'), e.name) + ' ' + h.dot(e.id) + '</td><td>' + h.toolLink(e.tool) + '</td><td>' + (h.field(e.id, 'fee') === '付費' ? '<span class="tag plain">付費</span> ' : '') +
+      (h.field(e.id, 'region') === '有' ? '<span class="tag plain">地區限制</span>' : '') + '</td></tr>';
+  }).join('') + '</tbody></table>';
+}
+var TEMPLATES = [
+  ['教案', ['你是幼稚園老師。', '對象是［年齡］幼兒。', '設計一節［主題］遊戲教案。', '30 分鐘、繁體中文、不用工作紙。', '按目標、材料、流程列出。']],
+  ['家長信', ['你是幼稚園老師。', '讀者是［班別］家長。', '寫一封［主題］通知信。', '不多於 150 字，禮貌書面語。', '以「各位家長：」開頭，署名［老師名］。']],
+  ['繪本大綱', ['你是繪本作家。', '讀者是［年齡］幼兒。', '寫［主題］繪本大綱。', '6 頁，每頁不多於 2 句，正面。', '按頁數列出。']],
+  ['插圖提示', ['你是插畫師。', '觀眾是［年齡］幼兒。', '為［頁面內容］寫插圖提示。', '角色外觀與前頁一致，卡通風格。', '寫成一段文字。']],
+  ['數字人腳本', ['你是動畫編劇。', '觀眾是［年齡］幼兒。', '為虛擬老師寫［主題］腳本。', '約 60 秒，溫暖正面，繁中。', '分人設及腳本列出。']],
+  ['兒歌', ['你是音樂老師。', '對象是［年齡］幼兒。', '寫［主題］兒歌歌詞。', '4 至 8 句，每句不多於 7 字。', '每句一行，註明 BPM。']],
+  ['通告', ['你是幼稚園行政老師。', '讀者是全校家長。', '寫［主題］活動通告。', '不多於 120 字，書面語。', '列出日期、地點、回條期限。']],
+  ['區角活動', ['你是幼稚園老師。', '對象是［年齡］幼兒。', '設計［主題］區角活動。', '材料簡單安全，繁中。', '按目標、材料、玩法列出。']]
+];
+
+PAGES.push(
+  /* 41 單元五 header */
+  { seg: 8, kind: 'header', cat: 'why', title: '單元五：AI 卡通數字人微動畫', reqs: [9, 32, 18],
+    html: function (h) { return moduleHeader(h, 8, ['故事講述：虛擬老師講故事', '課堂常規：提醒洗手、收玩具', '主題引入：開場介紹新主題', '數字人不取代真人老師']); },
+    notes: function () { return ['數字人是輔助，真人老師在場陪同。']; } },
+  /* 42 Live 數字人 */
+  { seg: 8, kind: 'live', cat: 'demo', tool: 'second', title: '示範：設計「小樹老師」', reqs: [17, 32, 9], uses: [],
+    prompt: U5_AVATAR.join(''),
+    steps: function (h) { return ['開啟 ' + h.second() + '。', '貼上頁面上的 Prompt。', '讀出人設，檢查是否溫暖、非恐怖。', '讀出腳本，計算約 60 秒。', '請老師建議一句課堂常規提示。']; },
+    html: function (h, p) {
+      return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
+        '<div class="chips" style="margin-top:10px"><span class="chip">溫暖</span><span class="chip">非恐怖（卡通風格，不追求擬真人臉）</span><span class="chip">尊重文化</span></div>' +
+        h.fallback('<div class="row">' + treeTeacherSvg(150) + '<div style="flex:1"><b>人設：</b>小樹老師，頭上有綠葉，穿藍綠色衣服，聲線溫柔緩慢。<br><b>腳本：</b>小朋友，早晨！今日小樹老師想講一個故事。小熊有一盒蠟筆，小兔沒有。小熊想了想，把蠟筆分一半。兩個好朋友一起畫了一道彩虹。分享，令大家都開心。你今日想和誰分享呢？</div></div>');
+    },
+    notes: function () { return ['人設避免擬真人臉，以免幼兒害怕。']; } },
+  /* 43 四步流程 */
+  { seg: 8, kind: 'content', cat: 'steps', title: '數字人四步流程', reqs: [32, 6, 9],
+    html: function () {
+      return flowHtml([['人設', '外型及聲線'], ['腳本', '約 60 秒'], ['語音／口型／短片', '工具生成'], ['課堂播放注意', '老師陪同']]) + '<p class="box" style="margin-top:48px">提示：每段短片不多於 3 分鐘。</p>';
+    },
+    notes: function () { return ['幼兒專注時間短，短片宜精簡。']; } },
+  /* 44 播放注意及工具 */
+  { seg: 8, kind: 'content', title: '播放注意及工具', reqs: [32, 14, 15],
+    html: function (h) {
+      return '<div class="grid g2" style="gap:40px"><ul class="points reveal small"><li>老師在場陪同</li><li>向幼兒說明是電腦製作</li><li>使用真人（包括老師）肖像或聲音前取得本人同意</li><li>不使用幼兒的肖像及聲音</li></ul>' +
+        '<div>' + funcTable(h, ['數字人', '語音']) + '</div></div>' + h.disclaimer();
+    },
+    notes: function () { return ['用老師肖像前要取得本人同意。']; } },
+  /* 45 小試 */
+  { seg: 8, kind: 'exercise', cat: 'try', title: '2 分鐘小試：30 秒課堂常規腳本', reqs: [9, 32, 15], uses: ['gemini'],
+    html: function (h) {
+      return exercise(h, '為小樹老師寫一段 30 秒的洗手提示腳本。', ['寫出開場問候。', '寫出三個洗手步驟。', '以一句鼓勵結束。'], h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()),
+        '小朋友，吃小食前要洗手啊！先開水沾濕雙手，再搓番梘泡泡數十聲，最後沖乾淨抹乾。洗得乾乾淨淨，你真棒！');
+    },
+    notes: function () { return ['提示：腳本用字要簡單，句子要短。']; } },
+
+  /* 46 單元六 header */
+  { seg: 9, kind: 'header', cat: 'why', title: '單元六：AI 音樂歌曲製作', reqs: [9, 33, 8, 18],
+    html: function (h) {
+      return segMeta(h, 9) + '<p class="small"><b>每分鐘拍數（BPM）：</b>一分鐘有多少下拍子，數字越大越快。例如：律動歌約 110 下。</p><p class="kicker">為何有用</p>' +
+        '<ul class="points reveal"><li>背景音樂：60 BPM、安靜、3 至 4 歲</li><li>律動音樂：110 BPM、活潑、4 至 5 歲</li><li>兒歌旋律：96 BPM、愉快、5 至 6 歲</li></ul>' + h.hookSlot(9);
+    },
+    notes: function () { return ['午睡用慢拍，律動用快拍。']; } },
+  /* 47 Live 兒歌 */
+  { seg: 9, kind: 'live', cat: 'demo', tool: 'gemini', title: '示範：寫一首收玩具兒歌', reqs: [17, 33, 9], uses: ['gemini'],
+    prompt: U6_SONG.join(''),
+    steps: ['開啟 gemini.google.com。', '貼上頁面上的 Prompt。', '對照歌詞準則逐項檢查。', '老師試唱，按粵語字音調整。'],
+    html: function (h, p) {
+      return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
+        '<div class="chips" style="margin-top:10px"><span class="chip">每句不多於 7 字</span><span class="chip">至少一句重複</span><span class="chip">用字簡單</span><span class="chip">內容正面</span></div>' +
+        '<p class="small" style="margin-top:8px">以粵語演唱時，請老師試唱並按字音調整歌詞。</p>' +
+        h.fallback('玩具玩完了<br>我們收起來<br>一件一件放<br>收好真可愛<br>玩具玩完了<br>我們收起來<br>BPM：100　情緒：愉快');
+    },
+    notes: function () { return ['AI 歌詞未必配合粵語聲調，要試唱。']; } },
+  /* 48 音樂步驟 */
+  { seg: 9, kind: 'content', cat: 'steps', title: '用 AI 生成音樂的步驟', reqs: [33, 14],
+    html: function (h) {
+      return '<div class="grid g2" style="gap:40px"><div><ol class="points small"><li>設定 BPM（例如 110）</li><li>設定情緒（例如活潑）</li><li>設定長度（例如 1 分鐘）</li><li>貼上歌詞，生成後試聽</li></ol>' +
+        '<p class="box small">在公開場合（例如學校表演、網上發佈）使用 AI 音樂前，先確認授權條款。</p></div><div>' + funcTable(h, ['音樂']) + '</div></div>' + h.disclaimer();
+    },
+    notes: function () { return ['免費版通常不可作商業用途。']; } },
+  /* 49 小試 */
+  { seg: 9, kind: 'exercise', cat: 'try', title: '2 分鐘小試：律動歌 Prompt', reqs: [9, 33, 15], uses: ['gemini'],
+    html: function (h) {
+      return exercise(h, '寫一條 Prompt，生成 4 句律動歌歌詞並註明 BPM 及情緒。', ['選主題及年齡。', '寫明 BPM 及情緒。', '加上每句字數限制。'], h.toolLink('gemini'),
+        '你是幼稚園音樂老師。對象是 K2（4 至 5 歲）幼兒。請寫一首 4 句「跳跳舞」律動歌歌詞。每句不多於 7 字，活潑正面，用繁體中文。每句一行，最後註明 BPM：110、情緒：活潑。');
+    },
+    notes: function () { return ['完成後可即場一起拍手唱一次。']; } },
+
+  /* 50 時段十 header + Take_Home_Card */
+  { seg: 10, kind: 'header', title: '今日帶回家', reqs: [34, 22, 15], uses: ['gemini', 'canva'],
+    html: function (h) {
+      return segMeta(h, 10) + '<div class="card accent"><h3>本週可試的 3 個任務</h3><ol class="points reveal"><li>用 ' + h.toolLink('gemini') + ' 起草一封家長信</li><li>用 ' + h.toolLink('canva') + ' 把 AI 通告做成 Poster</li><li>用 ' + h.toolLink(DECK.secondId()) + ' 寫一首律動歌歌詞</li></ol></div>';
+    },
+    notes: function () { return ['三個任務分別來自單元二、時段四及單元六。']; } },
+  /* 51 Action_Plan_Sheet */
+  { seg: 10, kind: 'content', cls: 'plan', title: '行動計劃表', reqs: [34],
+    html: function () {
+      var blank = '<tr><td>&nbsp;</td><td></td><td></td></tr>';
+      return '<table class="t plan-table"><thead><tr><th>任務</th><th style="width:420px">使用工具</th><th style="width:360px">預計完成日期</th></tr></thead><tbody>' + blank + blank + blank + '</tbody></table>' +
+        '<div class="commit"><b>本週只試 2 個免 VPN 工具</b><span>工具一：<span class="blank"></span></span><span>工具二：<span class="blank"></span></span></div>';
+    },
+    notes: function () { return ['可用瀏覽器打印本頁（只會打印行動計劃表）。']; } },
+  /* 52 Q&A */
+  { seg: 10, kind: 'content', title: 'Q&A', reqs: [34, 3],
+    html: function () {
+      return '<p style="font-size:40px;margin:60px 0 40px">有問題，歡迎提出。</p><button type="button" class="ctl" data-goto="appendix" data-interactive style="font-size:30px;padding:14px 32px">查看附錄</button>';
+    },
+    notes: function () { return ['常見問題：可否用 ChatGPT？答：香港官方不可直用，可改用 Poe 或 Microsoft Copilot。', '常見問題：AI 生成的圖可否上載學校網站？答：先確認工具授權條款，並標明 AI 生成。']; } },
+  /* 53 Closing */
+  { seg: 10, kind: 'closing', raw: true, title: '結尾', reqs: [13],
+    html: function (h) {
+      return '<div style="position:absolute;left:120px;top:240px;right:120px"><p class="kicker" style="font-size:28px">AI 工具於幼兒教育的應用 — 聯校教師培訓</p>' +
+        '<h1 style="position:static;width:auto;font-size:80px;margin:24px 0 64px">多謝各位老師參與！</h1><p style="font-size:30px">培訓機構：' + h.bind('provider') + '</p></div>';
+    },
+    notes: function () { return ['提醒老師帶走行動計劃表。']; } },
+
+  /* 54 速查表一 */
+  { seg: 'A', kind: 'appendix', title: '速查表一：香港可直用', reqs: [35, 14],
+    html: function (h) {
+      return '<table class="t" style="font-size:22px"><thead><tr><th>工具</th><th>香港狀態</th><th>用途</th><th>官方網址</th></tr></thead><tbody>' +
+        h.tools(function (e) { return h.hkOK(e.id); }).map(function (e) {
+          return '<tr><td><b>' + h.toolLink(e.id) + '</b>' + (e.id === 'poe' ? '<br><span class="meta">' + h.poeNote + '</span>' : '') + '</td><td>' + h.dot(e.id) + '</td><td>' + h.esc(h.field(e.id, 'use')) + '</td><td>' + h.link(e.url) + '</td></tr>';
+        }).join('') + '</tbody></table>' + h.disclaimer();
+    },
+    notes: function () { return ['回校查閱用；資料以官方當日為準。']; } },
+  /* 55 速查表二 */
+  { seg: 'A', kind: 'appendix', title: '速查表二：香港不可直用・教育方案', reqs: [35, 14, 16],
+    html: function (h) {
+      var no = h.tools(function (e) { return !h.hkOK(e.id); }).map(function (e) {
+        var alt = h.field(e.id, 'alt');
+        return '<tr><td><b>' + h.toolLink(e.id) + '</b></td><td class="nw">' + h.dot(e.id) + '</td><td>' + h.esc(alt) + (/Poe/.test(alt) ? '<br><span class="meta">' + h.poeNote + '</span>' : '') + '</td></tr>';
+      }).join('');
+      var plans = h.reg.filter(function (e) { return e.category === '教育方案'; }).map(function (e) {
+        return '<tr><td>' + h.link(e.source, e.name) + '</td><td class="nw">' + h.esc(h.field(e.id, 'route')) + '</td><td class="nw">' + h.esc(h.field(e.id, 'kgDefault')) + '</td></tr>';
+      }).join('');
+      return '<div class="grid" style="grid-template-columns:0.72fr 1.28fr;gap:24px"><div><p class="kicker">香港不可直用</p><table class="t"><thead><tr><th>平台</th><th>狀態</th><th>替代</th></tr></thead><tbody>' + no + '</tbody></table></div>' +
+        '<div><p class="kicker">教育方案</p><table class="t" style="font-size:22px"><thead><tr><th>方案</th><th>申請途徑</th><th>幼稚園預設</th></tr></thead><tbody>' + plans + '</tbody></table></div></div>' + h.disclaimer();
+    },
+    notes: function () { return ['方案是否適用，以官方審核為準。']; } },
+  /* 56 資源清單 */
+  { seg: 'A', kind: 'appendix', title: '資源清單', reqs: [35, 14],
+    html: function (h) {
+      var rows = h.reg.filter(function (e) { return e.category === '政策' || e.category === '教育方案'; });
+      return '<table class="t" style="font-size:22px"><thead><tr><th>項目</th><th>官方來源</th></tr></thead><tbody>' + rows.map(function (e) {
+        return '<tr><td>' + h.esc(e.name) + '</td><td>' + h.link(e.source) + '</td></tr>';
+      }).join('') + '</tbody></table>' + h.disclaimer();
+    },
+    notes: function () { return ['只列官方網站；網址可能變更。']; } },
+  /* 57 Prompt 範本庫 */
+  { seg: 'A', kind: 'appendix', title: 'Prompt 範本庫', reqs: [35, 20],
+    html: function () {
+      return '<div class="grid g2 tpl">' + TEMPLATES.map(function (t) {
+        return '<div class="card"><b>' + t[0] + '</b><div>' + partsHtml(t[1], true) + '</div></div>';
+      }).join('') + '</div>';
+    },
+    notes: function () { return ['把［　］內的部分換成自己班的資料。']; } }
+);
+</script>
+<script id="app">
+/* Runtime part 1: utilities, data access, validation (System_Warning) and page helpers */
+var DECK = (function () {
+  'use strict';
+  var CFG = SESSION_CONFIG, REG = REGISTRY, TL = TIMELINE;
+  var WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+  var PENDING = '待設定', OK = '香港可直用', NO = '香港不可直用';
+  var MODULE_SEGS = [2, 3, 6, 7, 8, 9];
+  var APPROVED = ['C1', 'C2', 'C3', 'C4', 'C5', 'M1', 'M2', 'M3', 'M4', 'M5', 'T1', 'T2', 'T3', 'T4', 'T5'];
+  var LABEL = { manjusri: '場次一', mantra: '場次二' };
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function empty(v) { return v === undefined || v === null || (typeof v === 'string' && v.trim() === '') || (Array.isArray(v) && v.length === 0); }
+  function isDate(s) {
+    if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+    var p = s.split('-').map(Number), d = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
+    return d.getUTCFullYear() === p[0] && d.getUTCMonth() === p[1] - 1 && d.getUTCDate() === p[2];
+  }
+  function utc(s) { var p = s.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2]); }
+  function isTime(s) { return typeof s === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(s); }
+  function mins(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+  function weekday(s) { return WEEK[new Date(utc(s)).getUTCDay()]; }
+  function chineseDate(s) { var p = s.split('-').map(Number); return p[0] + ' 年 ' + p[1] + ' 月 ' + p[2] + ' 日（' + weekday(s) + '）'; }
+
+  /* ---------- Session_Config ---------- */
+  var SESSION_FIELDS = ['label', 'date', 'start', 'end', 'lunchStart', 'lunchEnd', 'school', 'venue', 'headcount', 'factIds', 'facts', 'hooks'];
+  function sessionErrors(key) {
+    var s = (CFG.sessions || {})[key], bad = [];
+    if (!s) return SESSION_FIELDS.slice();
+    SESSION_FIELDS.forEach(function (f) { if (empty(s[f]) || (f === 'facts' && typeof s.facts === 'object' && Object.keys(s.facts).length === 0)) bad.push(f); });
+    if (bad.indexOf('date') < 0 && !isDate(s.date)) bad.push('date');
+    ['start', 'end', 'lunchStart', 'lunchEnd'].forEach(function (f) { if (bad.indexOf(f) < 0 && !isTime(s[f])) bad.push(f); });
+    if (bad.indexOf('headcount') < 0 && !(Number.isInteger(s.headcount) && s.headcount > 0)) bad.push('headcount');
+    [['start', 'end'], ['lunchStart', 'lunchEnd']].forEach(function (pr) {
+      if (bad.indexOf(pr[0]) < 0 && bad.indexOf(pr[1]) < 0 && mins(s[pr[0]]) >= mins(s[pr[1]])) { bad.push(pr[0]); bad.push(pr[1]); }
+    });
+    return bad;
+  }
+  function S(key, field) {
+    var s = (CFG.sessions || {})[key];
+    return (s && sessionErrors(key).indexOf(field) < 0) ? s[field] : PENDING;
+  }
+  function sharedErrors() {
+    var sh = CFG.shared || {}, bad = [];
+    ['providerConstant', 'footerProvider', 'secondTool', 'buildDate', 'facts'].forEach(function (f) { if (empty(sh[f])) bad.push(f); });
+    if (bad.indexOf('footerProvider') < 0 && ['開啟', '關閉'].indexOf(sh.footerProvider) < 0) bad.push('footerProvider');
+    if (bad.indexOf('secondTool') < 0 && ['DeepSeek', 'Qwen'].indexOf(sh.secondTool) < 0) bad.push('secondTool');
+    if (bad.indexOf('buildDate') < 0 && !isDate(sh.buildDate)) bad.push('buildDate');
+    if (bad.indexOf('facts') < 0 && ['C1', 'C2', 'C3', 'C4', 'C5'].some(function (c) { return empty(sh.facts[c]); })) bad.push('facts');
+    return bad;
+  }
+  function shared(f) { return sharedErrors().indexOf(f) < 0 ? CFG.shared[f] : null; }
+  function provider() { return shared('providerConstant') || PENDING; }
+  function footerOn() { return shared('footerProvider') === '開啟'; }
+  function secondName() { return shared('secondTool') || 'DeepSeek'; }
+  function secondId() { return secondName().toLowerCase(); }
+  function resolveTool(t) { return t === 'second' ? secondId() : t; }
+
+  function hookProblems(key, hook) {
+    var s = CFG.sessions[key] || {}, allowed = Array.isArray(s.factIds) ? s.factIds : [], why = [];
+    if (!hook || !Array.isArray(hook.facts) || hook.facts.length === 0) why.push('沒有引用事實編號');
+    else hook.facts.forEach(function (f) {
+      if (APPROVED.indexOf(f) < 0) why.push(f + ' 不屬 Approved_Fact_List');
+      else if (allowed.indexOf(f) < 0) why.push(f + ' 不屬此場次可引用的事實');
+    });
+    if (!hook || MODULE_SEGS.indexOf(hook.seg) < 0) why.push('所屬時段不是單元時段');
+    if (!hook || empty(hook.text)) why.push('沒有文字');
+    return why;
+  }
+  function validHooks(key, seg) {
+    var s = CFG.sessions[key];
+    if (!s || !Array.isArray(s.hooks)) return [];
+    return s.hooks.filter(function (h) { return h && h.seg === seg && hookProblems(key, h).length === 0; });
+  }
+
+  /* ---------- Availability_Registry ---------- */
+  var BY_ID = {};
+  REG.forEach(function (e) { if (e && e.id) BY_ID[e.id] = e; });
+  var ENUMS = {
+    category: ['工具', '功能', '教育方案', '政策'], hk: [OK, NO], group: ['主力', '也很實用', '一句帶過', '不列入'],
+    zh: ['佳', '良', '一般'], fit: ['高', '中', '低'], kind: ['文字', '圖像生成', '動畫', '數字人', '語音', '音樂'],
+    fee: ['免費', '付費', '需 Canva Education'], region: ['有', '沒有'], route: ['老師個人', '整校申請', '機構購買'], kgDefault: ['適用', '不適用']
+  };
+  var REQ = {
+    '工具': ['url', 'hk', 'group', 'use', 'zh', 'free', 'fit', 'note'],
+    '功能': ['tool', 'kind', 'hk', 'fee', 'region'],
+    '教育方案': ['org', 'audience', 'route', 'fee', 'privacy', 'kgDefault'],
+    '政策': ['issuer', 'scope']
+  };
+  function verifiedOK(e) {
+    if (!isDate(e.verified)) return false;
+    var bd = shared('buildDate');
+    return !bd || utc(e.verified) <= utc(bd);
+  }
+  function entryErrors(e) {
+    var bad = [];
+    ['id', 'name', 'category', 'claim', 'source', 'verified'].forEach(function (f) { if (empty(e[f])) bad.push(f); });
+    if (bad.indexOf('category') < 0 && ENUMS.category.indexOf(e.category) < 0) bad.push('category');
+    if (bad.indexOf('verified') < 0 && !verifiedOK(e)) bad.push('verified');
+    (REQ[e.category] || []).forEach(function (f) {
+      if (empty(e[f])) bad.push(f);
+      else if (ENUMS[f] && !(f === 'fee' && e.category === '教育方案') && ENUMS[f].indexOf(e[f]) < 0) bad.push(f);
+    });
+    if (e.category === '工具' && e.hk === NO && empty(e.alt)) bad.push('alt');
+    if (e.category === '功能' && e.tool && !BY_ID[e.tool]) bad.push('tool');
+    return bad;
+  }
+  function entry(id) { return BY_ID[id] || null; }
+  function hkOK(id) { var e = entry(id); return !!e && e.hk === OK; }
+  function field(id, f) { var e = entry(id); if (!e) return PENDING; return entryErrors(e).indexOf(f) < 0 ? e[f] : PENDING; }
+  function verifiedText(id) { var e = entry(id); return (e && verifiedOK(e)) ? e.verified : '未註明日期'; }
+  function tools(filter) { return REG.filter(function (e) { return e.category === '工具' && (!filter || filter(e)); }); }
+  function functions(kinds) { return REG.filter(function (e) { return e.category === '功能' && kinds.indexOf(e.kind) >= 0 && e.hk === OK; }); }
+
+  /* ---------- timeline ---------- */
+  function timelineProblems(key) {
+    var s = CFG.sessions[key] || {}, out = [];
+    function add(n, code) { out.push({ n: n, code: code }); }
+    if (!Array.isArray(TL) || TL.length !== 10) add('全部', 'a');
+    (TL || []).forEach(function (t, i) {
+      if (!t || t.n !== i + 1) add(t && t.n || i + 1, 'a');
+      if (!t || !isTime(t.start) || !isTime(t.end) || mins(t.start) >= mins(t.end)) add(t && t.n || i + 1, 'b');
+      var nx = TL[i + 1];
+      if (nx && t && t.end !== nx.start) add(t.n, 'c');
+      var modes = (t && t.modes) || [];
+      var good = modes.every(function (m) { return ['示範', '動手', '討論'].indexOf(m) >= 0; });
+      if (i === 4 ? modes.length !== 0 : (modes.length < 1 || modes.length > 3 || !good)) add(t && t.n || i + 1, 'f');
+    });
+    if (TL[0] && TL[0].start !== s.start) add(1, 'd');
+    if (TL[9] && TL[9].end !== s.end) add(10, 'd');
+    if (TL[4] && (TL[4].start !== s.lunchStart || TL[4].end !== s.lunchEnd)) add(5, 'e');
+    return out;
+  }
+  function duration(t) { return (isTime(t.start) && isTime(t.end) && mins(t.start) < mins(t.end)) ? String(mins(t.end) - mins(t.start)) : PENDING; }
+
+  /* ---------- System_Warning (需求 5 第 6 項) ---------- */
+  function warnings(key, pages) {
+    var w = [], label = LABEL[key] + '（' + key + '）';
+    var se = sessionErrors(key);
+    if (se.length) w.push(['需求 11 第 9 項', label + '欄位出錯：' + se.join('、')]);
+    var sh = sharedErrors();
+    if (sh.length) w.push(['需求 11 第 10 項', '共用設定欄位出錯：' + sh.join('、')]);
+    var s = CFG.sessions[key];
+    if (s && Array.isArray(s.hooks)) s.hooks.forEach(function (h, i) {
+      var why = hookProblems(key, h);
+      if (why.length) w.push(['需求 11 第 12 項', label + '第 ' + (i + 1) + ' 個校本例子（時段 ' + (h && h.seg) + '）：' + why.join('；')]);
+    });
+    var miss = MODULE_SEGS.filter(function (seg) { return validHooks(key, seg).length === 0; });
+    if (miss.length) w.push(['需求 18 第 5 項', label + '以下時段沒有有效校本例子：' + miss.map(function (n) { return '時段' + n; }).join('、')]);
+    REG.forEach(function (e, i) { var b = entryErrors(e); if (b.length) w.push(['需求 14 第 10 項', '第 ' + (i + 1) + ' 項 ' + (e.name || '') + ' 欄位出錯：' + b.join('、')]); });
+    var sd = S(key, 'date'), stale = REG.filter(function (e) {
+      if (!verifiedOK(e)) return true;
+      return sd !== PENDING && (utc(sd) - utc(e.verified)) / 86400000 > 30;
+    });
+    if (stale.length) w.push(['需求 14 第 8 項', '以下 ' + stale.length + ' 項須於場次前重新核實。' + stale.map(function (e) { return '第 ' + (REG.indexOf(e) + 1) + ' 項 ' + e.name + '（' + verifiedText(e.id) + '）'; }).join('；')]);
+    var watch = {};
+    ['gemini', secondId(), 'canva'].forEach(function (id) { watch[id] = 1; });
+    tools(function (e) { return ['主力', '也很實用', '一句帶過'].indexOf(e.group) >= 0; }).forEach(function (e) { watch[e.id] = 1; });
+    pages.forEach(function (p) { (p.uses || []).forEach(function (id) { watch[id] = 1; }); });
+    function affected(id) {
+      var out = [];
+      pages.forEach(function (p, i) {
+        if ((p.uses || []).indexOf(id) >= 0 || (p.tool && resolveTool(p.tool) === id) || (p.matrix && entry(id) && entry(id).group !== '不列入')) out.push(i + 1);
+      });
+      return out.length ? out.join('、') : '—';
+    }
+    Object.keys(watch).forEach(function (id) {
+      if (!hkOK(id)) w.push(['需求 15 第 6 項', (entry(id) ? entry(id).name : id) + ' 不是「香港可直用」，受影響頁：' + affected(id)]);
+    });
+    ['chatgpt', 'claude', 'doubao'].forEach(function (id) {
+      if (hkOK(id)) w.push(['需求 15 第 6 項', entry(id).name + ' 已變為「香港可直用」，請更新講解說法，受影響頁：' + affected(id)]);
+    });
+    var tp = timelineProblems(key);
+    if (tp.length) w.push(['需求 22 第 3 項', '時間軸不符合條件：' + tp.map(function (x) { return '時段' + x.n + '（' + x.code + '）'; }).join('、')]);
+    return w;
+  }
+
+  function link(url, label) {
+    var raw = String(url || '').trim();
+    var href = /^https?:\/\//i.test(raw) ? raw : (/^[\w.-]+\.[A-Za-z]{2,}/.test(raw) ? 'https://' + raw : '');
+    var host = raw.replace(/^https?:\/\//i, '').replace(/\/$/, '').split('/')[0].replace(/^www\./, '');
+    var text = label || host;
+    if (!href) return esc(text);
+    return '<a class="ext" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(text) + '</a>';
+  }
+  function toolLink(id) { var e = entry(id); return e ? link(e.url, e.name) : esc(id); }
+
+  /* ---------- helpers used by pages.js ---------- */
+  var h = {
+    esc: esc,
+    second: secondName,
+    toolName: function (t) { var id = resolveTool(t); return entry(id) ? entry(id).name : id; },
+    dot: function (id) {
+      var ok = hkOK(id);
+      return '<span class="st ' + (ok ? 'ok' : 'no') + '" data-st="' + esc(id) + '"><span class="d" aria-hidden="true"></span><span>' + (ok ? OK : NO) + '</span></span>';
+    },
+    link: link,
+    toolLink: toolLink,
+    disclaimer: function () { return '<div class="disclaimer">以官方當日為準</div>'; },
+    bind: function (name) { return '<span data-bind="' + name + '"></span>'; },
+    ready: function () { return '<span class="tag warm ready">今日回校就能用</span>'; },
+    hookSlot: function (seg) { return '<div class="hook" data-hook-slot="' + seg + '"></div>'; },
+    opt: function (title, body) {
+      return '<div class="opt" data-interactive><div class="opt-head"><span class="tag plain">選做</span><b>' + title +
+        '</b><button type="button" class="opt-toggle" data-interactive aria-expanded="false">展開</button></div><div class="opt-body">' + body + '</div></div>';
+    },
+    answer: function (body) {
+      return '<div><button type="button" class="ctl" data-show="answer" data-interactive>顯示範例答案</button>' +
+        '<div class="answer"><span class="label">範例答案：</span>' + body + '</div></div>';
+    },
+    fallback: function (body) {
+      return '<div><button type="button" class="ctl" data-show="fallback" data-interactive>顯示示例輸出</button>' +
+        '<div class="fallback"><div class="label">示例輸出</div>' + body + '</div></div>';
+    },
+    poeNote: 'Poe 不是 ChatGPT／Claude 官方帳戶',
+    entry: entry, field: field, hkOK: hkOK, tools: tools, functions: functions, reg: REG, tl: TL, duration: duration,
+    fee: function (id) { var f = field(id, 'fee'); return '<span class="tag plain">' + esc(f) + '</span>'; },
+    shared: function (f) { return shared(f); }
+  };
+
+  return {
+    CFG: CFG, REG: REG, TL: TL, LABEL: LABEL, PENDING: PENDING, MODULE_SEGS: MODULE_SEGS,
+    esc: esc, isDate: isDate, weekday: weekday, chineseDate: chineseDate,
+    sessionErrors: sessionErrors, sharedErrors: sharedErrors, S: S, provider: provider, footerOn: footerOn,
+    secondName: secondName, secondId: secondId, resolveTool: resolveTool, validHooks: validHooks, hookProblems: hookProblems,
+    entry: entry, entryErrors: entryErrors, hkOK: hkOK, verifiedText: verifiedText, timelineProblems: timelineProblems,
+    duration: duration, warnings: warnings, h: h
+  };
+})();
+
+/* Runtime part 2: rendering, navigation, session switching, interactions */
+(function () {
+  'use strict';
+  var D = DECK, h = D.h, pages = PAGES;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var stage = $('#stage'), slidesEl = $('#slides'), notesEl = $('#notes');
+  var state = { key: 'manjusri', index: 0 };
+  var N = pages.length;
+
+  /* ---------- web font: never wait longer than 3 s (需求 1 第 5 項) ---------- */
+  var font = $('#webfont');
+  setTimeout(function () { if (font && !font.dataset.loaded) font.remove(); }, 3000);
+
+  /* ---------- initial session from URL (需求 12 第 1 至 3 項) ---------- */
+  var params = new URLSearchParams(location.search);
+  if (params.has('school')) {
+    var v = (params.get('school') || '').toLowerCase();
+    if (v === 'manjusri' || v === 'mantra') state.key = v;
+    else console.warn('URL 參數 school 的值無效：「' + params.get('school') + '」，已改用 manjusri。');
+  }
+
+  /* ---------- build slides ---------- */
+  pages.forEach(function (p, i) {
+    var sec = document.createElement('section');
+    sec.className = 'slide' + (p.cls ? ' ' + p.cls : '');
+    sec.dataset.i = i;
+    sec.dataset.seg = p.seg;
+    sec.dataset.reqs = p.reqs.join(',');
+    sec.dataset.kind = p.kind;
+    if (p.cat) sec.dataset.cat = p.cat;
+    if (p.tool) sec.dataset.tool = D.resolveTool(p.tool);
+    var body = p.html(h, p);
+    sec.innerHTML = p.raw ? body : '<h1>' + p.title + (p.seg === 'A' ? '<span class="appx-mark">附錄</span>' : '') + '</h1><div class="content">' + body + '</div>';
+    slidesEl.appendChild(sec);
+  });
+  var slides = $$('.slide', slidesEl);
+
+  /* ---------- chrome ---------- */
+  var dots = $('#dots');
+  pages.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.interactive = ''; b.dataset.go = i;
+    b.setAttribute('aria-label', '第 ' + (i + 1) + ' 頁');
+    b.innerHTML = '<i></i>';
+    dots.appendChild(b);
+  });
+  var tlBar = $('#timeline-bar');
+  D.TL.forEach(function (t) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.interactive = ''; b.dataset.seg = t.n;
+    b.textContent = t.start + ' ' + t.short;
+    tlBar.appendChild(b);
+  });
+  var printArea = $('#print-area'), planSlide = slides.filter(function (s) { return s.classList.contains('plan'); })[0];
+  if (planSlide) printArea.innerHTML = planSlide.innerHTML.replace(/<span class="appx-mark">.*?<\/span>/, '');
+
+  /* ---------- session application (需求 11、12) ---------- */
+  function binds(key) {
+    var S = function (f) { return D.S(key, f); }, P = D.PENDING;
+    var date = S('date'), st = S('start'), en = S('end'), ls = S('lunchStart'), le = S('lunchEnd');
+    return {
+      school: S('school'), venue: S('venue'), label: S('label'),
+      date: date === P ? P : D.chineseDate(date),
+      time: (st === P || en === P) ? P : st + '–' + en,
+      lunch: (ls === P || le === P) ? P : ls + '–' + le,
+      afternoon: le === P ? P : '下午 ' + le + ' 開始',
+      provider: D.provider()
+    };
+  }
+  function applySession(key) {
+    state.key = key;
+    var b = binds(key);
+    $$('[data-bind]').forEach(function (el) { var v = b[el.dataset.bind]; if (v !== undefined && el.textContent !== v) el.textContent = v; });
+    $$('[data-hook-slot]').forEach(function (slot) {
+      var hooks = D.validHooks(key, +slot.dataset.hookSlot);
+      slot.hidden = hooks.length === 0;
+      slot.innerHTML = hooks.map(function (x) { return '<div class="hook-item"><span class="tag warm">校本例子</span>' + D.esc(x.text) + '</div>'; }).join('');
+    });
+    $('#session-tag').textContent = b.label;
+    var other = key === 'manjusri' ? 'mantra' : 'manjusri';
+    $('#session-switch').textContent = '切換至' + D.LABEL[other];
+    renderNotes();
+  }
+  function switchSession() {
+    var next = state.key === 'manjusri' ? 'mantra' : 'manjusri';
+    applySession(next);
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set('school', next);
+      history.replaceState(history.state, '', u.toString());
+    } catch (e) {
+      console.warn('URL 參數 school 未能更新：' + e.message);
+    }
+  }
+
+  /* ---------- notes (需求 5) ---------- */
+  function notesHtml() {
+    var p = pages[state.index], out = [], i = state.index;
+    if (p.kind === 'cover') {
+      var w = D.warnings(state.key, pages);
+      out.push('<h2>系統警告</h2>');
+      out.push(w.length ? '<ol>' + w.map(function (x) { return '<li class="warn">警告（' + x[0] + '）：' + D.esc(x[1]) + '</li>'; }).join('') + '</ol>' : '<p>目前沒有系統警告。</p>');
+    }
+    if (p.kind === 'header') {
+      var t = D.TL[p.seg - 1];
+      out.push('<p><b>時段 ' + t.n + '：' + t.start + '–' + t.end + '</b>' + (t.modes.length ? '；形式：' + t.modes.join('、') : '') + '</p>');
+    }
+    if (p.kind === 'live') {
+      if (!D.hkOK(D.resolveTool(p.tool))) out.push('<p class="warn">此工具狀態已變更，請改用示例輸出。</p>');
+      var steps = typeof p.steps === 'function' ? p.steps(h, p) : p.steps;
+      out.push('<h2>示範步驟</h2><ol>' + steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol>');
+      out.push(p.goal ? '<p><b>操作目標：</b>' + D.esc(p.goal) + '</p>' : '<p><b>Prompt 原文：</b>' + D.esc(p.prompt) + '</p>');
+      out.push('<p>網絡或工具失效時，按「顯示示例輸出」。</p>');
+    }
+    var pts = p.notes(h, p);
+    out.push('<h2>講解重點（第 ' + (i + 1) + ' 頁）</h2><ul>' + pts.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>');
+    return out.join('');
+  }
+  function renderNotes() { if (!notesEl.hidden) notesEl.innerHTML = notesHtml(); }
+  function toggleNotes() { notesEl.hidden = !notesEl.hidden; if (!notesEl.hidden) { notesEl.innerHTML = notesHtml(); notesEl.scrollTop = 0; } }
+
+  /* ---------- navigation (需求 3、4、22) ---------- */
+  function resetPage(sec) {
+    $$('.answer.shown, .fallback.shown', sec).forEach(function (el) { el.classList.remove('shown'); });
+    $$('.opt.open', sec).forEach(function (el) { el.classList.remove('open'); var b = $('.opt-toggle', el); b.textContent = '展開'; b.setAttribute('aria-expanded', 'false'); });
+    $$('.term.flipped', sec).forEach(function (el) { el.classList.remove('flipped'); });
+  }
+  function go(i, force) {
+    i = Math.max(0, Math.min(N - 1, i));
+    if (i === state.index && !force) return;
+    var old = slides[state.index];
+    old.classList.remove('current');
+    state.index = i;
+    var cur = slides[i];
+    resetPage(cur);
+    cur.classList.add('current');
+    var p = pages[i];
+    $('#page-indicator').textContent = (i + 1) + ' / ' + N;
+    $$('#dots button').forEach(function (b, k) { b.classList.toggle('now', k === i); if (k === i) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    tlBar.hidden = p.kind === 'cover' || p.seg === 'A';
+    $$('#timeline-bar button').forEach(function (b) { b.classList.toggle('now', +b.dataset.seg === p.seg); });
+    var fp = $('#footer-provider');
+    fp.hidden = !D.footerOn() || p.kind === 'cover' || p.kind === 'closing';
+    fp.textContent = D.provider();
+    renderNotes();
+  }
+  function headerOf(seg) { for (var k = 0; k < N; k++) if (pages[k].seg === seg && (pages[k].kind === 'header' || (seg === 1 && pages[k].kind === 'header'))) return k; return 0; }
+
+  /* ---------- scaling (需求 2) ---------- */
+  function fit() {
+    var banner = document.getElementById('preview-banner');
+    var reserve = banner ? banner.offsetHeight : 0;
+    var vw = window.innerWidth, vh = window.innerHeight - reserve, s = Math.min(vw / 1920, vh / 1080);
+    stage.style.transform = 'scale(' + s + ')';
+    stage.style.left = Math.round((vw - 1920 * s) / 2) + 'px';
+    stage.style.top = Math.round(reserve + (vh - 1080 * s) / 2) + 'px';
+  }
+  window.addEventListener('resize', function () { requestAnimationFrame(fit); });
+  document.addEventListener('fullscreenchange', function () { requestAnimationFrame(fit); });
+
+  var toastTimer;
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2800);
+  }
+  function toggleFullscreen() {
+    var fail = function () { toast('全屏未能啟動，可改用瀏覽器本身的全屏功能（例如 F11）。'); };
+    try {
+      if (document.fullscreenElement) { document.exitFullscreen().catch(fail); }
+      else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen().catch(fail); }
+      else fail();
+    } catch (e) { fail(); }
+  }
+
+  /* ---------- input ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.altKey || e.metaKey) return;
+    var k = e.key, tag = (e.target && e.target.tagName) || '';
+    var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable);
+    if (k === 'ArrowRight' || k === ' ' || k === 'Spacebar' || k === 'PageDown') { e.preventDefault(); blurActive(); go(state.index + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); blurActive(); go(state.index - 1); }
+    else if (!typing && (k === 'f' || k === 'F')) { e.preventDefault(); toggleFullscreen(); }
+    else if (!typing && (k === 'h' || k === 'H')) { e.preventDefault(); toggleNotes(); }
+  });
+  document.addEventListener('keyup', function (e) { if (e.key === ' ' && e.target && e.target.tagName === 'BUTTON') e.preventDefault(); });
+  function blurActive() { if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur(); }
+
+  document.addEventListener('click', function (e) {
+    if (e.button !== 0) return;
+    var t = e.target;
+    if (t.closest('#notes')) return;
+    if (t.closest('a[href]')) return;
+    var btn = t.closest('button, [data-interactive]');
+    if (!btn) { if (t.closest('#stage')) go(state.index + 1); return; }
+    if (btn.id === 'session-switch') return switchSession();
+    if (btn.closest('#dots') && btn.dataset.go !== undefined) return go(+btn.dataset.go);
+    if (btn.closest('#timeline-bar') && btn.dataset.seg) return go(headerOf(+btn.dataset.seg), true);
+    if (btn.dataset.goto === 'appendix') return go(pages.findIndex(function (p) { return p.seg === 'A'; }));
+    if (btn.dataset.show) {
+      var box = btn.parentElement.querySelector('.' + btn.dataset.show);
+      if (box) box.classList.add('shown');
+      return;
+    }
+    if (btn.classList.contains('opt-toggle')) {
+      var opt = btn.closest('.opt'), open = !opt.classList.contains('open');
+      opt.classList.toggle('open', open);
+      btn.textContent = open ? '收合' : '展開';
+      btn.setAttribute('aria-expanded', String(open));
+      return;
+    }
+    if (btn.classList.contains('term')) { btn.classList.toggle('flipped'); return; }
+  });
+
+  /* ---------- start ---------- */
+  fit();
+  applySession(state.key);
+  slides[0].classList.add('current');
+  state.index = 0;
+  go(0, true);
+
+  window.DECK_RUNTIME = { state: state, go: go, applySession: applySession, switchSession: switchSession, pages: pages, slides: slides, notesHtml: notesHtml, headerOf: headerOf };
+})();
 </script>
 </body>
 </html>
