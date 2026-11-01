@@ -108,14 +108,14 @@ var REGISTRY = [
     url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、多用途對話', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '勿輸入幼兒個人資料' },
   { id: 'deepseek', name: 'DeepSeek', category: '工具', claim: 'DeepSeek 網頁及 App 在香港可直接使用。', source: 'https://chat.deepseek.com', verified: '2026-11-01',
     url: 'https://chat.deepseek.com', hk: '香港可直用', group: '主力', use: '中文寫作、教案草稿', zh: '佳', free: '免費起步', fit: '高', note: '繁中輸出要再檢查用字' },
-  { id: 'qwen', name: 'Qwen', category: '工具', claim: 'Qwen（通義）網頁版在香港可直接使用。', source: 'https://chat.qwen.ai', verified: '2026-11-01',
+  { id: 'qwen', name: 'Qwen（通義千問）', category: '工具', claim: 'Qwen（通義千問）網頁版在香港可直接使用。', source: 'https://chat.qwen.ai', verified: '2026-11-01',
     url: 'https://chat.qwen.ai', hk: '香港可直用', group: '主力', use: '中文寫作、圖像生成', zh: '良', free: '免費起步', fit: '中', note: '繁中輸出要再檢查用字' },
   { id: 'grok', name: 'Grok', category: '工具', claim: 'Grok 網頁及香港 App Store 的 Grok App 可直接使用。', source: 'https://grok.com', verified: '2026-11-01',
     url: 'https://grok.com', hk: '香港可直用', group: '主力', use: '對話、即時資訊', zh: '良', free: '免費起步', fit: '中', note: '圖像內容要嚴格把關' },
   { id: 'copilot', name: 'Microsoft Copilot', category: '工具', claim: 'Microsoft Copilot 在香港可直接使用。', source: 'https://copilot.microsoft.com', verified: '2026-11-01',
     url: 'https://copilot.microsoft.com', hk: '香港可直用', group: '主力', use: '對話、Office 文書', zh: '良', free: '免費起步', fit: '高', note: 'Office 內功能另需授權' },
-  { id: 'canva', name: 'Canva', category: '工具', claim: 'Canva 在香港可直接使用，設 AI 功能。', source: 'https://www.canva.com', verified: '2026-11-01',
-    url: 'https://www.canva.com', hk: '香港可直用', group: '主力', use: 'Poster、繪本、動態頁', zh: '良', free: '免費起步', fit: '高', note: '部分 AI 功能有次數限制' },
+  { id: 'canva', name: 'Canva', category: '工具', claim: 'Canva 在香港可直接使用，設 AI 功能。請用香港入口，不要用內地版網站。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-01',
+    url: 'https://www.canva.com/zh_hk/', hk: '香港可直用', group: '主力', use: 'Poster、繪本、動態頁', zh: '良', free: '免費起步', fit: '高', note: '部分 AI 功能有次數限制' },
   { id: 'perplexity', name: 'Perplexity', category: '工具', claim: 'Perplexity 在香港可直接使用。', source: 'https://www.perplexity.ai', verified: '2026-11-01',
     url: 'https://www.perplexity.ai', hk: '香港可直用', group: '也很實用', use: '附來源的資料搜尋', zh: '良', free: '免費起步', fit: '中', note: '來源仍要老師核對' },
   { id: 'kimi', name: 'Kimi', category: '工具', claim: 'Kimi 在香港可直接使用。', source: 'https://www.kimi.com', verified: '2026-11-01',
@@ -146,7 +146,7 @@ var REGISTRY = [
     tool: 'canva', kind: '動畫', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-template', name: 'Canva 模板及文字排版', category: '功能', claim: 'Canva 模板及文字排版免費可用。', source: 'https://www.canva.com', verified: '2026-11-01',
     tool: 'canva', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
-  { id: 'f-canva-connector', name: 'Canva AI 連接器', category: '功能', claim: 'Canva AI 連接器可連接 Gemini 及 Microsoft Copilot；免費帳戶可以連接，教育版功能或有限制。', source: 'https://www.canva.com/ai-connector/', verified: '2026-11-01',
+  { id: 'f-canva-connector', name: 'Canva AI 連接器', category: '功能', claim: '可試把 Canva 接到 Gemini。教育版未必預設開啟。Gemini 官方現列個人帳戶，語言未包括中文，以帳戶顯示為準。', source: 'https://www.canva.com/ai-connector/', verified: '2026-11-01',
     tool: 'canva', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-gemini-video', name: 'Gemini 影片生成', category: '功能', claim: 'Gemini 的影片生成在香港可用，需付費方案。', source: 'https://one.google.com/intl/zh-HK_hk/about/google-ai-plans/', verified: '2026-11-01',
     tool: 'gemini', kind: '動畫', hk: '香港可直用', fee: '付費', region: '沒有' },
@@ -158,8 +158,8 @@ var REGISTRY = [
     tool: 'suno', kind: '音樂', hk: '香港可直用', fee: '免費', region: '沒有' },
 
   /* ---------- 教育方案 ---------- */
-  { id: 'e-canva-teacher', name: 'Canva Education（老師個人）', category: '教育方案', claim: 'K–12 在職教師可申請；幼稚園老師一般包括在內，以 Canva 審核為準。', source: 'https://www.canva.com/education/eligibility-guidelines/', verified: '2026-11-01',
-    org: 'Canva', audience: 'K–12 在職教師（幼稚園一般包括在內）', route: '老師個人', fee: '教師驗證後免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '適用' },
+  { id: 'e-canva-teacher', name: 'Canva Education（老師個人）', category: '教育方案', claim: 'K–12 合資格在職教師可申請。香港幼稚園老師要逐案由 Canva 審核，不是自動包括。', source: 'https://www.canva.com/education/eligibility-guidelines/', verified: '2026-11-01',
+    org: 'Canva', audience: 'K–12 合資格在職教師（幼稚園要逐案審核）', route: '老師個人', fee: '教師驗證後免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '不適用' },
   { id: 'e-canva-school', name: 'Canva Education（整校申請）', category: '教育方案', claim: '合資格學校可為全校老師及學生申請 Canva Education，是否批核以 Canva 審核為準。', source: 'https://www.canva.com/education/', verified: '2026-11-01',
     org: 'Canva', audience: '合資格學校', route: '整校申請', fee: '合資格學校免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '適用' },
   { id: 'e-gws-fundamentals', name: 'Google Workspace for Education Fundamentals', category: '教育方案', claim: '須由合資格的校方申請；老師個人按一下申請不等於取得學校教育版。', source: 'https://edu.google.com/workspace-for-education/editions/overview/', verified: '2026-11-01',
@@ -414,6 +414,7 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 </head>
 <body>
 <div id="preview-banner" role="status">PREVIEW ONLY　預覽，非正式教材<small>PR #1 尚未合併 main，不是最終交付版本</small></div>
+
 <div id="viewport">
   <div id="stage" aria-live="polite">
     <div id="slides"></div>
@@ -709,14 +710,30 @@ PAGES.push(
         '<p class="meta" style="margin-top:12px">資料來源：' + h.link(h.field('p-dpo-guideline', 'source'), '數字政策辦公室《香港生成式人工智能技術及應用指引》') + '</p>' + h.disclaimer();
     },
     notes: function () { return ['幼兒不直接操作 AI 工具；由老師操作並把關。']; } },
+  /* Canva AI 速查（上午小練習之前） */
+  { seg: 4, kind: 'content', title: 'Canva AI 速查', reqs: [21, 27, 14], uses: ['canva', 'f-canva-image', 'f-canva-animate', 'f-canva-connector'],
+    html: function (h) {
+      var item = function (title, body) {
+        return '<div class="card" style="padding:14px 18px"><h3 style="font-size:26px">' + title + '</h3><p class="small" style="margin:0">' + body + '</p></div>';
+      };
+        return '<p class="small">香港入口：' + h.link('https://www.canva.com/zh_hk/', 'canva.com/zh_hk') + '。請用這個網站，不要用內地版。名稱及用量以帳戶畫面為準。</p>' +
+        '<div class="grid g2" style="gap:14px">' +
+        item(h.link('https://www.canva.com/zh_hk/', 'Magic Write（魔法文案）'), '在設計裡起草或改寫文字。先給角色、對象、字數及語氣。') +
+        item('Magic Design', '用一句描述產生版面草稿，再由老師換圖及改字。') +
+        item('Magic Media／圖像生成', '用文字產生插圖。免費帳戶有用量上限，進階方案另計。') +
+        item('動畫', '把插圖或文字加上簡單動態。部分進階效果另有限制。') +
+        '</div>' +
+        '<div class="box" style="margin-top:14px"><b>選做：AI 連接器。</b>可試把 ' + h.toolLink('canva') + ' 接到 ' + h.toolLink('gemini') + '。教育版未必預設開啟，要問管理員。Gemini 官方現列個人帳戶，語言未包括中文，以帳戶顯示為準。香港現場不以 ChatGPT 或 Claude 的連接器作預設。<br><span class="meta">' + h.link('https://www.canva.com/education/', 'Canva Education') + '：K–12 合資格教師可申請；香港幼稚園老師要逐案由 Canva 審核。教育版預設只有管理員及老師可用大部分 Magic 功能；學生預設只有部分圖像功能。</span></div>';
+    },
+    notes: function () { return ['只教老師認得畫面上的名稱，不要逐項示範全部 AI 功能。', '不要承諾 Magic Layers，那是部分地區的測試功能。', '教育版的 AI 連接器常要管理員先開啟。現場若連接不到，就回到 Canva 裡手動貼文字。']; } },
   /* 25 上午小練習 */
   { seg: 4, kind: 'exercise', title: '上午小練習：AI 通告 → Canva Poster', reqs: [29, 21, 9, 15], uses: ['gemini', 'canva', 'f-canva-template', 'f-canva-connector'],
     html: function (h) {
       return '<p><span class="tag">建議 10 分鐘</span>　<b>任務：</b>用 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + ' 寫一則活動通告，再用 ' + h.toolLink('canva') + ' 做成 Poster。</p><div class="grid" style="grid-template-columns:1fr 1fr;gap:32px;align-items:start"><div><ol class="points small">' +
         '<li>用 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + ' 按公式寫一則活動通告。</li><li>複製 AI 輸出的通告文字。</li><li>在 ' + h.toolLink('canva') + ' 選一個 Poster 模板（Canva 模板及文字排版 ' + h.fee('f-canva-template') + '）。</li><li>把文字貼入模板，換上主題插圖。</li><li>老師檢查用字及日期後下載。</li></ol>' +
         '<p class="small"><b>工具：</b>' + h.toolLink('gemini') + ' 或 ' + h.toolLink(DECK.secondId()) + '、' + h.toolLink('canva') + '</p></div><div>' +
-        h.opt('進階：在 AI 對話內直接做 Poster', '把 ' + h.link(h.field('f-canva-connector', 'source'), 'Canva AI 連接器') + ' 接上 ' + h.toolLink('gemini') + ' 或 ' + h.toolLink('copilot') + '，就可在對話內生成 Poster 並匯出。免費帳戶可以連接；教育版功能或有限制。' + h.fee('f-canva-connector') + ' ' + h.dot('f-canva-connector') +
-          '<br><b>連接前留意：</b>AI 助手可讀取你的 Canva 設計；如設計內有幼兒照片，先移走或不要連接。') +
+        h.opt('進階：在 AI 對話內直接做 Poster', '可試把 ' + h.link(h.field('f-canva-connector', 'source'), 'Canva AI 連接器') + ' 接到 ' + h.toolLink('gemini') + '。教育版未必預設開啟。Gemini 官方現列個人帳戶，語言未包括中文，以帳戶顯示為準。' + h.fee('f-canva-connector') + ' ' + h.dot('f-canva-connector') +
+          '<br><b>連接前留意：</b>AI 助手可讀取你的 Canva 設計；如設計內有幼兒照片，先移走或不要連接。接不到就回到 Canva 手動貼文字。') +
         h.answer('<div class="row"><p style="flex:1;margin:0">活動通告：K2 班將於［日期］上午舉行「秋天樹葉展」，歡迎家長蒞臨欣賞小朋友的拓印作品。地點：［地點］。</p>' +
         '<svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Poster 版面示意"><rect x="2" y="2" width="196" height="146" rx="12" fill="#fff4e0" stroke="#8a4b12" stroke-width="3"/><text x="100" y="40" text-anchor="middle" font-size="22" fill="#5a2e08">秋天樹葉展</text><ellipse cx="60" cy="90" rx="22" ry="12" fill="#d9822b" transform="rotate(-30 60 90)"/><ellipse cx="140" cy="92" rx="22" ry="12" fill="#b5532a" transform="rotate(25 140 92)"/><text x="100" y="135" text-anchor="middle" font-size="18" fill="#5a2e08">［日期］［地點］</text></svg></div>') + '</div></div>';
     },
@@ -811,9 +828,9 @@ PAGES.push(
       }).join('') : '<div class="small">暫無已核實的香港可直用工具（只介紹概念：由文字或圖片生成短片）</div>';
       var easy = h.hkOK('f-canva-animate') ? '<div class="small">' + h.link(h.field('f-canva-animate', 'source'), 'Canva 動畫') + '　' + h.fee('f-canva-animate') + '</div>' : '<div class="small">暫無已核實的香港可直用工具</div>';
       return '<div class="grid g2" style="gap:40px"><div><p class="kicker">Canva 動畫步驟（Canva 動畫 ' + h.fee('f-canva-animate') + '）</p><ol class="points small"><li>匯入 AI 生成的插圖。</li><li>選取插圖，按「動畫」。</li><li>選效果並設定時長。</li><li>預覽後下載為短片。</li></ol></div>' +
-        '<div><p class="kicker">工具路徑：易 → 進階</p><div class="card"><b>易</b>' + easy + '</div><div class="card" style="margin-top:16px"><b>進階</b>' + advHtml + '</div></div></div>' + h.disclaimer();
+        '<div><p class="kicker">工具路徑：易 → 進階</p><div class="card"><b>易</b>' + easy + '</div><div class="card" style="margin-top:16px"><b>進階</b>' + advHtml + '<p class="meta" style="margin:8px 0 0">CapCut 可用，但不作現場主力。現場先完成 Prompt；成品可改播預錄樣本。</p></div></div></div>' + h.disclaimer();
     },
-    notes: function () { return ['進階工具多需付費，回校先用 Canva 已足夠。']; } },
+    notes: function () { return ['進階工具多需付費，回校先用 Canva 已足夠。', 'CapCut 可用，但不作現場主力。現場先寫好 Prompt 或分鏡；若未能即場出片，播放講師預錄樣本。樣本檔由講師自備，簡報不內置影片。']; } },
   /* 36 倫理 */
   { seg: 7, kind: 'content', title: 'AI 倫理', reqs: [31],
     html: function () {
@@ -934,9 +951,9 @@ PAGES.push(
   { seg: 9, kind: 'content', cat: 'steps', title: '用 AI 生成音樂的步驟', reqs: [33, 14],
     html: function (h) {
       return '<div class="grid g2" style="gap:40px"><div><ol class="points small"><li>設定 BPM（例如 110）</li><li>設定情緒（例如活潑）</li><li>設定長度（例如 1 分鐘）</li><li>貼上歌詞，生成後試聽</li></ol>' +
-        '<p class="box small">在公開場合（例如學校表演、網上發佈）使用 AI 音樂前，先確認授權條款。</p></div><div>' + funcTable(h, ['音樂']) + '</div></div>' + h.disclaimer();
+        '<p class="box small">在公開場合（例如學校表演、網上發佈）使用 AI 音樂前，先確認授權條款。Suno 可用，但不作現場主力。現場先寫歌詞；若未能即場出歌，播放講師預錄樣本。</p></div><div>' + funcTable(h, ['音樂']) + '</div></div>' + h.disclaimer();
     },
-    notes: function () { return ['免費版通常不可作商業用途。']; } },
+    notes: function () { return ['免費版的公開或商業使用，先看 Suno 授權條款。', 'Suno 不作現場主力。樣本音檔由講師自備，簡報不內置歌曲。接不到就用老師試唱歌詞。']; } },
   /* 49 小試 */
   { seg: 9, kind: 'exercise', cat: 'try', title: '2 分鐘小試：律動歌 Prompt', reqs: [9, 33, 15], uses: ['gemini'],
     html: function (h) {
@@ -948,9 +965,10 @@ PAGES.push(
   /* 50 時段十 header + Take_Home_Card */
   { seg: 10, kind: 'header', title: '今日帶回家', reqs: [34, 22, 15], uses: ['gemini', 'canva'],
     html: function (h) {
-      return segMeta(h, 10) + '<div class="card accent"><h3>本週可試的 3 個任務</h3><ol class="points reveal"><li>用 ' + h.toolLink('gemini') + ' 起草一封家長信</li><li>用 ' + h.toolLink('canva') + ' 把 AI 通告做成 Poster</li><li>用 ' + h.toolLink(DECK.secondId()) + ' 寫一首律動歌歌詞</li></ol></div>';
+      return segMeta(h, 10) + '<div class="card accent"><h3>本週可試的 3 個任務</h3><ol class="points reveal"><li>用 ' + h.toolLink('gemini') + ' 起草一封家長信</li><li>用 ' + h.toolLink('canva') + ' 把 AI 通告做成 Poster</li><li>用 ' + h.toolLink(DECK.secondId()) + ' 寫一首律動歌歌詞</li></ol></div>' +
+        '<div class="card" style="margin-top:16px"><h3>回校可問校長／IT</h3><ul class="points small" style="margin-top:8px"><li>' + h.link(h.field('e-canva-school', 'source'), 'Canva Education 整校') + '</li><li>' + h.link(h.field('e-gws-fundamentals', 'source'), 'Google Workspace for Education') + '，以及 ' + h.link(h.field('e-gemini-edu', 'source'), 'Gemini for Education') + '</li><li>' + h.link(h.field('e-copilot-chat', 'source'), 'Copilot Chat 教育帳戶') + '</li></ul><p class="meta" style="margin:0">是否批核以官方審核為準。老師個人按一下，不等於學校已經申請。</p></div>';
     },
-    notes: function () { return ['三個任務分別來自單元二、時段四及單元六。']; } },
+    notes: function () { return ['三個任務分別來自單元二、時段四及單元六。', '回校清單只問校長或 IT：Canva Education 整校、Google Workspace for Education 連 Gemini for Education、Copilot Chat 教育帳戶。']; } },
   /* 51 Action_Plan_Sheet */
   { seg: 10, kind: 'content', cls: 'plan', title: '行動計劃表', reqs: [34],
     html: function () {
@@ -1069,8 +1087,9 @@ var DECK = (function () {
   function shared(f) { return sharedErrors().indexOf(f) < 0 ? CFG.shared[f] : null; }
   function provider() { return shared('providerConstant') || PENDING; }
   function footerOn() { return shared('footerProvider') === '開啟'; }
-  function secondName() { return shared('secondTool') || 'DeepSeek'; }
-  function secondId() { return secondName().toLowerCase(); }
+  function secondKey() { return shared('secondTool') || 'DeepSeek'; }
+  function secondId() { return secondKey().toLowerCase(); }
+  function secondName() { var e = entry(secondId()); return (e && e.name) || secondKey(); }
   function resolveTool(t) { return t === 'second' ? secondId() : t; }
 
   function hookProblems(key, hook) {
