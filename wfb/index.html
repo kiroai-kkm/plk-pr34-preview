@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<title>PREVIEW ONLY — AI 工具於幼兒教育的應用 — 聯校教師培訓</title>
+<title>AI 工具於幼兒教育的應用 — 聯校教師培訓</title>
 <script id="session-config">
 /* ============================================================
  * Session_Config（場次設定）— 兩場的差異只在此區塊修改
@@ -407,14 +407,8 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="webfont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all';this.dataset.loaded='1'">
-<style id="preview-only">
-#preview-banner{position:fixed;top:0;left:0;right:0;z-index:10000;box-sizing:border-box;background:#9b1c1c;color:#fff;font:700 15px/1.35 "Noto Sans TC","Microsoft JhengHei",sans-serif;text-align:center;padding:7px 12px}
-#preview-banner small{display:block;font-weight:400;font-size:12px;opacity:.95}
-</style>
 </head>
 <body>
-<div id="preview-banner" role="status">PREVIEW ONLY　預覽，非正式教材<small>PR #1 尚未合併 main，不是最終交付版本</small></div>
-
 <div id="viewport">
   <div id="stage" aria-live="polite">
     <div id="slides"></div>
@@ -1415,12 +1409,10 @@ var DECK = (function () {
 
   /* ---------- scaling (需求 2) ---------- */
   function fit() {
-    var banner = document.getElementById('preview-banner');
-    var reserve = banner ? banner.offsetHeight : 0;
-    var vw = window.innerWidth, vh = window.innerHeight - reserve, s = Math.min(vw / 1920, vh / 1080);
+    var vw = window.innerWidth, vh = window.innerHeight, s = Math.min(vw / 1920, vh / 1080);
     stage.style.transform = 'scale(' + s + ')';
     stage.style.left = Math.round((vw - 1920 * s) / 2) + 'px';
-    stage.style.top = Math.round(reserve + (vh - 1080 * s) / 2) + 'px';
+    stage.style.top = Math.round((vh - 1080 * s) / 2) + 'px';
   }
   window.addEventListener('resize', function () { requestAnimationFrame(fit); });
   document.addEventListener('fullscreenchange', function () { requestAnimationFrame(fit); });
