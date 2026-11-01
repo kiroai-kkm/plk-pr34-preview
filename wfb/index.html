@@ -124,6 +124,8 @@ var REGISTRY = [
     url: 'https://poe.com', hk: '香港可直用', group: '也很實用', use: '一處試用多個模型', zh: '良', free: '每日免費額度', fit: '中', note: '額度用完要等翌日' },
   { id: 'hkchat', name: 'HKChat', category: '工具', claim: '港話通 HKChat 已在香港 App Store 上架，官方網站亦提供下載。', source: 'https://hkchat.org', verified: '2026-11-01',
     url: 'https://hkchat.org', hk: '香港可直用', group: '也很實用', use: '粵語草稿、本地資訊', zh: '佳', free: '免費下載', fit: '中', note: '粵語家長溝通草稿補充，不作唯一主力' },
+  { id: 'manus', name: 'Manus', category: '工具', claim: 'Manus 有繁中入口，可在香港開啟。它是自主代理，可做多步研究，並產出簡報、報告或網頁草稿。有免費積分可起步，進階方案另計。', source: 'https://manus.im/zh-hk', verified: '2026-11-01',
+    url: 'https://manus.im/zh-hk', hk: '香港可直用', group: '一句帶過', use: '多步研究、簡報及報告草稿', zh: '良', free: '免費積分起步', fit: '中', note: '老師先審；勿輸入幼兒個人資料或照片' },
   { id: 'ernie', name: '文心一言（ERNIE）', category: '工具', claim: '文心網頁未有官方香港可直用說明，不列入老師必備工具。', source: 'https://wenxin.baidu.com/', verified: '2026-11-01',
     url: 'https://wenxin.baidu.com/', hk: '香港不可直用', group: '不列入', use: '中文對話', zh: '一般', free: '—', fit: '低', note: '不列入老師必備工具', alt: 'Google Gemini、DeepSeek' },
   { id: 'chatgpt', name: 'ChatGPT', category: '工具', claim: 'OpenAI 支援地區名單不包括香港。', source: 'https://help.openai.com/en/articles/7947663-chatgpt-supported-countries', verified: '2026-11-01',
@@ -164,8 +166,10 @@ var REGISTRY = [
     org: 'Canva', audience: '合資格學校', route: '整校申請', fee: '合資格學校免費', privacy: '依 Canva 教育條款處理學生資料。', kgDefault: '適用' },
   { id: 'e-gws-fundamentals', name: 'Google Workspace for Education Fundamentals', category: '教育方案', claim: '須由合資格的校方申請；老師個人按一下申請不等於取得學校教育版。', source: 'https://edu.google.com/workspace-for-education/editions/overview/', verified: '2026-11-01',
     org: 'Google', audience: '合資格教育機構', route: '整校申請', fee: '合資格機構免費', privacy: '依 Google Education 條款保護資料。', kgDefault: '適用' },
-  { id: 'e-gemini-edu', name: 'Gemini for Education', category: '教育方案', claim: 'Gemini for Education 隨學校 Google Workspace for Education 帳戶提供，須由校方申請並開啟。', source: 'https://edu.google.com/ai/gemini-for-education/', verified: '2026-11-01',
-    org: 'Google', audience: '已申請 Google Workspace for Education 的學校', route: '整校申請', fee: '隨學校帳戶提供', privacy: '依 Google Education 條款，對話不用於訓練模型。', kgDefault: '適用' },
+  { id: 'e-gemini-edu', name: 'Gemini for Education', category: '教育方案', claim: '所有 Google Workspace for Education 版本免費附送，須由校方申請並由管理員開啟。給老師備課及文書，不是給幼兒自行使用。', source: 'https://edu.google.com/ai/gemini-for-education/', verified: '2026-11-01',
+    org: 'Google', audience: '已申請 Google Workspace for Education 的學校（本培訓以老師帳戶為主）', route: '整校申請', fee: '隨所有教育版本免費附送', privacy: '依 Google Education 條款，對話不用於訓練模型。管理員可控制誰能使用。', kgDefault: '適用' },
+  { id: 'e-manus-campus', name: 'Manus 校園計劃', category: '教育方案', claim: '主要給合資格院校已核實的教育電郵，參加者須年滿 18 歲。不是香港幼稚園的預設方案。', source: 'https://manus.im/edu/rules', verified: '2026-11-01',
+    org: 'Manus', audience: '合資格院校的學生、校友及教職員', route: '老師個人', fee: '教育電郵驗證', privacy: '勿把幼兒個人資料或照片交給代理。', kgDefault: '不適用' },
   { id: 'e-copilot-chat', name: 'Microsoft Copilot Chat（教育用戶）', category: '教育方案', claim: '學校教職員以合資格的 Microsoft 365 教育帳戶登入，即可使用 Copilot Chat，無須另購 Copilot 授權。', source: 'https://www.microsoft.com/en-us/education/products/copilot-in-education', verified: '2026-11-01',
     org: 'Microsoft', audience: '有合資格學校 Microsoft 帳戶的教職員', route: '整校申請', fee: '學校帳戶已包括', privacy: '依 Microsoft 教育條款提供資料保護。', kgDefault: '適用' },
   { id: 'e-m365-copilot', name: 'Microsoft 365 Copilot（Word／PowerPoint 內的 Copilot）', category: '教育方案', claim: 'Word 及 PowerPoint 內的 Copilot 需另購授權，不是教育帳戶已包括的 Copilot Chat。', source: 'https://www.microsoft.com/en-us/education/products/copilot-in-education', verified: '2026-11-01',
@@ -579,11 +583,11 @@ PAGES.push(
     html: function (h) {
       var one = h.tools(function (e) { return e.group === '一句帶過' && h.hkOK(e.id); });
       var oneHtml = one.length ? '<p class="kicker" style="margin-top:16px">一句帶過</p>' + one.map(function (e) {
-        return '<div class="oneliner card"><b>' + h.toolLink(e.id) + '</b>' + h.dot(e.id) + '<span>幼教現場優先使用主力工具</span><span class="meta">' + h.link(e.url) + '</span></div>';
+        return '<div class="oneliner card"><b>' + h.toolLink(e.id) + '</b>' + h.dot(e.id) + '<span>' + h.esc(h.field(e.id, 'use')) + '。' + h.esc(h.field(e.id, 'note')) + '</span><span class="meta">' + h.link(e.url) + '</span></div>';
       }).join('') : '';
       return '<p class="kicker">也很實用</p>' + matrixCards(h, '也很實用', 4) + oneHtml + h.disclaimer();
     },
-    notes: function () { return ['HKChat 適合起草粵語家長溝通草稿，但不作唯一主力。']; } },
+    notes: function () { return ['HKChat 適合起草粵語家長溝通草稿，但不作唯一主力。', 'Manus 不在現場主力示範。它可幫老師做多步研究，以及簡報、報告或網頁草稿；成品要老師審。不要輸入幼兒姓名、照片或個案。免費積分用完可改訂閱方案。校園計劃不是幼稚園預設。']; } },
   /* 13 安全提示 */
   { seg: 2, kind: 'content', title: '安全提示：輸入前先想一想', reqs: [20, 24],
     html: function () {
@@ -682,11 +686,11 @@ PAGES.push(
       var name = function (id, label) { return h.link(h.field(id, 'source'), label); };
       return '<table class="t" style="font-size:22px"><thead><tr><th style="width:330px">方案</th><th>老師個人免費試用</th><th>整校申請</th></tr></thead><tbody>' +
         '<tr><td><b>' + name('e-canva-teacher', 'Canva Education') + '</b><br><span class="tag warm">本場建議</span></td><td>' + c('e-canva-teacher') + pv('e-canva-teacher') + '</td><td>' + c('e-canva-school') + appr + '</td></tr>' +
-        '<tr><td><b>' + name('e-gws-fundamentals', 'Google Workspace for Education') + '</b><br><span class="meta">含 ' + name('e-gemini-edu', 'Gemini for Education') + '</span></td><td>老師個人按一下申請，不等於取得學校教育版。<br>今日示範使用個人 Gemini 帳戶；回校可向 IT 負責人或校長查詢是否申請。</td><td>Google Workspace for Education Fundamentals：' + c('e-gws-fundamentals').replace(/；.*$/, '。') + pv('e-gemini-edu') + appr + '</td></tr>' +
+        '<tr><td><b>' + name('e-gws-fundamentals', 'Google Workspace for Education') + '</b><br><span class="meta">含 ' + name('e-gemini-edu', 'Gemini for Education') + '</span></td><td>老師個人按一下申請，不等於取得學校教育版。今日示範是個人 Gemini，不是學校的 Gemini for Education。</td><td>' + c('e-gemini-edu') + pv('e-gemini-edu') + '<br><span class="meta">進階的 Google AI Pro for Education 要另購，本場不需要。</span>' + appr + '</td></tr>' +
         '<tr><td><b>' + name('e-copilot-chat', 'Microsoft 365／Copilot（教育）') + '</b></td><td>Copilot Chat（教育用戶）：' + c('e-copilot-chat') + '</td><td>Microsoft 365 Copilot：' + c('e-m365-copilot') + '<br>適合已使用 Outlook、Word 或 Teams 的學校。' + appr + '</td></tr>' +
         '</tbody></table>' + h.disclaimer();
     },
-    notes: function () { return ['Canva Education 是本場建議：老師可即日完成教師驗證。', '整校方案要由校方申請，老師只需向 IT 負責人或校長提出。']; } },
+    notes: function () { return ['Canva Education 是本場建議：老師可即日完成教師驗證。', '整校方案要由校方申請，老師只需向 IT 負責人或校長提出。', '個人 Gemini 與學校的 Gemini for Education 不同。學校版隨所有 Workspace 教育版本免費附送，對話不用於訓練模型，管理員可開關權限。適合老師寫教案、家長信、通訊、同意書、小測，以及把文字改得淺白。18 歲以下的使用由管理員控制；本培訓只談老師帳戶。']; } },
   /* 23 教育方案 2 */
   { seg: 4, kind: 'content', title: '不適用作香港幼稚園預設的方案', reqs: [27, 16, 14],
     html: function (h) {
@@ -694,9 +698,10 @@ PAGES.push(
       return '<table class="t"><thead><tr><th style="width:520px">方案／政策</th><th>說明</th></tr></thead><tbody>' +
         r('e-chatgpt-teachers') + r('e-chatgpt-edu') +
         '<tr><td><b>' + h.link(h.field('p-ai-sandbox', 'source'), '保障個人資料人工智能沙盒（2026）') + '</b><br><span class="meta">發出機構：' + h.esc(h.field('p-ai-sandbox', 'issuer')) + '</span></td><td>' + h.esc(h.field('p-ai-sandbox', 'scope')) + '　<span class="tag warm">政策趨勢，只作介紹</span></td></tr>' +
-        '</tbody></table><div class="box" style="margin-top:24px">想用 GPT 類工具 → ' + h.toolLink('copilot') + ' 或 ' + h.toolLink('poe') + '（' + h.poeNote + '）</div>' + h.disclaimer();
+        '</tbody></table><div class="box" style="margin-top:16px">想用 GPT 類工具 → ' + h.toolLink('copilot') + ' 或 ' + h.toolLink('poe') + '（' + h.poeNote + '）</div>' +
+        '<p class="small" style="margin-top:12px">' + h.link(h.field('e-manus-campus', 'source'), 'Manus 校園計劃') + '：' + h.esc(h.field('e-manus-campus', 'claim')) + ' 老師仍可用 ' + h.toolLink('manus') + ' 個人帳戶起草簡報，成品要自己審。</p>' + h.disclaimer();
     },
-    notes: function () { return ['這些方案主要不是為香港幼稚園而設，只作了解。']; } },
+    notes: function () { return ['這些方案主要不是為香港幼稚園而設，只作了解。', 'Manus 的老師簡報用法涵蓋學前至大學，是備課工具，不是給幼兒自行操作。']; } },
   /* 24 合規底線 */
   { seg: 4, kind: 'content', title: '合規底線（適用於全部 AI 工具）', reqs: [28, 14, 20],
     html: function (h) {
@@ -960,9 +965,9 @@ PAGES.push(
   { seg: 10, kind: 'header', title: '今日帶回家', reqs: [34, 22, 15], uses: ['gemini', 'canva'],
     html: function (h) {
       return segMeta(h, 10) + '<div class="card accent"><h3>本週可試的 3 個任務</h3><ol class="points reveal"><li>用 ' + h.toolLink('gemini') + ' 起草一封家長信</li><li>用 ' + h.toolLink('canva') + ' 把 AI 通告做成 Poster</li><li>用 ' + h.toolLink(DECK.secondId()) + ' 寫一首律動歌歌詞</li></ol></div>' +
-        '<div class="card" style="margin-top:16px"><h3>回校可問校長／IT</h3><ul class="points small" style="margin-top:8px"><li>' + h.link(h.field('e-canva-school', 'source'), 'Canva Education 整校') + '</li><li>' + h.link(h.field('e-gws-fundamentals', 'source'), 'Google Workspace for Education') + '，以及 ' + h.link(h.field('e-gemini-edu', 'source'), 'Gemini for Education') + '</li><li>' + h.link(h.field('e-copilot-chat', 'source'), 'Copilot Chat 教育帳戶') + '</li></ul><p class="meta" style="margin:0">是否批核以官方審核為準。老師個人按一下，不等於學校已經申請。</p></div>';
+        '<div class="card" style="margin-top:16px"><h3>回校可問校長／IT</h3><ul class="points small" style="margin-top:8px"><li>' + h.link(h.field('e-canva-school', 'source'), 'Canva Education 整校') + '</li><li>' + h.link(h.field('e-gws-fundamentals', 'source'), 'Google Workspace for Education') + '，以及 ' + h.link(h.field('e-gemini-edu', 'source'), 'Gemini for Education') + '（學校版免費附送，對話不用於訓練模型）</li><li>' + h.link(h.field('e-copilot-chat', 'source'), 'Copilot Chat 教育帳戶') + '</li></ul><p class="meta" style="margin:0">是否批核以官方審核為準。今日示範是個人 Gemini，老師個人按一下，不等於學校已經申請。</p></div>';
     },
-    notes: function () { return ['三個任務分別來自單元二、時段四及單元六。', '回校清單只問校長或 IT：Canva Education 整校、Google Workspace for Education 連 Gemini for Education、Copilot Chat 教育帳戶。']; } },
+    notes: function () { return ['三個任務分別來自單元二、時段四及單元六。', '回校清單只問校長或 IT：Canva Education 整校、Google Workspace for Education 連 Gemini for Education、Copilot Chat 教育帳戶。', '學校版 Gemini 給老師備課及文書。進階的 Google AI Pro for Education 要另購，本場不需要。']; } },
   /* 51 Action_Plan_Sheet */
   { seg: 10, kind: 'content', cls: 'plan', title: '行動計劃表', reqs: [34],
     html: function () {
