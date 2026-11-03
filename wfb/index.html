@@ -342,6 +342,26 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 .answer.shown, .fallback.shown { display: block; }
 .answer, .fallback { margin-top: 14px; background: #fff; border: 2px solid var(--accent); border-radius: 14px; padding: 12px 18px; font-size: 22px; line-height: 1.42; }
 .fallback .label, .answer .label { font-weight: 700; color: var(--accent); }
+
+.real-out-slot {
+  min-height: 168px;
+  margin-top: 6px;
+  border: 3px dashed var(--accent);
+  border-radius: 14px;
+  background: #f4faf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 22px;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.4;
+}
+.real-out-slot b { color: var(--accent); }
+.real-out-slot .small { display: block; margin-top: 6px; font-size: 18px; opacity: 0.9; }
+.real-out-slot img { max-width: 100%; max-height: 360px; border-radius: 10px; }
+
 .opt { margin-top: 12px; border: 2px dashed var(--line); border-radius: 14px; padding: 8px 16px; background: #fffdf8; }
 .opt .opt-head { display: flex; gap: 12px; align-items: center; font-size: 22px; }
 .opt .opt-body { display: none; font-size: 22px; margin-top: 8px; line-height: 1.42; }
@@ -643,9 +663,9 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<p class="small">對照工具：' + h.toolLink('deepseek') + ' ' + h.dot('deepseek') + '。這類短草稿，用 DeepSeek 的預設快速模式已夠。</p>' +
         '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback('<ol class="small" style="margin:6px 0 0"><li>樹葉為甚麼會變色？——「我們一起去公園找找看。」</li><li>秋天你會穿甚麼衣服？——「摸摸外套，它厚不厚？」</li><li>你最喜歡秋天哪種水果？——「我們來畫出它的顏色。」</li></ol>');
+        h.fallback({ tool: 'DeepSeek（或並排第二工具）', kind: '三則提問回覆', hint: '貼上剛才現場／預先截好的真實回覆：三則秋天提問與跟進語。' });
     },
-    notes: function () { return ['這是今天第一個，也是上午唯一要並排的示範。', '網絡慢就按「顯示示例輸出」，不要改用官方 ChatGPT。', 'DeepSeek 有深度思考和網頁搜尋；這條短 Prompt 不必開啟思考。']; } },
+    notes: function () { return ['這是今天第一個，也是上午唯一要並排的示範。', '網絡慢就按「顯示示例輸出」打開預留位（請事先貼好真實回覆），不要改用官方 ChatGPT。', 'DeepSeek 有深度思考和網頁搜尋；這條短 Prompt 不必開啟思考。']; } },
   { day: 1, seg: 2, kind: 'content', cat: 'steps', title: 'Prompt 五個部分', reqs: [24, 9, 7],
     html: function () {
       var names = ['角色', '對象（幼兒年齡）', '任務', '限制（字數、語氣、繁體）', '輸出格式'];
@@ -717,7 +737,7 @@ PAGES.push(
     },
     html: function (h, p) {
       return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback('<b>主題：</b>秋天的樹葉　<b>對象：</b>K2（4 至 5 歲）<br><b>學習目標：</b>觀察樹葉的顏色及形狀，用完整句子描述。<br><b>材料：</b>樹葉、放大鏡、畫紙、蠟筆<br><b>活動流程：</b><span class="tag plain">提問</span>「樹葉為甚麼會變色？」→ <span class="tag plain">遊戲</span>「樹葉配對」→ <span class="tag plain">學習角</span>美藝角樹葉拓印');
+        h.fallback({ tool: 'Gemini／第二工具', kind: '教案初稿', hint: '貼上真實教案回覆：主題、對象、目標、材料、活動流程。' });
     },
     notes: function () { return ['AI 只寫初稿。日期、材料、本班情況由老師改。', '不要在這一節再示範 Gemini。']; } },
   { day: 1, seg: 3, kind: 'content', cat: 'steps', title: '家長信：口語稿改書面語', reqs: [26, 20, 9],
@@ -725,7 +745,7 @@ PAGES.push(
       return '<p class="small">沿用剛才的 ' + h.toolLink(DECK.secondId()) + ' 或 ' + h.toolLink('gemini') + '。這不是新的示範，請各位在這一節一起跟做。</p>' +
         '<div class="prompt">' + U2_LETTER.join('') + '</div>' +
         '<div class="grid g2" style="margin-top:12px"><div class="card"><p class="kicker">改完要核對</p><ul class="small"><li>日期、地點仍是［　］</li><li>沒有幼兒姓名</li><li>語氣像學校通告，不是廣告</li></ul></div>' +
-        '<div class="card accent"><p class="kicker">示例</p><p class="small">各位家長：下星期五（［日期］）本班將到［地點］觀察樹葉。請為小朋友穿上運動鞋，並帶備水壺。如當日下雨，活動改在校內進行。<br>［老師名］</p></div></div>';
+        '<div class="card accent"><p class="kicker">真實輸出預留位</p><div class="real-out-slot" style="min-height:120px;font-size:18px"><div><b>請貼上家長信真實回覆</b><span class="small">口語稿改書面語後的 AI 結果（文字或截圖）</span></div></div></div></div>';
     },
     notes: function () { return ['巡視時只看三件事：留空、沒有姓名、繁體書面語。', '做不完的可當下午檔案工作室的底稿。']; } },
   { day: 1, seg: 3, kind: 'content', title: 'Prompt 不夠清楚時，怎樣補好', reqs: [26, 6, 7, 9],
@@ -801,9 +821,9 @@ PAGES.push(
     steps: ['用網頁開 gemini.google.com。如有學校教育帳戶，請先登入那個帳戶。', '貼上 Prompt，請它在對話內產生 PDF。', '在預覽裡改一個字（例如標題），不必先下載到電腦再改。', '確認沒有幼兒姓名，日期和地點仍是方括號。', '匯出或存到雲端。手機只宜作 PDF 的後備；其他格式請用網頁，不必在手機上勉強完成。'],
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback('<div class="card"><b>活動通告</b><p class="small">K2 將於［日期］［時間］在［地點］舉行「秋天樹葉展」。請小朋友穿運動鞋，並帶備水壺。歡迎家長蒞臨。查詢：［學校電話］。<br>本通告由老師請 AI 起稿，並經老師修改。</p></div>');
+        h.fallback({ tool: 'Gemini 檔案／PDF', kind: '活動通告', hint: '貼上真實通告 PDF 預覽截圖或文字：標題、日期、地點、注意事項。' });
     },
-    notes: function () { return ['這是下午第一個示範，請停留久一點。', '預覽失敗就用示例輸出，並請老師在紙上改一句，說明成品要經人手修改。', '不要改去官方 ChatGPT 或 Claude。']; } },
+    notes: function () { return ['這是下午第一個示範，請停留久一點。', '預覽失敗就打開「顯示示例輸出」預留位（請事先貼好真實通告結果），並請老師在紙上改一句，說明成品要經人手修改。', '不要改去官方 ChatGPT 或 Claude。']; } },
   { day: 1, seg: 6, kind: 'content', cat: 'steps', title: '時間夠再做一頁：活動表或簡報', reqs: [26, 9], uses: ['gemini', 'f-gemini-files'],
     html: function (h) {
       return '<p class="small">通告 PDF 已完成的老師，可以二選一。未完成的請繼續改 PDF。</p>' +
@@ -829,8 +849,7 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'canva') + '<p class="small">香港入口：' + h.link('https://www.canva.com/zh_hk/', 'canva.com/zh_hk') + '。' + h.fee('f-canva-template') + ' ' + h.fee('f-canva-bg') + '</p>' +
         '<div class="prompt"><b>操作目標：</b>' + h.esc(p.goal) + '</div>' + bufferLine() +
-        h.fallback('<div class="row"><p style="flex:1;margin:0">活動通告：K2 將於［日期］上午舉行「秋天樹葉展」。地點：［地點］。請穿運動鞋。</p>' +
-          '<svg width="220" height="150" viewBox="0 0 200 150" role="img" aria-label="海報版面示意"><rect x="2" y="2" width="196" height="146" rx="12" fill="#fff4e0" stroke="#8a4b12" stroke-width="3"/><text x="100" y="48" text-anchor="middle" font-size="22" fill="#5a2e08">秋天樹葉展</text><ellipse cx="70" cy="92" rx="22" ry="12" fill="#d9822b" transform="rotate(-30 70 92)"/><ellipse cx="130" cy="96" rx="22" ry="12" fill="#b5532a" transform="rotate(20 130 96)"/><text x="100" y="132" text-anchor="middle" font-size="16" fill="#5a2e08">［日期］［地點］</text></svg></div>');
+        h.fallback({ tool: 'Canva', kind: '海報截圖', hint: '貼上真實 Canva 海報預覽截圖（通告文字 + 版面）。' });
     },
     notes: function () { return ['一個示範走完四步的名稱，然後把時間還給老師做海報。', '教育版尚未批核的老師，用免費帳戶能做多少就做多少。不要在現場承諾 Magic 全部開放。', '去背如果要 Education 或進階方案，就當可選，不要因此拖住全班。']; } },
   { day: 1, seg: 7, kind: 'content', title: '四個按鈕：今天請完成海報', reqs: [21, 14], uses: ['canva', 'f-canva-template', 'f-canva-image', 'f-canva-bg'],
@@ -923,11 +942,11 @@ PAGES.push(
     notes: function () { return ['主題用分享、洗手這類生活題。', '這一節的現場示範只有 Gemini 分鏡。組頁請各位一起跟做。']; } },
   { day: 2, seg: 2, kind: 'live', cat: 'demo', tool: 'gemini', title: '一起跟做：分鏡與插圖提示', reqs: [17, 30, 9], uses: ['gemini', 'f-gemini-image'],
     prompt: U3_BOOK.join(''),
-    steps: ['開 gemini.google.com。', '貼上 Prompt，讀出 6 頁裡的第 1 頁和第 4 頁。', '檢查角色的衣服和顏色，後面各頁有沒有走樣。', '可請它為第 1 頁生成一張圖。生成慢就用示例，不必改工具。', '其餘時間請各位改自己的主題，先完成文字分鏡。'],
+    steps: ['開 gemini.google.com。', '貼上 Prompt，讀出 6 頁裡的第 1 頁和第 4 頁。', '檢查角色的衣服和顏色，後面各頁有沒有走樣。', '可請它為第 1 頁生成一張圖。生成慢就打開輸出預留位（事先貼好真實圖），不必改工具。', '其餘時間請各位改自己的主題，先完成文字分鏡。'],
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<p class="small">圖像：' + h.esc(h.field('f-gemini-image', 'name')) + ' ' + h.dot('f-gemini-image') + '</p>' +
         '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback('<div class="row"><div style="flex:1"><b>第 1 頁：</b>小熊有一盒新蠟筆。他很喜歡紅色。<br><b>第 4 頁：</b>小熊把蠟筆分一半。小兔笑了。<br><b>插圖提示：</b>穿紅色背心的啡色小熊，水彩，畫面明亮。</div>' + bearSvg(200, false) + '</div>');
+        h.fallback({ tool: 'Gemini', kind: '繪本分鏡', hint: '貼上真實分鏡回覆：至少第 1、4 頁文案與插圖提示（可連截圖）。' });
     },
     notes: function () { return ['角色一致性比畫得漂亮重要。', '不要在這一節開 Canva，下一頁才組頁。']; } },
   { day: 2, seg: 2, kind: 'content', cat: 'steps', title: '繪本五步', reqs: [30, 6, 9],
@@ -958,7 +977,7 @@ PAGES.push(
     steps: ['開 canva.com/zh_hk 裡剛才的一頁。', '用 Magic Media 出一張同一角色的圖。如果看不到 Dream Lab，不必尋找，管理員可能已關閉。', '用 Magic Grab 或 Magic Edit 改一件物件，例如蠟筆的顏色。', '開 Canva AI，用對話把標題改短，不必重做整頁。', 'Magic Animate 預覽約 5 秒。AI Voice 有的話才試，沒有就跳過。', 'Magic Layers 只在帳戶有才試。沒有這個按鈕是正常的。'],
     html: function (h, p) {
       return h.ready() + liveHead(h, 'canva') + '<div class="prompt"><b>操作目標：</b>' + h.esc(p.goal) + '</div>' + bufferLine() +
-        h.fallback('<p class="small">示例：標題由「小熊學習分享蠟筆的故事」改成「一起分享」。小熊仍穿紅背心。動畫只是揮一下手，沒有閃爍。</p>' + bearSvg(180, true));
+        h.fallback({ tool: 'Canva AI', kind: '組頁／對話改稿截圖', hint: '貼上真實 Canva 編輯結果：標題改寫、角色一致、動畫設定截圖。' });
     },
     notes: function () { return ['Canva AI 2.0 是指在編輯器裡用對話改設計，名稱以帳戶畫面為準。', '不要在這一節播放 CapCut。午膳後才一起做動畫。']; } },
   { day: 2, seg: 3, kind: 'content', title: '進階功能一覽', reqs: [21, 14], uses: ['canva', 'f-canva-image', 'f-canva-animate', 'f-canva-voice'],
@@ -1074,7 +1093,7 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
         '<div class="chips" style="margin-top:8px"><span class="chip">溫暖</span><span class="chip">卡通，不追求真人臉</span><span class="chip">不在台上即場生成影片</span></div>' + bufferLine() +
-        h.fallback('<div class="row">' + treeTeacherSvg(140) + '<div style="flex:1"><b>人設：</b>小樹老師，頭上有綠葉，聲線慢而溫柔。<br><b>腳本：</b>小朋友，早晨！小熊有一盒蠟筆，小兔沒有。小熊把蠟筆分一半。分享，令大家都開心。</div></div>');
+        h.fallback({ tool: '數字人／腳本工具', kind: '人設＋腳本', hint: '貼上真實人設與腳本輸出，或預錄播放畫面截圖（30–60 秒那一段）。' });
     },
     notes: function () { return ['預錄只播 30 至 60 秒。', '找不到檔：讀腳本，不要即場生成數字人。']; } },
   { day: 2, seg: 7, kind: 'content', title: '播放前請留意', reqs: [32, 14, 15],
@@ -1095,7 +1114,7 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
         '<div class="chips" style="margin-top:8px"><span class="chip">每句不多於 7 字</span><span class="chip">至少一句重複</span><span class="chip">試唱，不即場生成旋律</span></div>' + bufferLine() +
-        h.fallback('玩具玩完了<br>我們收起來<br>一件一件放<br>收好真可愛<br>玩具玩完了<br>我們收起來<br>拍數：100　情緒：愉快');
+        h.fallback({ tool: 'Gemini（歌詞）', kind: '兒歌歌詞', hint: '貼上真實歌詞回覆：兩段、拍數、情緒；勿用虛構歌詞示例。' });
     },
     notes: function () { return ['試唱是這節的成品。', '若講師帶了預錄，可播一小段，檔名建議 samples/music-shouwanju.mp3。沒有就試唱。', 'Suno 不在台上即場生成。']; } },
   { day: 2, seg: 8, kind: 'content', title: '歌詞寫好之後', reqs: [33, 14], uses: ['gemini', 'suno'],
@@ -1397,9 +1416,25 @@ var DECK = (function () {
       return '<div><button type="button" class="ctl" data-show="answer" data-interactive>顯示範例答案</button>' +
         '<div class="answer"><span class="label">範例答案：</span>' + body + '</div></div>';
     },
-    fallback: function (body) {
+    fallback: function (opts) {
+      /* opts: string hint, or { tool, kind, hint, img } — never invent fake AI replies */
+      var tool = '', kind = '文字或截圖', hint = '', img = '';
+      if (opts && typeof opts === 'object') {
+        tool = opts.tool || '';
+        kind = opts.kind || kind;
+        hint = opts.hint || '';
+        img = opts.img || '';
+      } else if (typeof opts === 'string' && opts) {
+        hint = opts;
+      }
+      var title = tool ? ('請貼上「' + tool + '」真實輸出') : '請貼上相關 AI 真實輸出';
+      var detail = hint || ('預留位置：插入這次示範的真實' + kind + '結果（勿用虛構示例）。');
+      var inner = img
+        ? ('<img src="' + img + '" alt="' + title + '">' )
+        : ('<div><b>' + title + '</b><span class="small">' + detail + '</span></div>');
       return '<div><button type="button" class="ctl" data-show="fallback" data-interactive>顯示示例輸出</button>' +
-        '<div class="fallback"><div class="label">示例輸出</div>' + body + '</div></div>';
+        '<div class="fallback"><div class="label">真實輸出預留位</div>' +
+        '<div class="real-out-slot" data-real-output-slot>' + inner + '</div></div></div>';
     },
     poeNote: 'Poe 不是 ChatGPT／Claude 官方帳戶',
     entry: entry, field: field, hkOK: hkOK, tools: tools, functions: functions, reg: REG, tl: timelineFor('manjusri'), duration: duration,
@@ -1567,11 +1602,11 @@ var DECK = (function () {
       if (t) out.push('<p><b>時段 ' + t.n + '：' + t.start + '–' + t.end + '</b>' + (t.modes.length ? '；形式：' + t.modes.join('、') : '') + '</p>');
     }
     if (p.kind === 'live') {
-      if (!D.hkOK(D.resolveTool(p.tool))) out.push('<p class="warn">此工具狀態已變更，請改用示例輸出。</p>');
+      if (!D.hkOK(D.resolveTool(p.tool))) out.push('<p class="warn">此工具狀態已變更，請改用「顯示示例輸出」預留位（貼真實結果）。</p>');
       var steps = typeof p.steps === 'function' ? p.steps(h, p) : p.steps;
       out.push('<h2>示範步驟</h2><ol>' + steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol>');
       out.push(p.goal ? '<p><b>操作目標：</b>' + D.esc(p.goal) + '</p>' : '<p><b>Prompt 原文：</b>' + D.esc(p.prompt) + '</p>');
-      out.push('<p>網絡或工具失效時，按「顯示示例輸出」。</p>');
+      out.push('<p>網絡或工具失效時，按「顯示示例輸出」打開真實輸出預留位。</p>');
     }
     var pts = p.notes(h, p);
     out.push('<h2>講解重點（第 ' + (i + 1) + ' 頁）</h2><ul>' + pts.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>');
