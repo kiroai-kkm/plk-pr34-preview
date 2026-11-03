@@ -1693,7 +1693,15 @@ var DECK = (function () {
     if (t.closest('#notes')) return;
     if (t.closest('a[href]')) return;
     var btn = t.closest('button, [data-interactive]');
-    if (!btn) { if (t.closest('#stage')) go(state.index + 1); return; }
+    if (!btn) {
+      var stageEl = t.closest('#stage');
+      if (stageEl) {
+        var r = stageEl.getBoundingClientRect();
+        var mid = r.left + r.width / 2;
+        go(e.clientX < mid ? state.index - 1 : state.index + 1);
+      }
+      return;
+    }
     if (btn.id === 'session-switch') return switchSession();
     if (btn.id === 'page-prev') return go(state.index - 1);
     if (btn.id === 'page-next') return go(state.index + 1);
