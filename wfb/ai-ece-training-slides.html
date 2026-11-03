@@ -108,7 +108,7 @@ var SESSION_CONFIG = {
 var REGISTRY = [
   /* ---------- 工具 ---------- */
   { id: 'gemini', name: 'Google Gemini', category: '工具', claim: 'Gemini 在香港可直用，毋須 VPN。2026-10-29 起可在對話內產生、預覽及編輯 PDF、Docs、Slides 及 Sheets；另有 Storybook Gem 可製作插圖 storybook（須登入，目前未滿 18 歲不可用）。', source: 'https://support.google.com/gemini/answer/16434396?hl=zh-HK&co=GENIE.Platform%3DDesktop', verified: '2026-11-03',
-    url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、對話內檔案、Storybook', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '個人帳戶的對話或會用於改進模型；Storybook 須年滿 18 歲；學校版另見教育方案' },
+    url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、對話內檔案、Storybook、Skills', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '個人帳戶的對話或會用於改進模型；Storybook／Skills 目前多為 18+；學校版另見教育方案' },
   { id: 'deepseek', name: 'DeepSeek', category: '工具', claim: 'DeepSeek 在香港可免費直接使用，毋須 VPN。快預設為 DeepSeek-V4.1-Flash；較難任務仍可參考 V4-Pro。另有深度思考及網頁搜尋。', source: 'https://chat.deepseek.com', verified: '2026-11-02',
     url: 'https://chat.deepseek.com', hk: '香港可直用', group: '主力', use: '教案、深度思考、搜尋', zh: '佳', free: '免費，不用 VPN', fit: '高', note: '勿上載幼兒資料。模式名稱以當日畫面為準' },
   { id: 'qwen', name: 'Qwen（通義千問）', category: '工具', claim: '通義千問在香港可直接使用。Qwen3.8-Max（2026-08-02）與 Qwen3.8-Flash（2026-08-26）為現時主線；千問 App 可在香港下載。', source: 'https://chat.qwen.ai', verified: '2026-11-02',
@@ -117,7 +117,7 @@ var REGISTRY = [
     url: 'https://grok.com', hk: '香港可直用', group: '主力', use: '對話、構思、即時資訊', zh: '良', free: '免費起步', fit: '中', note: '圖像及短片要嚴格把關；不是學校教育帳戶' },
   { id: 'copilot', name: 'Microsoft Copilot', category: '工具', claim: 'Microsoft Copilot 在香港可直接使用。學校應優先用 Copilot Chat（教育帳戶，有資料保護）。這不是官方 ChatGPT。', source: 'https://copilot.microsoft.com', verified: '2026-11-02',
     url: 'https://copilot.microsoft.com', hk: '香港可直用', group: '主力', use: '教育帳戶文書、翻譯、摘要', zh: '良', free: '免費起步', fit: '高', note: 'Word 內 Copilot 另需授權；個人版不等於教育條款' },
-  { id: 'canva', name: 'Canva', category: '工具', claim: '請用香港入口 canva.com/zh_hk，不要用內地版網站。Canva AI、Magic Write、Translate、Magic Design、Magic Media、Dream Lab、去背、Magic Edit、Magic Animate、Magic Grab 及 AI Voice 以帳戶為準。Magic Layers 不是香港預設。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
+  { id: 'canva', name: 'Canva', category: '工具', claim: '請用香港入口 canva.com/zh_hk，不要用內地版網站。Canva AI、Magic Write、Translate、Magic Design、Magic Media、Dream Lab、去背、Magic Edit、Magic Animate、Image-to-Video、Magic Grab 及 AI Voice 以帳戶為準。Magic Layers 不是香港預設。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
     url: 'https://www.canva.com/zh_hk/', hk: '香港可直用', group: '主力', use: '海報、繪本、動態頁', zh: '良', free: '免費起步', fit: '高', note: '教育版要逐案審核；管理員可關閉部分 AI' },
   { id: 'perplexity', name: 'Perplexity', category: '工具', claim: 'Perplexity 在香港可直接使用，可做附來源的搜尋。Learn Mode 是否適合幼稚園，當日再看。', source: 'https://www.perplexity.ai', verified: '2026-11-02',
     url: 'https://www.perplexity.ai', hk: '香港可直用', group: '也很實用', use: '附來源搜尋、Learn Mode', zh: '良', free: '免費起步', fit: '中', note: '來源仍要老師核對' },
@@ -151,11 +151,15 @@ var REGISTRY = [
     tool: 'gemini', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-gemini-storybook', name: 'Gemini Storybook Gem', category: '功能', claim: '在 Gemini 應用程式製作插圖 storybook：約 10–12 頁、可朗讀、分享 g.co/gemini/share 連結、列印或另存 PDF。須登入；目前未滿 18 歲不可用。提示須含英文 storybook，或經 Gem 清單開啟 Storybook。', source: 'https://support.google.com/gemini/answer/16434396?hl=zh-HK&co=GENIE.Platform%3DDesktop', verified: '2026-11-03',
     tool: 'gemini', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-gemini-skills', name: 'Gemini Skills（技能）', category: '功能', claim: '可把常用指示存成可重用的 Skill／技能（Gems 正過渡至 Skills）；在提示列以斜線呼叫即可重用。目前多為 18+，U18 稍後開放。適合家長信、教案等範本；幼兒不可自行操作。', source: 'https://blog.google/products-and-platforms/products/gemini/automate-tasks-with-skills/', verified: '2026-11-03',
+    tool: 'gemini', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-image', name: 'Canva 圖像生成', category: '功能', claim: 'Canva Magic Media 及 Dream Lab 可生成圖像；免費帳戶有用量上限，管理員可關閉 Dream Lab。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
     tool: 'canva', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-bg', name: 'Canva 去背', category: '功能', claim: 'Canva Background Remover 可去除背景，用來做名牌或剪貼。是否出現以帳戶為準，本場名牌只作可選。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
     tool: 'canva', kind: '圖像生成', hk: '香港可直用', fee: '需 Canva Education', region: '沒有' },
   { id: 'f-canva-animate', name: 'Canva Magic Animate', category: '功能', claim: 'Canva Magic Animate 可把插圖或文字加上簡單動態。部分進階效果另有限制。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
+    tool: 'canva', kind: '動畫', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-canva-image-to-video', name: 'Canva Image-to-Video', category: '功能', claim: '可把靜態圖轉成約 5 秒短片。接在 Magic Animate 後、時間夠才試，勿取代組頁。教育版管理員或可關閉；由老師投影給幼兒看，幼兒不操作。', source: 'https://www.canva.com/help/image-to-video/', verified: '2026-11-03',
     tool: 'canva', kind: '動畫', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-voice', name: 'Canva AI Voice', category: '功能', claim: 'Canva 可為設計加上 AI 配音。是否出現以帳戶及 Education 權限為準，本場只作可選。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
     tool: 'canva', kind: '語音', hk: '香港可直用', fee: '需 Canva Education', region: '沒有' },
@@ -607,11 +611,7 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="webfont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all';this.dataset.loaded='1'">
 </head>
-<body>
-<div id="wfb-preview-banner" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#b45309;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:8px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25)">PREVIEW ONLY · 非正式定稿 · 本地更新鏡像至 GitHub Pages · 勿作 Carol 最終交付</div>
-<script>document.documentElement.style.setProperty('--wfb-preview-pad','40px');</script>
-<style>body{padding-top:40px !important}#stage{margin-top:0}</style>
-
+<body><div id="wfb-preview-banner" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#b45309;color:#fff;font:700 14px/36px system-ui,sans-serif;text-align:center;letter-spacing:.02em">PREVIEW ONLY · 非 Carol 定稿 · kiroai-kkm/plk-pr34-preview</div><style>body{padding-top:36px!important}</style>
 <div id="viewport">
   <div id="stage" aria-live="polite">
     <div id="slides"></div>
@@ -878,7 +878,7 @@ PAGES.push(
         });
     },
     notes: function () { return ['AI 只寫初稿。日期、材料、本班情況由老師改。', '不要在這一節再示範 Gemini。']; } },
-  { day: 1, seg: 3, kind: 'content', cat: 'steps', title: '家長信：口語稿改書面語', reqs: [26, 20, 9],
+  { day: 1, seg: 3, kind: 'content', cat: 'steps', title: '家長信：口語稿改書面語', reqs: [26, 20, 9], uses: ['gemini', 'f-gemini-skills'],
     html: function (h) {
       return '<p class="small">沿用剛才的 ' + h.toolLink(DECK.secondId()) + ' 或 ' + h.toolLink('gemini') + '。這不是新的示範，請各位在這一節一起跟做。</p>' +
         '<div class="prompt">' + U2_LETTER.join('') + '</div>' +
@@ -891,9 +891,19 @@ PAGES.push(
             { src: 'assets/real-outputs/deck-03-gemini-parent-letter.png', caption: 'Gemini · 家長信' },
             { src: 'assets/real-outputs/deck-03-deepseek-parent-letter.png', caption: 'DeepSeek · 家長信' }
           ]
-        }) + '</div>';
+        }) + '</div>' +
+        '<p class="box small" style="margin-top:12px"><b>小提示 · ' + h.link(h.field('f-gemini-skills', 'source'), 'Gemini Skills／技能') + '：</b>可把常用 Prompt（家長信、教案）存成 Skill／技能，回校重用；目前多為 18+。' + h.dot('f-gemini-skills') + ' 幼兒不可自行操作。</p>' +
+        h.fallback({
+          tool: 'Gemini Skills',
+          kind: '技能示例',
+          hint: '已存技能「家長信書面語」編輯畫面，以及用 @技能 跑出口語稿→書面家長信。',
+          cards: [
+            { src: 'assets/real-outputs/deck-skills-parent-letter.png', caption: 'Skills · 家長信書面語' },
+            { src: 'assets/real-outputs/deck-skills-parent-letter-result.png', caption: 'Skills · 一次實跑結果' }
+          ]
+        });
     },
-    notes: function () { return ['巡視時只看三件事：留空、沒有姓名、繁體書面語。', '做不完的可當下午檔案工作室的底稿。']; } },
+    notes: function () { return ['巡視時只看三件事：留空、沒有姓名、繁體書面語。', '做不完的可當下午檔案工作室的底稿。', 'Skills／技能：Gems 正過渡至此；目前多為 18+，U18 稍後；個人帳戶與教育版時程或不同。本場只提一句、附真實示例卡，不做新現場示範。']; } },
   { day: 1, seg: 3, kind: 'content', title: 'Prompt 不夠清楚時，怎樣補好', reqs: [26, 6, 7, 9],
     html: function () {
       return '<div class="vs"><div class="card bad"><p class="kicker">不夠清楚</p><p style="font-size:40px;font-weight:700">寫一份教案</p><p class="small">沒有對象、時間、格式，AI 只能自行猜測。</p></div>' +
@@ -914,9 +924,10 @@ PAGES.push(
         '<tr><td><b>' + h.link(h.field('e-canva-teacher', 'source'), 'Canva Education') + '</b></td><td>' + h.esc(h.field('e-canva-teacher', 'claim')) + '<br>' + h.esc(h.field('e-canva-school', 'claim')) + appr + '</td></tr>' +
         '<tr><td><b>' + h.link(h.field('e-gemini-edu', 'source'), 'Gemini for Education') + '</b></td><td>' + h.esc(h.field('e-gemini-edu', 'claim')) + '<br><span class="meta">今天若用個人 Gemini，對話可能用於改進模型。學校版要管理員開啟。</span>' + appr + '</td></tr>' +
         '<tr><td><b>' + h.link(h.field('e-copilot-chat', 'source'), 'Copilot Chat（教育）') + '</b></td><td>' + h.esc(h.field('e-copilot-chat', 'claim')) + '<br><span class="meta">' + h.esc(h.field('e-m365-copilot', 'claim')) + '</span>' + appr + '</td></tr>' +
-        '</tbody></table>' + h.disclaimer();
+        '</tbody></table>' +
+        '<p class="box small" style="margin-top:10px">有 Microsoft 365 教育帳戶的學校，Copilot 介面或見教案／教學（Teach）入口，以帳戶畫面為準；一句帶過即可。</p>' + h.disclaimer();
     },
-    notes: function () { return ['Canva 香港幼稚園要逐案審核，不是自動包括。入口是 canva.com/zh_hk。', 'Gemini 學生免費 AI Plus 優惠不包括香港，不要在場說可以領。', 'Copilot Chat 不是官方 ChatGPT。Word 裡的 Copilot 另要授權。']; } },
+    notes: function () { return ['Canva 香港幼稚園要逐案審核，不是自動包括。入口是 canva.com/zh_hk。', 'Gemini 學生免費 AI Plus 優惠不包括香港，不要在場說可以領。', 'Copilot Chat 不是官方 ChatGPT。Word 裡的 Copilot 另要授權。Teach／教案入口只一句帶過，不要變成新示範。']; } },
   { day: 1, seg: 4, kind: 'content', title: '這些不要當成幼稚園的預設', reqs: [27, 16, 14],
     html: function (h) {
       var r = function (id) { return '<tr><td><b>' + h.link(h.field(id, 'source'), h.field(id, 'name')) + '</b></td><td>' + h.esc(h.field(id, 'claim')) + '</td></tr>'; };
@@ -1120,7 +1131,7 @@ PAGES.push(
     html: function () {
       return flowHtml([['主題', '美德或生活'], ['分鏡', '6 頁故事線'], ['文案', '每頁兩句內'], ['插圖提示', '外觀寫定'], ['組頁', 'Canva 排一頁']]) +
         '<div class="chips" style="margin-top:28px"><span class="chip">角色一致</span><span class="chip">年齡適切</span><span class="chip">避免恐怖</span><span class="chip">避免刻板印象</span></div>' +
-        '<p class="box small" style="margin-top:16px">主線仍是分鏡＋Canva。時間夠才試右方／下一頁的 Storybook Gem，不要跳過組頁實作。</p>';
+        '<p class="box small" style="margin-top:16px">主線：分鏡＋Canva。Storybook 是加時，勿取代組頁。</p>';
     },
     notes: function () { return ['每一步等老師點頭，才去下一步。今天能完成一頁已經夠。', 'Storybook 是第二路徑，不是取代 Canva。']; } },
   { day: 2, seg: 2, kind: 'content', title: '加時路徑：Gemini Storybook Gem', reqs: [30, 14, 9], uses: ['gemini', 'f-gemini-storybook'],
@@ -1181,7 +1192,7 @@ PAGES.push(
         });
     },
     notes: function () { return ['Canva AI 2.0 是指在編輯器裡用對話改設計，名稱以帳戶畫面為準。', '不要在這一節播放 CapCut。午膳後才一起做動畫。']; } },
-  { day: 2, seg: 3, kind: 'content', title: '進階功能一覽', reqs: [21, 14], uses: ['canva', 'f-canva-image', 'f-canva-animate', 'f-canva-voice'],
+  { day: 2, seg: 3, kind: 'content', title: '進階功能一覽', reqs: [21, 14], uses: ['canva', 'f-canva-image', 'f-canva-animate', 'f-canva-image-to-video', 'f-canva-voice'],
     html: function (h) {
       var item = function (title, body) { return '<div class="card" style="padding:12px 16px"><h3 style="font-size:24px">' + title + '</h3><p class="small" style="margin:0">' + body + '</p></div>'; };
       return '<div class="grid g2" style="gap:12px">' +
@@ -1191,13 +1202,22 @@ PAGES.push(
         item('Magic Animate', '短動態。' + h.fee('f-canva-animate') + ' 午膳後才一起跟做。') +
         item('AI Voice（可選）', h.fee('f-canva-voice') + ' 沒有就不配音。') +
         item('Canva AI 對話改稿', '在編輯器裡請它改一句、換一個圖，不必整頁重做。') +
-        '</div>' + h.disclaimer();
+        '</div>' +
+        '<p class="box small" style="margin-top:12px"><b>小提示 · ' + h.link(h.field('f-canva-image-to-video', 'source'), 'Image-to-Video') + '：</b>靜態圖可轉約 5 秒短片；接在 Magic Animate 後，時間夠才試，勿取代組頁。管理員或可關閉；老師投影，幼兒不操作。' + h.dot('f-canva-image-to-video') + ' ' + h.fee('f-canva-image-to-video') + '</p>' +
+        h.fallback({
+          tool: 'Canva',
+          kind: 'Image-to-Video',
+          hint: '真實 Image-to-Video 介面／結果截圖（靜態圖轉約 5 秒）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-canva-image-to-video.png', caption: 'Canva · Image-to-Video' }
+          ]
+        }) + h.disclaimer();
     },
-    notes: function () { return ['教育版是否開通，各校不同。免費帳戶能做的就做。', '仍然只用 canva.com/zh_hk。']; } },
+    notes: function () { return ['教育版是否開通，各校不同。免費帳戶能做的就做。', '仍然只用 canva.com/zh_hk。', 'Image-to-Video：約 5 秒；接 Animate 後才提；時間不夠就跳過。幼兒不自行操作。本場只附真實示例卡，不做新現場示範。引導式視覺（Guided Vision）只備註：帳戶有才提，本場不投影示範。']; } },
   { day: 2, seg: 3, kind: 'content', title: 'Magic Layers 與 Magic Activities', reqs: [21, 31],
     html: function () {
       return '<div class="grid g2"><div class="card"><h3>Magic Layers：帳戶有才試</h3><p class="small">公開測試地區是美國、英國、加拿大、澳洲，不是香港預設。如果帳戶裡看得到，可以試把海報拆成圖層；沒有就跳過，不影響今天的作品。</p></div>' +
-        '<div class="card accent"><h3>Magic Activities：產出後要大改</h3><p class="small">它可以產出工作紙、遊戲或課堂活動，但預設往往像小學工作紙。只示範給老師看：字太多、行距太密、要幼兒自己閱讀。必須改成少字、大圖、可以遊戲的幼兒版。今天不必全班即場生成。</p></div></div>' +
+        '<div class="card accent"><h3>Magic Activities：產出後要大改</h3><p class="small">可產出工作紙或遊戲，但預設常像小學版。只給老師看：須改成少字、大圖、可遊戲的幼兒版；今天不必全班即場生成。</p></div></div>' +
         '<div class="vs" style="margin-top:16px"><div class="card bad"><p class="kicker">還不適合幼兒</p><p class="small">一頁十行說明，要幼兒圈出正確答案。</p></div><div class="card good accent"><p class="kicker">幼兒版</p><p class="small">一句話：「把蠟筆分給朋友」。一幅大圖。老師口頭提問。</p></div></div>';
     },
     notes: function () { return ['Magic Layers 不要寫進離開前要完成的清單，也不要說香港已經有。', 'Magic Activities 的重點是要大改，不要因為看起來方便就直接派給幼兒。']; } },
@@ -1268,13 +1288,13 @@ PAGES.push(
       return moduleHeader(h, 6, ['把上午的插圖做成約 10 秒的動態', '用 Canva Magic Animate，不開新的影片工具', '動作要慢，不要閃爍', '做不完就停在預覽，也可以']);
     },
     notes: function () { return ['這是一起跟做，不是另一個新產品介紹。講師先做 1 分鐘，其餘時間巡視。', 'CapCut 不在台上即場生成。']; } },
-  { day: 2, seg: 6, kind: 'content', cat: 'steps', title: '一起跟做：小熊揮手', reqs: [31, 21, 9], uses: ['canva', 'f-canva-animate'],
+  { day: 2, seg: 6, kind: 'content', cat: 'steps', title: '一起跟做：小熊揮手', reqs: [31, 21, 9], uses: ['canva', 'f-canva-animate', 'f-canva-image-to-video'],
     html: function (h) {
       return '<div class="grid g2" style="gap:28px"><div><p class="kicker">步驟（' + h.fee('f-canva-animate') + '）</p><ol class="points small"><li>打開上午那一頁，選取插圖。</li><li>按動畫，選一個輕柔效果。</li><li>頁面時長約 10 秒。</li><li>播放預覽。滿意才下載。</li><li>向幼兒說明是老師請電腦幫手。</li></ol></div>' +
         '<div class="row">' + bearSvg(200, false) + '<div style="font-size:40px;align-self:center">→</div>' + bearSvg(200, true) + '</div></div>' +
-        '<p class="box small">如果預覽出不來，就看右圖。不要改為即場用 CapCut 生成。</p>';
+        '<p class="box small">如果預覽出不來，就看右圖。不要改為即場用 CapCut 生成。時間夠才可試 Image-to-Video（約 5 秒），勿取代這一頁的 Animate 跟做。</p>';
     },
-    notes: function () { return ['右圖是示例，不是要老師畫出來。', '進階影片工具只介紹概念，今天不開。']; } },
+    notes: function () { return ['右圖是示例，不是要老師畫出來。', '進階影片工具只介紹概念，今天不開。', 'Image-to-Video 只在時間夠、Animate 預覽完成後才試；幼兒不操作。']; } },
   { day: 2, seg: 6, kind: 'content', title: '如果動畫做不到', reqs: [31, 15], uses: ['canva', 'capcut'],
     html: function (h) {
       return '<ul class="points"><li>留在 Canva 預覽，下載失敗也算完成一起跟做</li><li>CapCut 可在課後再看，本場不在台上即場生成</li><li>不要上傳幼兒照片做角色</li><li>不要複製老師或幼兒的聲音</li></ul>' +
