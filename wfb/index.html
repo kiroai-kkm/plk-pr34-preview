@@ -20,7 +20,7 @@ var SESSION_CONFIG = {
     // 現場示範的第二個工具：只可填 DeepSeek 或 Qwen
     secondTool: 'DeepSeek',
     // 本檔最後建立或修改內容的日期（YYYY-MM-DD）；資料表日期不得遲於此日
-    buildDate: '2026-11-02',
+    buildDate: '2026-11-03',
     // 兩校共通事實（C1–C5）；School_Hook 只可引用已核准事實
     facts: {
       C1: '兩校均為世界佛教友誼會（世佛會）屬校。',
@@ -107,8 +107,8 @@ var SESSION_CONFIG = {
  * ============================================================ */
 var REGISTRY = [
   /* ---------- 工具 ---------- */
-  { id: 'gemini', name: 'Google Gemini', category: '工具', claim: 'Gemini 在香港可直用，毋須 VPN。2026-10-29 起可在對話內產生、預覽及編輯 PDF、Docs、Slides 及 Sheets；PDF 亦可在手機，其餘格式以網頁為主。', source: 'https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/', verified: '2026-11-02',
-    url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、對話內檔案', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '個人帳戶的對話或會用於改進模型；學校版另見教育方案' },
+  { id: 'gemini', name: 'Google Gemini', category: '工具', claim: 'Gemini 在香港可直用，毋須 VPN。2026-10-29 起可在對話內產生、預覽及編輯 PDF、Docs、Slides 及 Sheets；另有 Storybook Gem 可製作插圖 storybook（須登入，目前未滿 18 歲不可用）。', source: 'https://support.google.com/gemini/answer/16434396?hl=zh-HK&co=GENIE.Platform%3DDesktop', verified: '2026-11-03',
+    url: 'https://gemini.google.com', hk: '香港可直用', group: '主力', use: '文字、圖像、對話內檔案、Storybook', zh: '佳', free: '個人帳戶免費起步', fit: '高', note: '個人帳戶的對話或會用於改進模型；Storybook 須年滿 18 歲；學校版另見教育方案' },
   { id: 'deepseek', name: 'DeepSeek', category: '工具', claim: 'DeepSeek 在香港可免費直接使用，毋須 VPN。快預設為 DeepSeek-V4.1-Flash；較難任務仍可參考 V4-Pro。另有深度思考及網頁搜尋。', source: 'https://chat.deepseek.com', verified: '2026-11-02',
     url: 'https://chat.deepseek.com', hk: '香港可直用', group: '主力', use: '教案、深度思考、搜尋', zh: '佳', free: '免費，不用 VPN', fit: '高', note: '勿上載幼兒資料。模式名稱以當日畫面為準' },
   { id: 'qwen', name: 'Qwen（通義千問）', category: '工具', claim: '通義千問在香港可直接使用。Qwen3.8-Max（2026-08-02）與 Qwen3.8-Flash（2026-08-26）為現時主線；千問 App 可在香港下載。', source: 'https://chat.qwen.ai', verified: '2026-11-02',
@@ -149,6 +149,8 @@ var REGISTRY = [
     tool: 'gemini', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-gemini-files', name: 'Gemini 對話內檔案', category: '功能', claim: '2026-10-29 起可在對話內產生、預覽及編輯 PDF、文件、簡報及試算表。個人帳戶可用；PDF 可在網頁及手機，其餘格式以網頁為主。', source: 'https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/', verified: '2026-11-02',
     tool: 'gemini', kind: '文字', hk: '香港可直用', fee: '免費', region: '沒有' },
+  { id: 'f-gemini-storybook', name: 'Gemini Storybook Gem', category: '功能', claim: '在 Gemini 應用程式製作插圖 storybook：約 10–12 頁、可朗讀、分享 g.co/gemini/share 連結、列印或另存 PDF。須登入；目前未滿 18 歲不可用。提示須含英文 storybook，或經 Gem 清單開啟 Storybook。', source: 'https://support.google.com/gemini/answer/16434396?hl=zh-HK&co=GENIE.Platform%3DDesktop', verified: '2026-11-03',
+    tool: 'gemini', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-image', name: 'Canva 圖像生成', category: '功能', claim: 'Canva Magic Media 及 Dream Lab 可生成圖像；免費帳戶有用量上限，管理員可關閉 Dream Lab。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
     tool: 'canva', kind: '圖像生成', hk: '香港可直用', fee: '免費', region: '沒有' },
   { id: 'f-canva-bg', name: 'Canva 去背', category: '功能', claim: 'Canva Background Remover 可去除背景，用來做名牌或剪貼。是否出現以帳戶為準，本場名牌只作可選。', source: 'https://www.canva.com/zh_hk/', verified: '2026-11-02',
@@ -223,7 +225,7 @@ var TIMELINE_DAY1 = [
 
 var TIMELINE_DAY2 = [
   { n: 1, start: '10:00', end: '10:25', title: '重溫第一天、作業分享、今日創作路線', short: '重溫', modes: ['討論'] },
-  { n: 2, start: '10:25', end: '11:25', title: '單元三：AI 繪本（Gemini 分鏡與文字、Canva 組頁）', short: '繪本', modes: ['示範', '動手做'], module: true },
+  { n: 2, start: '10:25', end: '11:25', title: '單元三：AI 繪本（Gemini 分鏡、Storybook 加時、Canva 組頁）', short: '繪本', modes: ['示範', '動手做'], module: true },
   { n: 3, start: '11:25', end: '12:25', title: 'Canva 進階：Magic Media、Dream Lab、動畫與對話改稿', short: '進階', modes: ['示範', '動手做'], module: true },
   { n: 4, start: '12:25', end: '13:00', title: '單元四前半：AI 素養、私隱、版權、紅線', short: '素養', modes: ['討論'], module: true },
   { n: 5, start: '13:00', end: '14:00', title: '午膳', short: '午膳', modes: [] },
@@ -282,7 +284,7 @@ body { font-family: var(--font); color: var(--ink); }
 .slide .cover-stack h1, .slide .closing-stack h1 { position: static; left: auto; top: auto; width: auto; line-height: 1.2; }
 .slide .cover-stack h1 { font-size: 50px; margin: 4px 0 12px; }
 .slide .closing-stack h1 { font-size: 76px; margin: 8px 0 28px; }
-.slide .content { position: absolute; left: 96px; right: 96px; top: 176px; bottom: 184px; font-size: 30px; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; }
+.slide .content { position: absolute; left: 96px; right: 96px; top: 176px; bottom: 184px; font-size: 30px; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; overflow: hidden; }
 .slide.full .content { top: 120px; }
 .kicker { font-size: 22px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
 p { margin: 0 0 16px; }
@@ -344,23 +346,139 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 .fallback .label, .answer .label { font-weight: 700; color: var(--accent); }
 
 .real-out-slot {
-  min-height: 168px;
+  width: 100%;
+  min-height: 0;
   margin-top: 6px;
   border: 3px dashed var(--accent);
   border-radius: 14px;
   background: #f4faf9;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 18px 22px;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 12px;
   color: var(--ink);
   font-size: 22px;
   line-height: 1.4;
 }
+.real-out-slot > div:only-child {
+  width: 100%;
+  text-align: center;
+}
 .real-out-slot b { color: var(--accent); }
 .real-out-slot .small { display: block; margin-top: 6px; font-size: 18px; opacity: 0.9; }
-.real-out-slot img { max-width: 100%; max-height: 360px; border-radius: 10px; }
+.real-out-slot.pair {
+  justify-content: flex-start;
+}
+.real-out-card {
+  flex: 1 1 280px;
+  max-width: 520px;
+  min-width: 260px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid hsl(40 25% 78%);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgb(15 90 96 / 10%);
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+.real-out-card:focus-visible {
+  outline: 4px solid var(--accent-2);
+  outline-offset: 2px;
+}
+.real-out-card-thumb {
+  display: block;
+  height: 180px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #e8f0ef;
+}
+.real-out-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+}
+.real-out-card-cap {
+  display: block;
+  padding: 10px 14px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.35;
+}
+
+/* Lightbox enlarge for real-out cards (stage-local) */
+.real-out-lightbox {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 64px;
+}
+.real-out-lightbox[hidden] { display: none !important; }
+.real-out-lb-close {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 25%);
+}
+.real-out-lb-close:focus-visible {
+  outline: 4px solid var(--accent-2);
+  outline-offset: 2px;
+}
+.real-out-lb-figure {
+  margin: 0;
+  max-width: min(1600px, 92%);
+  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.real-out-lb-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 820px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 35%);
+  background: #fff;
+}
+.real-out-lb-figure figcaption {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 45%);
+}
 
 .opt { margin-top: 12px; border: 2px dashed var(--line); border-radius: 14px; padding: 8px 16px; background: #fffdf8; }
 .opt .opt-head { display: flex; gap: 12px; align-items: center; font-size: 22px; }
@@ -490,6 +608,10 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 <link id="webfont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all';this.dataset.loaded='1'">
 </head>
 <body>
+<div id="wfb-preview-banner" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#b45309;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:8px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25)">PREVIEW ONLY · 非正式定稿 · 本地更新鏡像至 GitHub Pages · 勿作 Carol 最終交付</div>
+<script>document.documentElement.style.setProperty('--wfb-preview-pad','40px');</script>
+<style>body{padding-top:40px !important}#stage{margin-top:0}</style>
+
 <div id="viewport">
   <div id="stage" aria-live="polite">
     <div id="slides"></div>
@@ -663,7 +785,15 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<p class="small">對照工具：' + h.toolLink('deepseek') + ' ' + h.dot('deepseek') + '。這類短草稿，用 DeepSeek 的預設快速模式已夠。</p>' +
         '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'DeepSeek（或並排第二工具）', kind: '三則提問回覆', hint: '貼上剛才現場／預先截好的真實回覆：三則秋天提問與跟進語。' });
+        h.fallback({
+          tool: 'Gemini／DeepSeek',
+          kind: '三則提問回覆',
+          hint: '貼上剛才現場／預先截好的真實回覆：三則秋天提問與跟進語。',
+          cards: [
+            { src: 'assets/real-outputs/deck-01-gemini-autumn-questions.png', caption: 'Gemini · 秋天提問' },
+            { src: 'assets/real-outputs/deck-01-deepseek-autumn-questions.png', caption: 'DeepSeek · 秋天提問' }
+          ]
+        });
     },
     notes: function () { return ['這是今天第一個，也是上午唯一要並排的示範。', '網絡慢就按「顯示示例輸出」打開預留位（請事先貼好真實回覆），不要改用官方 ChatGPT。', 'DeepSeek 有深度思考和網頁搜尋；這條短 Prompt 不必開啟思考。']; } },
   { day: 1, seg: 2, kind: 'content', cat: 'steps', title: 'Prompt 五個部分', reqs: [24, 9, 7],
@@ -737,7 +867,15 @@ PAGES.push(
     },
     html: function (h, p) {
       return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'Gemini／第二工具', kind: '教案初稿', hint: '貼上真實教案回覆：主題、對象、目標、材料、活動流程。' });
+        h.fallback({
+          tool: 'Gemini／第二工具',
+          kind: '教案初稿',
+          hint: '貼上真實教案回覆：主題、對象、目標、材料、活動流程。',
+          cards: [
+            { src: 'assets/real-outputs/deck-02-gemini-lesson-plan.png', caption: 'Gemini · 教案初稿' },
+            { src: 'assets/real-outputs/deck-02-deepseek-lesson-plan.png', caption: 'DeepSeek · 教案初稿' }
+          ]
+        });
     },
     notes: function () { return ['AI 只寫初稿。日期、材料、本班情況由老師改。', '不要在這一節再示範 Gemini。']; } },
   { day: 1, seg: 3, kind: 'content', cat: 'steps', title: '家長信：口語稿改書面語', reqs: [26, 20, 9],
@@ -745,7 +883,15 @@ PAGES.push(
       return '<p class="small">沿用剛才的 ' + h.toolLink(DECK.secondId()) + ' 或 ' + h.toolLink('gemini') + '。這不是新的示範，請各位在這一節一起跟做。</p>' +
         '<div class="prompt">' + U2_LETTER.join('') + '</div>' +
         '<div class="grid g2" style="margin-top:12px"><div class="card"><p class="kicker">改完要核對</p><ul class="small"><li>日期、地點仍是［　］</li><li>沒有幼兒姓名</li><li>語氣像學校通告，不是廣告</li></ul></div>' +
-        '<div class="card accent"><p class="kicker">真實輸出預留位</p><div class="real-out-slot" style="min-height:120px;font-size:18px"><div><b>請貼上家長信真實回覆</b><span class="small">口語稿改書面語後的 AI 結果（文字或截圖）</span></div></div></div></div>';
+        h.fallback({
+          tool: 'Gemini／第二工具',
+          kind: '家長信',
+          hint: '口語稿改書面語後的 AI 結果（文字或截圖）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-03-gemini-parent-letter.png', caption: 'Gemini · 家長信' },
+            { src: 'assets/real-outputs/deck-03-deepseek-parent-letter.png', caption: 'DeepSeek · 家長信' }
+          ]
+        }) + '</div>';
     },
     notes: function () { return ['巡視時只看三件事：留空、沒有姓名、繁體書面語。', '做不完的可當下午檔案工作室的底稿。']; } },
   { day: 1, seg: 3, kind: 'content', title: 'Prompt 不夠清楚時，怎樣補好', reqs: [26, 6, 7, 9],
@@ -821,7 +967,14 @@ PAGES.push(
     steps: ['用網頁開 gemini.google.com。如有學校教育帳戶，請先登入那個帳戶。', '貼上 Prompt，請它在對話內產生 PDF。', '在預覽裡改一個字（例如標題），不必先下載到電腦再改。', '確認沒有幼兒姓名，日期和地點仍是方括號。', '匯出或存到雲端。手機只宜作 PDF 的後備；其他格式請用網頁，不必在手機上勉強完成。'],
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'Gemini 檔案／PDF', kind: '活動通告', hint: '貼上真實通告 PDF 預覽截圖或文字：標題、日期、地點、注意事項。' });
+        h.fallback({
+          tool: 'Gemini 檔案／PDF',
+          kind: '活動通告',
+          hint: '貼上真實通告 PDF 預覽截圖或文字：標題、日期、地點、注意事項。',
+          cards: [
+            { src: 'assets/real-outputs/deck-04-notice-pdf.png', caption: 'Gemini · 通告 PDF' }
+          ]
+        });
     },
     notes: function () { return ['這是下午第一個示範，請停留久一點。', '預覽失敗就打開「顯示示例輸出」預留位（請事先貼好真實通告結果），並請老師在紙上改一句，說明成品要經人手修改。', '不要改去官方 ChatGPT 或 Claude。']; } },
   { day: 1, seg: 6, kind: 'content', cat: 'steps', title: '時間夠再做一頁：活動表或簡報', reqs: [26, 9], uses: ['gemini', 'f-gemini-files'],
@@ -849,7 +1002,14 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'canva') + '<p class="small">香港入口：' + h.link('https://www.canva.com/zh_hk/', 'canva.com/zh_hk') + '。' + h.fee('f-canva-template') + ' ' + h.fee('f-canva-bg') + '</p>' +
         '<div class="prompt"><b>操作目標：</b>' + h.esc(p.goal) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'Canva', kind: '海報截圖', hint: '貼上真實 Canva 海報預覽截圖（通告文字 + 版面）。' });
+        h.fallback({
+          tool: 'Canva',
+          kind: '海報截圖',
+          hint: '貼上真實 Canva 海報預覽截圖（通告文字 + 版面）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-05-canva-poster.png', caption: 'Canva · 秋天海報' }
+          ]
+        });
     },
     notes: function () { return ['一個示範走完四步的名稱，然後把時間還給老師做海報。', '教育版尚未批核的老師，用免費帳戶能做多少就做多少。不要在現場承諾 Magic 全部開放。', '去背如果要 Education 或進階方案，就當可選，不要因此拖住全班。']; } },
   { day: 1, seg: 7, kind: 'content', title: '四個按鈕：今天請完成海報', reqs: [21, 14], uses: ['canva', 'f-canva-template', 'f-canva-image', 'f-canva-bg'],
@@ -937,24 +1097,62 @@ PAGES.push(
 
   { day: 2, seg: 2, kind: 'header', cat: 'why', title: '單元三：AI 繪本', reqs: [9, 30, 18],
     html: function (h) {
-      return moduleHeader(h, 2, ['用 Gemini 寫分鏡和文案；這一節不追動畫', '插圖提示先寫定角色外觀，後面各頁沿用', '用 Canva 組頁，做成可以打印的一頁', '請檢查是否適合年齡，有沒有可怕內容或刻板印象']);
+      return moduleHeader(h, 2, ['用 Gemini 寫分鏡和文案；這一節不追動畫', '另一條路：Storybook Gem 可一次出一整本插圖 storybook，並可朗讀', '插圖提示先寫定角色外觀，後面各頁沿用；再用 Canva 組頁做成可打印的一頁', '請檢查是否適合年齡，有沒有可怕內容或刻板印象']);
     },
-    notes: function () { return ['主題用分享、洗手這類生活題。', '這一節的現場示範只有 Gemini 分鏡。組頁請各位一起跟做。']; } },
-  { day: 2, seg: 2, kind: 'live', cat: 'demo', tool: 'gemini', title: '一起跟做：分鏡與插圖提示', reqs: [17, 30, 9], uses: ['gemini', 'f-gemini-image'],
+    notes: function () { return ['主題用分享、洗手這類生活題。', '主線仍是 Gemini 分鏡 + Canva 組頁。Storybook Gem 是加時／時間夠才示範，不要取代 Canva 實作。', 'Storybook 目前未滿 18 歲不可用；幼兒不可自行操作，老師要檢查內容。']; } },
+  { day: 2, seg: 2, kind: 'live', cat: 'demo', tool: 'gemini', title: '一起跟做：分鏡與插圖提示', reqs: [17, 30, 9], uses: ['gemini', 'f-gemini-image', 'f-gemini-storybook'],
     prompt: U3_BOOK.join(''),
-    steps: ['開 gemini.google.com。', '貼上 Prompt，讀出 6 頁裡的第 1 頁和第 4 頁。', '檢查角色的衣服和顏色，後面各頁有沒有走樣。', '可請它為第 1 頁生成一張圖。生成慢就打開輸出預留位（事先貼好真實圖），不必改工具。', '其餘時間請各位改自己的主題，先完成文字分鏡。'],
+    steps: ['開 gemini.google.com。', '貼上 Prompt，讀出 6 頁裡的第 1 頁和第 4 頁。', '檢查角色的衣服和顏色，後面各頁有沒有走樣。', '可請它為第 1 頁生成一張圖。生成慢就打開輸出預留位（事先貼好真實圖），不必改工具。', '其餘時間請各位改自己的主題，先完成文字分鏡。', '時間夠：左側 Gem → Storybook（或探索 Gem），或輸入含英文 storybook 的提示；可開一頁並試聽朗讀。慢就回到分鏡預留位，不要硬等。'],
     html: function (h, p) {
-      return h.ready() + liveHead(h, 'gemini') + '<p class="small">圖像：' + h.esc(h.field('f-gemini-image', 'name')) + ' ' + h.dot('f-gemini-image') + '</p>' +
+      return h.ready() + liveHead(h, 'gemini') + '<p class="small">圖像：' + h.esc(h.field('f-gemini-image', 'name')) + ' ' + h.dot('f-gemini-image') + '　｜　加時路徑：' + h.esc(h.field('f-gemini-storybook', 'name')) + ' ' + h.dot('f-gemini-storybook') + '</p>' +
         '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'Gemini', kind: '繪本分鏡', hint: '貼上真實分鏡回覆：至少第 1、4 頁文案與插圖提示（可連截圖）。' });
+        '<p class="box small" style="margin-top:12px"><b>時間夠才示範 Storybook：</b>Gem → Storybook，或提示含英文 storybook。約 1–2 分鐘、通常 10–12 頁；可朗讀。慢就打開下方預留位，勿取代下一節 Canva 組頁。</p>' +
+        h.fallback({
+          tool: 'Gemini',
+          kind: '繪本分鏡',
+          hint: '貼上真實分鏡回覆：至少第 1、4 頁文案與插圖提示（可連截圖）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-06-storyboard.png', caption: 'Gemini · 繪本分鏡' }
+          ]
+        });
     },
-    notes: function () { return ['角色一致性比畫得漂亮重要。', '不要在這一節開 Canva，下一頁才組頁。']; } },
+    notes: function () { return ['角色一致性比畫得漂亮重要。', '不要在這一節開 Canva，下一頁才組頁。', 'Storybook 是加時：年滿 18、須登入；幼兒不可自行用；內容老師檢查。時間不夠就跳過，保留分鏡預留位。']; } },
   { day: 2, seg: 2, kind: 'content', cat: 'steps', title: '繪本五步', reqs: [30, 6, 9],
     html: function () {
       return flowHtml([['主題', '美德或生活'], ['分鏡', '6 頁故事線'], ['文案', '每頁兩句內'], ['插圖提示', '外觀寫定'], ['組頁', 'Canva 排一頁']]) +
-        '<div class="chips" style="margin-top:28px"><span class="chip">角色一致</span><span class="chip">年齡適切</span><span class="chip">避免恐怖</span><span class="chip">避免刻板印象</span></div>';
+        '<div class="chips" style="margin-top:28px"><span class="chip">角色一致</span><span class="chip">年齡適切</span><span class="chip">避免恐怖</span><span class="chip">避免刻板印象</span></div>' +
+        '<p class="box small" style="margin-top:16px">主線仍是分鏡＋Canva。時間夠才試右方／下一頁的 Storybook Gem，不要跳過組頁實作。</p>';
     },
-    notes: function () { return ['每一步等老師點頭，才去下一步。今天能完成一頁已經夠。']; } },
+    notes: function () { return ['每一步等老師點頭，才去下一步。今天能完成一頁已經夠。', 'Storybook 是第二路徑，不是取代 Canva。']; } },
+  { day: 2, seg: 2, kind: 'content', title: '加時路徑：Gemini Storybook Gem', reqs: [30, 14, 9], uses: ['gemini', 'f-gemini-storybook'],
+    html: function (h) {
+      return '<p class="small">來源：' + h.link(h.field('f-gemini-storybook', 'source'), '在 Gemini 應用程式製作插圖 storybook') + '。' + h.dot('f-gemini-storybook') + ' ' + h.fee('f-gemini-storybook') +
+        '　｜　入口：' + h.link('https://gemini.google.com/gem/storybook', 'gemini.google.com/gem/storybook') + '</p>' +
+        '<div class="grid g2" style="gap:14px;align-items:start">' +
+        '<div>' +
+        '<div class="card"><h3 style="font-size:24px">怎樣開</h3><ol class="points small"><li>登入 gemini.google.com（須年滿 18 歲）。</li><li>開 ' + h.link('https://gemini.google.com/gem/storybook', 'Storybook Gem') + '（左側找不到 Gem 時可直接用此連結）。</li><li>或新對話提示含英文 <b>storybook</b>，例如「製作關於學會分享的 storybook」。</li><li>亦可上載相片後按「製作 storybook」圖示。</li></ol></div>' +
+        '<div class="card" style="margin-top:12px"><h3 style="font-size:24px">做完可以</h3><ul class="points small"><li>通常 10–12 頁，約 1–2 分鐘。</li><li>全螢幕翻頁；聆聽朗讀，可改聲音。</li><li>分享 g.co/gemini/share 連結；列印或另存 PDF。</li><li>封面可舉報不安全內容；對話可請它重生成／切換版本。</li></ul></div>' +
+        '<p class="box small" style="margin-top:12px"><b>課堂用法：</b>老師備課用，不是給幼兒自己操作。內容仍要人手檢查。主線完成分鏡＋Canva 後，時間夠才示範一頁＋聆聽。</p>' +
+        '</div>' +
+        '<div class="card accent" style="padding:12px">' +
+        '<p class="small" style="margin:0 0 8px"><b>示例封面</b>　《蠟筆傳呀傳》· 真實生成</p>' +
+        '<button type="button" class="real-out-card" data-interactive data-full="assets/real-outputs/deck-06b-gemini-storybook.png" data-caption="Gemini · Storybook 封面《蠟筆傳呀傳》" aria-label="封面《蠟筆傳呀傳》（按一下放大）" style="width:100%;max-width:100%">' +
+        '<span class="real-out-card-thumb" style="height:auto;max-height:420px;aspect-ratio:auto">' +
+        '<' + 'img src="assets/real-outputs/deck-06b-gemini-storybook.png" alt="Gemini Storybook 封面《蠟筆傳呀傳》" style="width:100%;height:auto;object-fit:contain;display:block"></span>' +
+        '<span class="real-out-card-cap">封面 · 按一下放大</span></button>' +
+        '<p class="small" style="margin:10px 0 0">入口連結：' + h.link('https://gemini.google.com/gem/storybook', '開啟 Storybook Gem') + '</p>' +
+        '</div></div>' +
+        bufferLine() +
+        h.fallback({
+          tool: 'Gemini Storybook',
+          kind: 'Storybook 內頁',
+          hint: '真實 Storybook 第 1／10 頁（《蠟筆傳呀傳》）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-06b-gemini-storybook-p1.png', caption: 'Gemini · Storybook 第 1／10 頁' }
+          ]
+        }) + h.disclaimer();
+    },
+    notes: function () { return ['年齡門檻：目前未滿 18 歲不可用；幼兒不可自行用。', '不要用 Storybook 取代 Canva 角色卡／組頁實作，除非時間極充裕且老師已完成一頁。', '生成慢就跳過，回到分鏡預留位。直達連結：gemini.google.com/gem/storybook']; } },
   { day: 2, seg: 2, kind: 'content', title: 'Canva 組頁：先完成一頁', reqs: [21, 30, 14], uses: ['canva', 'f-canva-template', 'f-canva-image'],
     html: function (h) {
       return '<p class="small">沿用 ' + h.link('https://www.canva.com/zh_hk/', 'canva.com/zh_hk') + '。請各位一起跟做，講師不會再全程投影。</p>' +
@@ -977,7 +1175,16 @@ PAGES.push(
     steps: ['開 canva.com/zh_hk 裡剛才的一頁。', '用 Magic Media 出一張同一角色的圖。如果看不到 Dream Lab，不必尋找，管理員可能已關閉。', '用 Magic Grab 或 Magic Edit 改一件物件，例如蠟筆的顏色。', '開 Canva AI，用對話把標題改短，不必重做整頁。', 'Magic Animate 預覽約 5 秒。AI Voice 有的話才試，沒有就跳過。', 'Magic Layers 只在帳戶有才試。沒有這個按鈕是正常的。'],
     html: function (h, p) {
       return h.ready() + liveHead(h, 'canva') + '<div class="prompt"><b>操作目標：</b>' + h.esc(p.goal) + '</div>' + bufferLine() +
-        h.fallback({ tool: 'Canva AI', kind: '組頁／對話改稿截圖', hint: '貼上真實 Canva 編輯結果：標題改寫、角色一致、動畫設定截圖。' });
+        h.fallback({
+          tool: 'Canva AI',
+          kind: '組頁／對話改稿截圖',
+          hint: '貼上真實 Canva 編輯結果：標題改寫、角色一致、動畫設定截圖。',
+          cards: [
+            { src: 'assets/real-outputs/deck-07-storybook-before.png', caption: '場景一 · 傳蠟筆' },
+            { src: 'assets/real-outputs/deck-07-scene-c-tidy.png', caption: '場景二 · 收拾分享' },
+            { src: 'assets/real-outputs/deck-07-scene-d-park.png', caption: '場景三 · 秋天公園' }
+          ]
+        });
     },
     notes: function () { return ['Canva AI 2.0 是指在編輯器裡用對話改設計，名稱以帳戶畫面為準。', '不要在這一節播放 CapCut。午膳後才一起做動畫。']; } },
   { day: 2, seg: 3, kind: 'content', title: '進階功能一覽', reqs: [21, 14], uses: ['canva', 'f-canva-image', 'f-canva-animate', 'f-canva-voice'],
@@ -1056,6 +1263,7 @@ var TEMPLATES = [
   ['家長信', ['你是幼稚園老師。', '讀者是［班別］家長。', '寫一封［主題］通知。', '不多於 150 字，禮貌書面語。', '以「各位家長：」開頭，署名［老師名］。']],
   ['通告 PDF', ['你是幼稚園老師。', '讀者是家長。', '在對話內做一份活動通告 PDF。', '不多於 150 字，無幼兒姓名。', '日期地點用［　］留空。']],
   ['繪本分鏡', ['你是繪本作家。', '讀者是［年齡］幼兒。', '寫［主題］6 頁分鏡。', '每頁不多於 2 句，外觀前後一致。', '按頁數列出文案及插圖提示。']],
+  ['Storybook Gem', ['你是幼稚園老師。', '讀者是 K1（3 至 4 歲）幼兒。', '製作關於學會分享（傳蠟筆）的 storybook。', '溫暖正面、角色外觀前後一致，用繁體中文。', '適合課堂朗讀；避免可怕或刻板內容。']],
   ['數字人腳本', ['你是動畫編劇。', '觀眾是［年齡］幼兒。', '為虛擬老師寫［主題］腳本。', '約 60 秒，卡通、不追求真人臉。', '分人設及腳本列出。']],
   ['兒歌', ['你是音樂老師。', '對象是［年齡］幼兒。', '寫［主題］兒歌歌詞。', '4 至 8 句，每句不多於 7 字。', '每句一行，註明拍數。']]
 ];
@@ -1093,7 +1301,15 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'second') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
         '<div class="chips" style="margin-top:8px"><span class="chip">溫暖</span><span class="chip">卡通，不追求真人臉</span><span class="chip">不在台上即場生成影片</span></div>' + bufferLine() +
-        h.fallback({ tool: '數字人／腳本工具', kind: '人設＋腳本', hint: '貼上真實人設與腳本輸出，或預錄播放畫面截圖（30–60 秒那一段）。' });
+        h.fallback({
+          tool: '數字人／腳本工具',
+          kind: '人設＋腳本',
+          hint: '貼上真實人設與腳本輸出，或預錄播放畫面截圖（30–60 秒那一段）。',
+          cards: [
+            { src: 'assets/real-outputs/deck-08-gemini-avatar.png', caption: 'Gemini · 小樹腳本' },
+            { src: 'assets/real-outputs/deck-08-deepseek-avatar.png', caption: 'DeepSeek · 小樹腳本' }
+          ]
+        });
     },
     notes: function () { return ['預錄只播 30 至 60 秒。', '找不到檔：讀腳本，不要即場生成數字人。']; } },
   { day: 2, seg: 7, kind: 'content', title: '播放前請留意', reqs: [32, 14, 15],
@@ -1114,7 +1330,14 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<div class="prompt">' + h.esc(p.prompt) + '</div>' +
         '<div class="chips" style="margin-top:8px"><span class="chip">每句不多於 7 字</span><span class="chip">至少一句重複</span><span class="chip">試唱，不即場生成旋律</span></div>' + bufferLine() +
-        h.fallback({ tool: 'Gemini（歌詞）', kind: '兒歌歌詞', hint: '貼上真實歌詞回覆：兩段、拍數、情緒；勿用虛構歌詞示例。' });
+        h.fallback({
+          tool: 'Gemini（歌詞）',
+          kind: '兒歌歌詞',
+          hint: '貼上真實歌詞回覆：兩段、拍數、情緒；勿用虛構歌詞示例。',
+          cards: [
+            { src: 'assets/real-outputs/deck-09-toy-song.png', caption: 'Gemini · 收玩具歌詞' }
+          ]
+        });
     },
     notes: function () { return ['試唱是這節的成品。', '若講師帶了預錄，可播一小段，檔名建議 samples/music-shouwanju.mp3。沒有就試唱。', 'Suno 不在台上即場生成。']; } },
   { day: 2, seg: 8, kind: 'content', title: '歌詞寫好之後', reqs: [33, 14], uses: ['gemini', 'suno'],
@@ -1416,25 +1639,46 @@ var DECK = (function () {
       return '<div><button type="button" class="ctl" data-show="answer" data-interactive>顯示範例答案</button>' +
         '<div class="answer"><span class="label">範例答案：</span>' + body + '</div></div>';
     },
+    realOutCards: function (items) {
+      /* items: [{ src, caption, full? }] — compact thumbs; click opens lightbox via data-full */
+      return (items || []).map(function (it) {
+        if (!it || !it.src) return '';
+        var cap = it.caption || '';
+        var full = it.full || it.src;
+        return '<button type="button" class="real-out-card" data-interactive data-full="' + esc(full) +
+          '" data-caption="' + esc(cap) + '" aria-label="' + esc(cap ? (cap + '（按一下放大）') : '按一下放大') + '">' +
+          '<span class="real-out-card-thumb">' + '<' + 'img src="' + esc(it.src) + '" alt="' + esc(cap) + '"></span>' +
+          (cap ? '<span class="real-out-card-cap">' + esc(cap) + '</span>' : '') +
+          '</button>';
+      }).join('');
+    },
     fallback: function (opts) {
-      /* opts: string hint, or { tool, kind, hint, img } — never invent fake AI replies */
-      var tool = '', kind = '文字或截圖', hint = '', img = '';
+      /* opts: string hint, or { tool, kind, hint, img, cards } — never invent fake AI replies */
+      var tool = '', kind = '文字或截圖', hint = '', img = '', cards = null;
       if (opts && typeof opts === 'object') {
         tool = opts.tool || '';
         kind = opts.kind || kind;
         hint = opts.hint || '';
         img = opts.img || '';
+        cards = opts.cards || null;
       } else if (typeof opts === 'string' && opts) {
         hint = opts;
       }
       var title = tool ? ('請貼上「' + tool + '」真實輸出') : '請貼上相關 AI 真實輸出';
       var detail = hint || ('預留位置：插入這次示範的真實' + kind + '結果（勿用虛構示例）。');
-      var inner = img
-        ? ('<img src="' + img + '" alt="' + title + '">' )
-        : ('<div><b>' + title + '</b><span class="small">' + detail + '</span></div>');
+      var inner;
+      var pair = '';
+      if (cards && cards.length) {
+        inner = h.realOutCards(cards);
+        if (cards.length >= 2) pair = ' pair';
+      } else if (img) {
+        inner = h.realOutCards([{ src: img, caption: title, full: img }]);
+      } else {
+        inner = '<div><b>' + title + '</b><span class="small">' + detail + '</span></div>';
+      }
       return '<div><button type="button" class="ctl" data-show="fallback" data-interactive>顯示示例輸出</button>' +
         '<div class="fallback"><div class="label">真實輸出預留位</div>' +
-        '<div class="real-out-slot" data-real-output-slot>' + inner + '</div></div></div>';
+        '<div class="real-out-slot' + pair + '" data-real-output-slot>' + inner + '</div></div></div>';
     },
     poeNote: 'Poe 不是 ChatGPT／Claude 官方帳戶',
     entry: entry, field: field, hkOK: hkOK, tools: tools, functions: functions, reg: REG, tl: timelineFor('manjusri'), duration: duration,
@@ -1442,7 +1686,7 @@ var DECK = (function () {
       return '<div class="grid g2">' + ['manjusri', 'mantra'].map(function (key) {
         var s = (CFG.sessions || {})[key] || {};
         var bits = key === 'mantra'
-          ? ['繪本分鏡與 Canva 組頁', 'Canva 進階、素養與微動畫', '數字人腳本、兒歌與行動計劃']
+          ? ['繪本分鏡、Storybook 加時與 Canva 組頁', 'Canva 進階、素養與微動畫', '數字人腳本、兒歌與行動計劃']
           : ['Prompt、教案與家長信', 'Gemini 檔案工作室', 'Canva 入門海報'];
         var here = key === activeKey;
         return '<div class="card' + (here ? ' accent' : '') + '"><h3>' + esc(s.dayName || '') + (here ? '　<span class="tag">今日</span>' : '') + '</h3>' +
@@ -1617,6 +1861,7 @@ var DECK = (function () {
 
   /* ---------- navigation (需求 3、4、22) ---------- */
   function resetPage(sec) {
+    closeLightbox();
     $$('.answer.shown, .fallback.shown', sec).forEach(function (el) { el.classList.remove('shown'); });
     $$('.opt.open', sec).forEach(function (el) { el.classList.remove('open'); var b = $('.opt-toggle', el); b.textContent = '展開'; b.setAttribute('aria-expanded', 'false'); });
     $$('.term.flipped', sec).forEach(function (el) { el.classList.remove('flipped'); });
@@ -1665,6 +1910,42 @@ var DECK = (function () {
     var t = $('#toast'); t.textContent = msg; t.hidden = false;
     clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2800);
   }
+  /* ---------- real-out card lightbox ---------- */
+  var lightbox = null;
+  function ensureLightbox() {
+    if (lightbox) return lightbox;
+    lightbox = document.createElement('div');
+    lightbox.id = 'real-out-lightbox';
+    lightbox.className = 'real-out-lightbox';
+    lightbox.setAttribute('data-interactive', '');
+    lightbox.hidden = true;
+    lightbox.innerHTML =
+      '<button type="button" class="real-out-lb-close" data-interactive aria-label="關閉">×</button>' +
+      '<figure class="real-out-lb-figure" data-interactive>' +
+      '<' + 'img alt="">' +
+      '<figcaption></figcaption>' +
+      '</figure>';
+    stage.appendChild(lightbox);
+    return lightbox;
+  }
+  function openLightbox(src, caption) {
+    if (!src) return;
+    var lb = ensureLightbox();
+    var img = lb.querySelector('img');
+    var cap = lb.querySelector('figcaption');
+    img.src = src;
+    img.alt = caption || '';
+    cap.textContent = caption || '';
+    lb.hidden = false;
+  }
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    var img = lightbox.querySelector('img');
+    if (img) img.removeAttribute('src');
+  }
+  function lightboxOpen() { return !!(lightbox && !lightbox.hidden); }
+
   function toggleFullscreen() {
     var fail = function () { toast('全屏未能啟動，可改用瀏覽器本身的全屏功能（例如 F11）。'); };
     try {
@@ -1679,6 +1960,11 @@ var DECK = (function () {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     var k = e.key, tag = (e.target && e.target.tagName) || '';
     var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable);
+    if (k === 'Escape' && lightboxOpen()) { e.preventDefault(); closeLightbox(); return; }
+    if (lightboxOpen() && (k === 'ArrowRight' || k === ' ' || k === 'Spacebar' || k === 'PageDown' || k === 'ArrowLeft' || k === 'PageUp')) {
+      e.preventDefault();
+      return;
+    }
     if (k === 'ArrowRight' || k === ' ' || k === 'Spacebar' || k === 'PageDown') { e.preventDefault(); blurActive(); go(state.index + 1); }
     else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); blurActive(); go(state.index - 1); }
     else if (!typing && (k === 'f' || k === 'F')) { e.preventDefault(); toggleFullscreen(); }
@@ -1692,6 +1978,17 @@ var DECK = (function () {
     var t = e.target;
     if (t.closest('#notes')) return;
     if (t.closest('a[href]')) return;
+    if (lightboxOpen()) {
+      if (t.closest('.real-out-lb-close') || t === lightbox || (t.classList && t.classList.contains('real-out-lightbox'))) {
+        closeLightbox();
+      }
+      return;
+    }
+    var card = t.closest('.real-out-card');
+    if (card && card.dataset.full) {
+      openLightbox(card.dataset.full, card.dataset.caption || '');
+      return;
+    }
     var btn = t.closest('button, [data-interactive]');
     if (!btn) {
       var stageEl = t.closest('#stage');
