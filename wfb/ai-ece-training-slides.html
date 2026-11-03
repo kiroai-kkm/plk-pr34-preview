@@ -284,7 +284,7 @@ body { font-family: var(--font); color: var(--ink); }
 .slide .cover-stack h1, .slide .closing-stack h1 { position: static; left: auto; top: auto; width: auto; line-height: 1.2; }
 .slide .cover-stack h1 { font-size: 50px; margin: 4px 0 12px; }
 .slide .closing-stack h1 { font-size: 76px; margin: 8px 0 28px; }
-.slide .content { position: absolute; left: 96px; right: 96px; top: 176px; bottom: 184px; font-size: 30px; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; overflow: hidden; }
+.slide .content { position: absolute; left: 96px; right: 96px; top: 176px; bottom: 184px; font-size: 30px; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; line-break: strict; text-wrap: pretty; overflow: hidden; } /* bottom 184 keeps clear of #timeline-bar at 916 */
 .slide.full .content { top: 120px; }
 .kicker { font-size: 22px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
 p { margin: 0 0 16px; }
@@ -397,7 +397,7 @@ button.ctl:focus-visible, #session-switch:focus-visible { outline: 4px solid var
 }
 .real-out-card-thumb {
   display: block;
-  height: 180px;
+  height: 150px;
   flex: 0 0 auto;
   overflow: hidden;
   background: #e8f0ef;
@@ -1106,7 +1106,6 @@ PAGES.push(
     html: function (h, p) {
       return h.ready() + liveHead(h, 'gemini') + '<p class="small">圖像：' + h.esc(h.field('f-gemini-image', 'name')) + ' ' + h.dot('f-gemini-image') + '　｜　加時路徑：' + h.esc(h.field('f-gemini-storybook', 'name')) + ' ' + h.dot('f-gemini-storybook') + '</p>' +
         '<div class="prompt">' + h.esc(p.prompt) + '</div>' + bufferLine() +
-        '<p class="box small" style="margin-top:12px"><b>時間夠才示範 Storybook：</b>Gem → Storybook，或提示含英文 storybook。約 1–2 分鐘、通常 10–12 頁；可朗讀。慢就打開下方預留位，勿取代下一節 Canva 組頁。</p>' +
         h.fallback({
           tool: 'Gemini',
           kind: '繪本分鏡',
@@ -1130,27 +1129,22 @@ PAGES.push(
         '　｜　入口：' + h.link('https://gemini.google.com/gem/storybook', 'gemini.google.com/gem/storybook') + '</p>' +
         '<div class="grid g2" style="gap:14px;align-items:start">' +
         '<div>' +
-        '<div class="card"><h3 style="font-size:24px">怎樣開</h3><ol class="points small"><li>登入 gemini.google.com（須年滿 18 歲）。</li><li>開 ' + h.link('https://gemini.google.com/gem/storybook', 'Storybook Gem') + '（左側找不到 Gem 時可直接用此連結）。</li><li>或新對話提示含英文 <b>storybook</b>，例如「製作關於學會分享的 storybook」。</li><li>亦可上載相片後按「製作 storybook」圖示。</li></ol></div>' +
-        '<div class="card" style="margin-top:12px"><h3 style="font-size:24px">做完可以</h3><ul class="points small"><li>通常 10–12 頁，約 1–2 分鐘。</li><li>全螢幕翻頁；聆聽朗讀，可改聲音。</li><li>分享 g.co/gemini/share 連結；列印或另存 PDF。</li><li>封面可舉報不安全內容；對話可請它重生成／切換版本。</li></ul></div>' +
-        '<p class="box small" style="margin-top:12px"><b>課堂用法：</b>老師備課用，不是給幼兒自己操作。內容仍要人手檢查。主線完成分鏡＋Canva 後，時間夠才示範一頁＋聆聽。</p>' +
+        '<div class="card"><h3 style="font-size:22px">怎樣開</h3><ol class="points small"><li>登入 gemini.google.com（須年滿 18 歲）。</li><li>開 ' + h.link('https://gemini.google.com/gem/storybook', 'Storybook Gem') + '（找不到 Gem 就用此連結）。</li><li>或新對話提示含英文 <b>storybook</b>。</li><li>亦可上載相片後按「製作 storybook」。</li></ol></div>' +
+        '<div class="card" style="margin-top:10px"><h3 style="font-size:22px">做完可以</h3><ul class="points small"><li>通常 10–12 頁，約 1–2 分鐘；可朗讀、改聲音。</li><li>分享連結；列印或另存 PDF。</li><li>內容要人手檢查；幼兒不可自行操作。</li></ul></div>' +
+        '<p class="box small" style="margin-top:10px"><b>課堂用法：</b>主線完成分鏡＋Canva 後，時間夠才示範一頁＋聆聽。</p>' +
         '</div>' +
-        '<div class="card accent" style="padding:12px">' +
-        '<p class="small" style="margin:0 0 8px"><b>示例封面</b>　《蠟筆傳呀傳》· 真實生成</p>' +
-        '<button type="button" class="real-out-card" data-interactive data-full="assets/real-outputs/deck-06b-gemini-storybook.png" data-caption="Gemini · Storybook 封面《蠟筆傳呀傳》" aria-label="封面《蠟筆傳呀傳》（按一下放大）" style="width:100%;max-width:100%">' +
-        '<span class="real-out-card-thumb" style="height:auto;max-height:420px;aspect-ratio:auto">' +
-        '<' + 'img src="assets/real-outputs/deck-06b-gemini-storybook.png" alt="Gemini Storybook 封面《蠟筆傳呀傳》" style="width:100%;height:auto;object-fit:contain;display:block"></span>' +
+        '<div class="card accent" style="padding:10px">' +
+        '<p class="small" style="margin:0 0 6px"><b>示例</b>　《蠟筆傳呀傳》· 真實生成　｜　' + h.link('https://gemini.google.com/gem/storybook', '開啟 Storybook Gem') + '</p>' +
+        '<div class="real-out-slot pair" data-real-output-slot style="margin-top:0;padding:8px;gap:10px">' +
+        '<button type="button" class="real-out-card" data-interactive data-full="assets/real-outputs/deck-06b-gemini-storybook.png" data-caption="Gemini · Storybook 封面《蠟筆傳呀傳》" aria-label="封面《蠟筆傳呀傳》（按一下放大）" style="flex:1 1 46%;max-width:100%;min-width:0">' +
+        '<span class="real-out-card-thumb" style="height:220px">' +
+        '<' + 'img src="assets/real-outputs/deck-06b-gemini-storybook.png" alt="封面《蠟筆傳呀傳》" style="object-fit:contain;background:#e8f0ef"></span>' +
         '<span class="real-out-card-cap">封面 · 按一下放大</span></button>' +
-        '<p class="small" style="margin:10px 0 0">入口連結：' + h.link('https://gemini.google.com/gem/storybook', '開啟 Storybook Gem') + '</p>' +
-        '</div></div>' +
-        bufferLine() +
-        h.fallback({
-          tool: 'Gemini Storybook',
-          kind: 'Storybook 內頁',
-          hint: '真實 Storybook 第 1／10 頁（《蠟筆傳呀傳》）。',
-          cards: [
-            { src: 'assets/real-outputs/deck-06b-gemini-storybook-p1.png', caption: 'Gemini · Storybook 第 1／10 頁' }
-          ]
-        }) + h.disclaimer();
+        '<button type="button" class="real-out-card" data-interactive data-full="assets/real-outputs/deck-06b-gemini-storybook-p1.png" data-caption="Gemini · Storybook 第 1／10 頁" aria-label="第 1／10 頁（按一下放大）" style="flex:1 1 46%;max-width:100%;min-width:0">' +
+        '<span class="real-out-card-thumb" style="height:220px">' +
+        '<' + 'img src="assets/real-outputs/deck-06b-gemini-storybook-p1.png" alt="第 1／10 頁" style="object-fit:contain;background:#e8f0ef"></span>' +
+        '<span class="real-out-card-cap">第 1／10 頁 · 按一下放大</span></button>' +
+        '</div></div></div>' + h.disclaimer();
     },
     notes: function () { return ['年齡門檻：目前未滿 18 歲不可用；幼兒不可自行用。', '不要用 Storybook 取代 Canva 角色卡／組頁實作，除非時間極充裕且老師已完成一頁。', '生成慢就跳過，回到分鏡預留位。直達連結：gemini.google.com/gem/storybook']; } },
   { day: 2, seg: 2, kind: 'content', title: 'Canva 組頁：先完成一頁', reqs: [21, 30, 14], uses: ['canva', 'f-canva-template', 'f-canva-image'],
